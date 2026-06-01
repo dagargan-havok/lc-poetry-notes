@@ -89,6 +89,17 @@
     .quote-themes { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 4px; }
     .qtag { display:inline-block; padding:2px 10px; border-radius:12px; font:600 .72rem var(--ui-font); text-transform:uppercase; letter-spacing:.04em; background:var(--tag-bg); color:var(--heading); border:1px solid var(--border); cursor:pointer; transition:background var(--transition), transform var(--transition), box-shadow var(--transition); }
     .qtag:hover { background:rgba(138,70,206,.12); transform:translateY(-1px); box-shadow:0 6px 14px rgba(138,70,206,.12); }
+    .qtag[data-theme="contrast"] { background:rgba(28,107,187,.11); color:var(--accent); border-color:rgba(28,107,187,.14); }
+    .qtag[data-theme="ageing"] { background:rgba(201,100,66,.12); color:var(--emphasis); border-color:rgba(201,100,66,.18); }
+    .qtag[data-theme="nature"] { background:rgba(215,58,131,.11); color:var(--pink); border-color:rgba(215,58,131,.14); }
+    .qtag[data-theme="idealism"] { background:rgba(138,70,206,.12); color:var(--purple); border-color:rgba(138,70,206,.16); }
+    .qtag[data-theme="politics"] { background:rgba(31,111,228,.11); color:var(--blue); border-color:rgba(31,111,228,.16); }
+    .qtag[data-theme="love"] { background:rgba(45,143,143,.12); color:var(--cyan); border-color:rgba(45,143,143,.16); }
+    .qtag[data-theme="companionship"] { background:rgba(45,143,143,.12); color:var(--cyan); border-color:rgba(45,143,143,.16); }
+    .qtag[data-theme="art"] { background:rgba(181,102,19,.12); color:var(--orange); border-color:rgba(181,102,19,.15); }
+    .qtag[data-theme="permanence"] { background:rgba(181,102,19,.12); color:var(--orange); border-color:rgba(181,102,19,.15); }
+    .qtag[data-theme="public-private"] { background:rgba(38,131,26,.12); color:var(--green); border-color:rgba(38,131,26,.15); }
+    .qtag[data-theme="escapism"] { background:rgba(138,70,206,.12); color:var(--purple); border-color:rgba(138,70,206,.16); }
     .theme-quotes { margin-top:12px; }
     .theme-quotes-toggle { background:none; border:1px solid var(--border); border-radius:10px; padding:6px 14px; font:600 .82rem var(--ui-font); color:var(--accent); cursor:pointer; transition:background var(--transition), border-color var(--transition), transform var(--transition); }
     .theme-quotes-toggle:hover { background:rgba(28,107,187,.06); border-color:rgba(28,107,187,.18); transform:translateY(-1px); }
