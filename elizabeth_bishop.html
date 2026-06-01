@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elizabeth Bishop Study Page</title>
+  <style>
+    :root {
+      --bg: #FAF9F5;
+      --fg: #1F1E1D;
+      --accent: #1C6BBB;
+      --emphasis: #C96442;
+      --keyword: #D73A83;
+      --heading: #8A46CE;
+      --interactive: #1F6FE4;
+      --constant: #2D8F8F;
+      --parameter: #B56613;
+      --string: #26831A;
+      --gray: #6F6F78;
+      --border: #E8E6E1;
+      --card: #FFFFFF;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --quote-bg: #FFF6F1;
+      --tag-purple-bg: rgba(138,70,206,0.12);
+      --tag-blue-bg: rgba(28,107,187,0.12);
+      --tag-pink-bg: rgba(215,58,131,0.12);
+      --tag-cyan-bg: rgba(45,143,143,0.12);
+      --tag-orange-bg: rgba(181,102,19,0.12);
+      --tag-terracotta-bg: rgba(201,100,66,0.12);
+      --radius: 18px;
+      --ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --body-font: Georgia, 'Times New Roman', serif;
+      --tag-bg: rgba(138, 70, 206, 0.08);
+      --quote: #C96442;
+      --transition: 0.25s ease;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, rgba(138,70,206,0.05), transparent 30%), var(--bg);
+      color: var(--fg);
+      font-family: var(--body-font);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page { max-width: 1200px; margin: 0 auto; padding: 28px 20px 60px; }
+    .top-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--ui-font);
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+    .top-link:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .hero {
+      margin-top: 18px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.94), rgba(255,255,255,0.84));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -70px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(28,107,187,0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--ui-font);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: var(--heading);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    h1, h2, h3, h4 { color: var(--heading); margin: 0 0 12px; line-height: 1.2; }
+    h1 { font-size: clamp(2.2rem, 4vw, 3.5rem); }
+    .hero-subtitle {
+      font-family: var(--ui-font);
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+    .hero-description { max-width: 78ch; margin-bottom: 18px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; }
+    .meta-pill {
+      font-family: var(--ui-font);
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.8);
+      color: var(--gray);
+      font-size: 0.92rem;
+    }
+    .tabs {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      margin: 22px 0;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(250,249,245,0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tab-button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--gray);
+      font-family: var(--ui-font);
+      font-weight: 700;
+      padding: 12px 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+    .tab-button:hover, .tab-button:focus-visible { background: rgba(28,107,187,0.08); color: var(--interactive); outline: none; }
+    .tab-button.active { background: var(--interactive); color: #fff; }
+    .tab-panel { display: none; animation: fadeIn 0.35s ease; }
+    .tab-panel.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .panel-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+    .panel-intro { color: var(--gray); margin-top: -4px; }
+    .overview-grid, .exam-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
+    .theme-cloud, .tag-row, .theme-examples { display: flex; flex-wrap: wrap; gap: 10px; }
+    .theme-chip, .example-pill, .theme-card-badge {
+      font-family: var(--ui-font);
+      font-size: 0.9rem;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+    .theme-chip { font-weight: 700; }
+    .jump-theme, .example-pill { cursor: pointer; }
+    .jump-theme:hover, .example-pill:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .tag-purple { background: var(--tag-purple-bg); color: var(--heading); border-color: rgba(138,70,206,0.2); }
+    .tag-blue { background: var(--tag-blue-bg); color: var(--accent); border-color: rgba(28,107,187,0.2); }
+    .tag-pink { background: var(--tag-pink-bg); color: var(--keyword); border-color: rgba(215,58,131,0.2); }
+    .tag-cyan { background: var(--tag-cyan-bg); color: var(--constant); border-color: rgba(45,143,143,0.2); }
+    .tag-orange { background: var(--tag-orange-bg); color: var(--parameter); border-color: rgba(181,102,19,0.2); }
+    .tag-terracotta { background: var(--tag-terracotta-bg); color: var(--emphasis); border-color: rgba(201,100,66,0.2); }
+    .theme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .theme-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,249,245,0.96));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+      scroll-margin-top: 96px;
+    }
+    .theme-card:hover { transform: translateY(-2px); border-color: rgba(28,107,187,0.24); }
+    .theme-card-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .progress-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(31,111,228,0.06);
+      border: 1px solid rgba(31,111,228,0.12);
+      font-family: var(--ui-font);
+      color: var(--gray);
+    }
+    .progress-badge { font-weight: 800; color: var(--interactive); }
+    .accordion-stack { display: grid; gap: 14px; }
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,249,245,0.98));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      scroll-margin-top: 96px;
+    }
+    .accordion-item:hover { border-color: rgba(28,107,187,0.24); transform: translateY(-1px); }
+    .accordion-item.studied { border-color: rgba(38,131,26,0.28); box-shadow: 0 6px 18px rgba(38,131,26,0.08); }
+    .accordion-toggle {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      color: inherit;
+      transition: background 0.25s ease;
+    }
+    .accordion-toggle:hover { background: rgba(28,107,187,0.04); }
+    .accordion-title-wrap { display: grid; gap: 6px; }
+    .accordion-kicker { font-family: var(--ui-font); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); }
+    .accordion-title { font-size: 1.55rem; color: var(--heading); }
+    .accordion-meta { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+    .studied-label {
+      font-family: var(--ui-font);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.88);
+      color: var(--gray);
+      cursor: pointer;
+    }
+    .studied-toggle { accent-color: var(--string); width: 18px; height: 18px; }
+    .accordion-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      font-family: var(--ui-font);
+      font-size: 1.35rem;
+      color: var(--interactive);
+      background: rgba(31,111,228,0.08);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .accordion-item.open .accordion-icon { transform: rotate(45deg); background: rgba(201,100,66,0.12); color: var(--emphasis); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
+    .accordion-content { padding: 0 22px 24px; display: grid; gap: 18px; }
+    .section-block {
+      background: rgba(250,249,245,0.7);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .section-label {
+      font-family: var(--ui-font);
+      color: var(--gray);
+      font-weight: 700;
+      margin-bottom: 12px;
+      font-size: 0.93rem;
+    }
+    .styled-list, .check-list { margin: 0; padding-left: 22px; }
+    .styled-list li::marker { color: var(--accent); }
+    .techniques-list li::marker { color: var(--constant); }
+    .check-list { list-style: none; padding-left: 0; display: grid; gap: 10px; }
+    .check-list li {
+      position: relative;
+      padding-left: 30px;
+    }
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--string);
+      font-family: var(--ui-font);
+      font-weight: 800;
+    }
+    .quotes-grid { display: grid; gap: 14px; }
+    .quote-card {
+      background: #fffdfb;
+      border: 1px solid rgba(201,100,66,0.16);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    blockquote {
+      margin: 0;
+      padding: 18px 18px 16px 20px;
+      border-left: 5px solid var(--emphasis);
+      background: var(--quote-bg);
+      color: var(--emphasis);
+      font-size: 1.04rem;
+    }
+    .quote-card p, .mini-quote-card p { margin: 0; padding: 14px 18px 18px; }
+
+    .quote-themes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 18px 4px;
+    }
+    .qtag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font: 600 0.72rem var(--ui-font);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: var(--tag-bg);
+      color: var(--heading);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .qtag:hover {
+      background: rgba(138, 70, 206, 0.12);
+      transform: translateY(-1px);
+    }
+    .qtag.theme-symbolism, .qtag.theme-appearance { --tag-bg: var(--tag-purple-bg); }
+    .qtag.theme-nature, .qtag.theme-gender { --tag-bg: var(--tag-blue-bg); }
+    .qtag.theme-childhood { --tag-bg: var(--tag-pink-bg); }
+    .qtag.theme-suffering { --tag-bg: var(--tag-cyan-bg); }
+    .qtag.theme-religion { --tag-bg: var(--tag-orange-bg); }
+    .qtag.theme-empathy { --tag-bg: var(--tag-terracotta-bg); }
+    .theme-quotes { margin-top: 12px; }
+    .theme-quotes-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 6px 14px;
+      font: 600 0.82rem var(--ui-font);
+      color: var(--accent);
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), border-color var(--transition);
+    }
+    .theme-quotes-toggle:hover { background: rgba(28, 107, 187, 0.06); transform: translateY(-1px); border-color: rgba(28,107,187,0.2); }
+    .theme-quotes-list {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .mini-quote {
+      padding: 10px 14px;
+      background: var(--quote-bg);
+      border-left: 3px solid var(--quote);
+      border-radius: 8px;
+    }
+    .mini-quote .quote-source {
+      display: block;
+      font: 700 0.75rem var(--ui-font);
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .mini-quote blockquote {
+      margin: 0;
+      padding: 0;
+      border-left: 0;
+      background: transparent;
+      font-style: italic;
+      color: var(--quote);
+      font-size: 0.92rem;
+    }
+    .two-column { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .exam-section h3 { margin-bottom: 8px; }
+    .compact-list { margin: 0; padding-left: 22px; }
+    .compact-list li::marker { color: var(--keyword); }
+    .quick-quote-wrap { display: grid; gap: 14px; }
+    .quick-quote-group { display: grid; gap: 14px; }
+    .mini-quote-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fff, #faf9f5);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .mini-quote-poem {
+      font-family: var(--ui-font);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      padding: 14px 18px 0;
+      font-weight: 700;
+    }
+    .details-panel { padding: 0; overflow: hidden; }
+    .source-notes summary {
+      list-style: none;
+      cursor: pointer;
+      font-family: var(--ui-font);
+      font-weight: 800;
+      color: var(--interactive);
+      padding: 18px 22px;
+      border-bottom: 1px solid transparent;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .source-notes[open] summary { background: rgba(31,111,228,0.06); border-color: var(--border); }
+    .source-notes summary::-webkit-details-marker { display: none; }
+    .source-notes pre {
+      margin: 0;
+      padding: 22px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-x: auto;
+      background: linear-gradient(180deg, #fff, #faf9f5);
+      border-top: 1px solid var(--border);
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--fg);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    strong { color: var(--keyword); }
+    em { color: var(--string); }
+    @media (max-width: 860px) {
+      .overview-grid, .exam-grid, .two-column { grid-template-columns: 1fr; }
+      .accordion-toggle { flex-direction: column; align-items: flex-start; }
+      .accordion-meta { width: 100%; justify-content: space-between; }
+      .tabs { top: 0; }
+    }
+    @media (max-width: 560px) {
+      .page { padding: 20px 14px 48px; }
+      .hero, .panel-card { padding: 20px; border-radius: 22px; }
+      .accordion-title { font-size: 1.28rem; }
+      .tab-button { flex: 1 1 calc(50% - 10px); text-align: center; }
+      blockquote { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="top-link" href="index.html">← Back to Index</a>
+
+    <header class="hero">
+      <div class="eyebrow">Claude Light Theme Study Guide</div>
+      <h1>Elizabeth Bishop</h1>
+      <div class="hero-subtitle">1911–1979 • Elizabeth Bishop — Leaving Cert Poetry Notes</div>
+      <p class="hero-description">Elizabeth Bishop is a twentieth-century American poet whose work often draws on observation, memory, travel, childhood experience, religion, and the natural world.</p>
+      <div class="hero-meta">
+        <span class="meta-pill">Observation &amp; Symbolism</span>
+        <span class="meta-pill">Memory &amp; Childhood</span>
+        <span class="meta-pill">Nature, Survival &amp; Compassion</span>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Study page sections">
+      <button class="tab-button tab-btn active" type="button" data-tab="overview">Overview</button>
+      <button class="tab-button tab-btn" type="button" data-tab="poems">Poems</button>
+      <button class="tab-button tab-btn" type="button" data-tab="themes">Themes</button>
+      <button class="tab-button tab-btn" type="button" data-tab="exam">Exam Tips</button>
+    </nav>
+
+    <section class="tab-panel active" id="tab-overview">
+      <div class="overview-grid">
+        <article class="panel-card">
+          <h2>Poet Overview</h2>
+          <p class="panel-intro">A clear starting point for revision before you dive into individual poems.</p>
+          <p>Elizabeth Bishop is a twentieth-century American poet whose work often draws on observation, memory, travel, childhood experience, religion, and the natural world.</p><p>In these poems, Bishop is deeply interested in symbolism: the central image or creature in the title often carries the deepest meaning of the poem.</p><p>Her poetry can seem deceptively simple on first reading, but it is often abstract and layered, requiring the reader to dig beneath the surface narrative.</p><p>She frequently writes through speakers who are complex, limited, biased, or uncertain, so the speaker's voice does not always neatly match Bishop's own views.</p><p>Across these poems, Bishop combines vivid physical detail with emotional restraint, allowing symbols, images, and structure to reveal meaning gradually.</p>
+        </article>
+        <article class="panel-card">
+          <h2>Key Themes</h2>
+          <p class="panel-intro">Tap a theme to jump to the matching explanation in the Themes tab.</p>
+          <div class="theme-cloud"><button class="theme-chip tag-purple jump-theme" type="button" data-theme="symbolism">Symbolism</button><button class="theme-chip tag-blue jump-theme" type="button" data-theme="the-natural-world">The Natural World</button><button class="theme-chip tag-pink jump-theme" type="button" data-theme="childhood-memory">Childhood &amp; Memory</button><button class="theme-chip tag-cyan jump-theme" type="button" data-theme="suffering-survival">Suffering &amp; Survival</button><button class="theme-chip tag-orange jump-theme" type="button" data-theme="religion-biblical-echoes">Religion &amp; Biblical Echoes</button><button class="theme-chip tag-terracotta jump-theme" type="button" data-theme="compassion-empathy">Compassion &amp; Empathy</button><button class="theme-chip tag-purple jump-theme" type="button" data-theme="distance-between-appearance-and-reality">Distance Between Appearance and Reality</button><button class="theme-chip tag-blue jump-theme" type="button" data-theme="gender-domesticity">Gender &amp; Domesticity</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-poems">
+      <article class="panel-card">
+        <div class="progress-strip">
+          <div><strong>Poem progress</strong><br><span>Track each poem as you revise.</span></div>
+          <div class="progress-badge" id="progress-count">0/5 studied</div>
+        </div>
+        <div class="accordion-stack">
+          <section class="accordion-item" id="poem-the-filling-station">
+            <button class="accordion-toggle" type="button" aria-expanded="false">
+                <span class="accordion-title-wrap">
+                    <span class="accordion-kicker">Poem 1</span>
+                    <span class="accordion-title">The Filling Station</span>
+                </span>
+                <span class="accordion-meta">
+                    <label class="studied-label" onclick="event.stopPropagation();">
+                        <input class="studied-toggle" type="checkbox" data-poem="the-filling-station">
+                        <span>Studied ✓</span>
+                    </label>
+                    <span class="accordion-icon" aria-hidden="true">+</span>
+                </span>
+            </button>
+            <div class="accordion-body">
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <div class="section-label">Summary: Brief summary of the poem</div>
+                        <p>The speaker encounters a filthy petrol station and initially reacts with disgust and superiority. As the poem develops, however, the speaker notices small signs of care and domestic life hidden within the dirt. This discovery transforms the poem from a sneering description of masculine grime into a meditation on tenderness, care, and the unseen presence of love.</p>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Themes: List relevant themes</div>
+                        <div class="tag-row"><span class="theme-chip tag-purple">Symbolism</span><span class="theme-chip tag-blue">Gender dynamics</span><span class="theme-chip tag-pink">Appearance versus reality</span><span class="theme-chip tag-cyan">Compassion and human connection</span><span class="theme-chip tag-orange">Speaker development</span><span class="theme-chip tag-terracotta">Domesticity and care</span></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Structure &amp; Form: Notes on structure</div>
+                        <ul class="styled-list"><li>The poem begins abruptly, <strong>in medias res</strong>, with an exclamatory reaction that immediately captures attention.</li><li>Bishop structures the poem around a clear movement from <strong>contempt to curiosity to insight</strong>.</li><li>A series of questions marks the speaker's changing attitude and shows her mind working through what she sees.</li><li>The free verse form feels conversational, but Bishop carefully controls repetition and tonal shifts.</li><li>The ending broadens from a particular filling station to a universal idea of love: the poem widens in scope as it closes.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Quotes &amp; Analysis:</div>
+                        <div class="quotes-grid"><div class="quote-card">
+            <blockquote>"Oh, but it is dirty!"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>This dramatic interjection is a high-impact opening. The exclamation throws the reader straight into the speaker's disgust and establishes her initially judgemental, almost snobbish tone.</p>
+        </div><div class="quote-card">
+            <blockquote>"oil-soaked, oil-permeated"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>The repetition exaggerates the saturation of grease and creates a comic but unpleasant excess. Bishop "doubles down" on the filth, making the setting feel overwhelming.</p>
+        </div><div class="quote-card">
+            <blockquote>"Be careful with that match!"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>The imperative suggests danger and reinforces how completely the station is steeped in oil. It also helps create the speaker's superior, commanding attitude.</p>
+        </div><div class="quote-card">
+            <blockquote>"Father wears a dirty, / oil-soaked monkey suit"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-gender" data-theme="gender">Gender/Domesticity</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>The father's identity is reduced to his work clothes. "Monkey suit" has a dismissive, mocking quality, showing the speaker's early contempt.</p>
+        </div><div class="quote-card">
+            <blockquote>"all quite thoroughly dirty"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>The blanket description denies individuality to the men. The speaker sees them as a single greasy mass rather than as distinct human beings.</p>
+        </div><div class="quote-card">
+            <blockquote>"Do they live in the station?"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>This question sounds contemptuous and incredulous. It shows how the speaker initially cannot imagine dignity, privacy, or family life existing in such a place.</p>
+        </div><div class="quote-card">
+            <blockquote>"There are cans of motor oil, / and after them, some pegs, / some shirts"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span><span class="qtag theme-gender" data-theme="gender">Gender/Domesticity</span></div>
+            <p>The poem begins to blur the boundary between workplace and home. Domestic life slowly emerges from behind the industrial surface.</p>
+        </div><div class="quote-card">
+            <blockquote>"a big dim doily"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-gender" data-theme="gender">Gender/Domesticity</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>The doily is a crucial symbol of care, delicacy, and domestic attention. Its presence is unexpected amid the grime, making it all the more powerful.</p>
+        </div><div class="quote-card">
+            <blockquote>"Why the extraneous plant? / Why the taboret? / Why, oh why, the doily?"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span><span class="qtag theme-gender" data-theme="gender">Gender/Domesticity</span></div>
+            <p>The repetition of questions shows a tonal change: disgust has become curiosity. The speaker is now genuinely trying to understand what lies beneath appearances.</p>
+        </div><div class="quote-card">
+            <blockquote>"Somebody embroidered the doily"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-gender" data-theme="gender">Gender/Domesticity</span></div>
+            <p>The repeated "somebody" emphasises the unseen labour of care. Bishop evokes an absent figure whose love is visible through small acts rather than direct presence.</p>
+        </div><div class="quote-card">
+            <blockquote>"Somebody waters the plant"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-gender" data-theme="gender">Gender/Domesticity</span></div>
+            <p>This image of nurture contrasts strongly with the masculine, oily environment. It suggests persistence of life and tenderness in an unlikely place.</p>
+        </div><div class="quote-card">
+            <blockquote>"Somebody loves us all"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>The final revelation transforms the poem. The filling station becomes a symbol of human need for care and belonging. The universal "us all" expands the poem beyond this family to a larger statement about love.</p>
+        </div></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Poetic Techniques:</div>
+                        <ul class="styled-list techniques-list"><li><strong>Exclamation:</strong> "Oh, but it is dirty!" creates an immediate dramatic hook.</li><li><strong>Repetition:</strong> "oil-soaked, oil-permeated" intensifies the greasy atmosphere.</li><li><strong>Imperative:</strong> "Be careful with that match!" conveys danger and superiority.</li><li><strong>Questioning:</strong> "Why the extraneous plant?" shows the speaker's development from judgement to reflection.</li><li><strong>Symbolism:</strong> the doily, plant, and taboret symbolise domestic care and hidden love.</li><li><strong>Contrast:</strong> masculine labour and feminine domesticity are sharply set against each other.</li><li><strong>Tone shift:</strong> Bishop moves from mockery and disgust to warmth and wonder.</li><li><strong>Universal ending:</strong> the poem broadens from one setting to a general truth about love.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Exam-Ready Points:</div>
+                        <ul class="check-list"><li>Bishop uses the filling station as a symbol rather than merely a setting; the real subject is hidden human care.</li><li>The poem is powerful because the speaker changes: she begins in contempt but ends in recognition.</li><li>Bishop contrasts rough masculine labour with signs of feminine domesticity to explore gendered ideas of value.</li><li>The repeated questions dramatise the speaker's changing consciousness and invite the reader to rethink first impressions.</li><li>The ending is memorable because it transforms a dirty, ordinary place into proof that "Somebody loves us all."</li><li>The speaker's snobbery is important: Bishop does not present a simple lyric self, but a complex and possibly flawed voice.</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section><section class="accordion-item" id="poem-the-prodigal">
+            <button class="accordion-toggle" type="button" aria-expanded="false">
+                <span class="accordion-title-wrap">
+                    <span class="accordion-kicker">Poem 2</span>
+                    <span class="accordion-title">The Prodigal</span>
+                </span>
+                <span class="accordion-meta">
+                    <label class="studied-label" onclick="event.stopPropagation();">
+                        <input class="studied-toggle" type="checkbox" data-poem="the-prodigal">
+                        <span>Studied ✓</span>
+                    </label>
+                    <span class="accordion-icon" aria-hidden="true">+</span>
+                </span>
+            </button>
+            <div class="accordion-body">
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <div class="section-label">Summary: Brief summary of the poem</div>
+                        <p>The poem presents a degraded man, likely an alcoholic or drifter, living among pigs in a foul, degrading environment. Though the title refers to the biblical Prodigal Son, Bishop never directly retells that parable. Instead, the biblical story acts as a frame through which we interpret the man's fall, self-disgust, and eventual moment of recognition that he must return home.</p>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Themes: List relevant themes</div>
+                        <div class="tag-row"><span class="theme-chip tag-purple">Symbolism</span><span class="theme-chip tag-blue">Addiction and degradation</span><span class="theme-chip tag-pink">Compassion and uncomfortable empathy</span><span class="theme-chip tag-cyan">Biblical allusion</span><span class="theme-chip tag-orange">Exile and return</span><span class="theme-chip tag-terracotta">Human suffering</span><span class="theme-chip tag-purple">Moral and spiritual crisis</span></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Structure &amp; Form: Notes on structure</div>
+                        <ul class="styled-list"><li>The poem works through descriptive free verse, building up the physical horror of the pigsty before moving toward insight.</li><li>Bishop uses the title as a major interpretive key: the biblical story is present even when not explicitly mentioned.</li><li>The poem's structure mirrors a mental journey from degradation toward self-awareness.</li><li>Graphic sensory detail forces the reader into the scene before any moral resolution is offered.</li><li>The final movement toward "home" is understated, making the emotional breakthrough feel hard-won rather than sentimental.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Quotes &amp; Analysis:</div>
+                        <div class="quotes-grid"><div class="quote-card">
+            <blockquote>"The brown enormous odor he lived by / was too close"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>Bishop begins with smell, immediately making the reader inhabit the man's degrading world. The sensory detail is invasive and uncomfortable.</p>
+        </div><div class="quote-card">
+            <blockquote>"lives of the dawn / and the dust"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>The phrasing suggests exhaustion, poverty, and repetitive existence. His life has become reduced and animal-like.</p>
+        </div><div class="quote-card">
+            <blockquote>"among the trash"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The setting symbolises degradation. He is not merely in a dirty place; he has fallen socially, morally, and spiritually.</p>
+        </div><div class="quote-card">
+            <blockquote>"the pigsties"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The pigsty is the central symbol of addiction and self-abasement. Like many Bishop titles and settings, it points beyond itself to an inner condition.</p>
+        </div><div class="quote-card">
+            <blockquote>"self-righteous eyes"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>This striking phrase applied to the pigs humiliates the man further. Even in the pigs' world, he seems the outsider, judged and diminished.</p>
+        </div><div class="quote-card">
+            <blockquote>"burning puddles"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-religion" data-theme="religion">Religion</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>This biblical, almost apocalyptic image gives the sty a hellish atmosphere. The setting feels morally charged, not just physically disgusting.</p>
+        </div><div class="quote-card">
+            <blockquote>"forked lightning"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-religion" data-theme="religion">Religion</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The biblical resonance suggests judgement, revelation, and divine warning. Bishop elevates the scene beyond realism into symbolic territory.</p>
+        </div><div class="quote-card">
+            <blockquote>Reference to Noah's ark</blockquote>
+            <div class="quote-themes"><span class="qtag theme-religion" data-theme="religion">Religion</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The allusion introduces ideas of judgement, survival, and renewal. Biblical imagery shadows the poem without becoming explicit sermonising.</p>
+        </div><div class="quote-card">
+            <blockquote>The sow eating her own young</blockquote>
+            <div class="quote-themes"><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>This shocking image symbolises the destruction of the future to satisfy present appetite. It reflects addiction as a force that consumes what should be protected.</p>
+        </div><div class="quote-card">
+            <blockquote>"in his shuddering insights"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>The phrase suggests painful moments of clarity rather than calm reflection. His self-knowledge comes physically, violently, and with difficulty.</p>
+        </div><div class="quote-card">
+            <blockquote>"but it took him a long time / finally to make his mind up to go home"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-religion" data-theme="religion">Religion</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>The understated ending is moving because it avoids easy redemption. Bishop recognises that return, repentance, and recovery are slow and difficult.</p>
+        </div></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Poetic Techniques:</div>
+                        <ul class="styled-list techniques-list"><li><strong>Biblical allusion:</strong> the title invokes the Prodigal Son, creating a parallel narrative.</li><li><strong>Symbolism:</strong> the pigsty represents addiction, degradation, and exile from the self.</li><li><strong>Sensory imagery:</strong> stink, filth, and physical decay force the reader into the addict's reality.</li><li><strong>Animal imagery:</strong> the overlap between man and pig blurs human dignity and degradation.</li><li><strong>Religious imagery:</strong> burning puddles, lightning, and ark imagery deepen the poem's moral seriousness.</li><li><strong>Juxtaposition:</strong> bodily filth is placed beside spiritual significance.</li><li><strong>Understatement:</strong> the decision to return home is quiet, which makes it feel real.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Exam-Ready Points:</div>
+                        <ul class="check-list"><li>Bishop uses the biblical title as a narrative foil: the poem gains meaning through comparison with the parable of the Prodigal Son.</li><li>The pigsty is a symbol for addiction's degrading reality rather than merely a literal setting.</li><li>The poem is socially conscious because it refuses to let the reader keep a safe, judgemental distance from the addict.</li><li>Graphic detail is central to the poem's effect: Bishop forces us to confront suffering directly.</li><li>The sow eating her young is a powerful symbol of addiction sacrificing the future for immediate appetite.</li><li>The ending is effective because Bishop avoids easy forgiveness and instead shows insight as painful and gradual.</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section><section class="accordion-item" id="poem-the-armadillo">
+            <button class="accordion-toggle" type="button" aria-expanded="false">
+                <span class="accordion-title-wrap">
+                    <span class="accordion-kicker">Poem 3</span>
+                    <span class="accordion-title">The Armadillo</span>
+                </span>
+                <span class="accordion-meta">
+                    <label class="studied-label" onclick="event.stopPropagation();">
+                        <input class="studied-toggle" type="checkbox" data-poem="the-armadillo">
+                        <span>Studied ✓</span>
+                    </label>
+                    <span class="accordion-icon" aria-hidden="true">+</span>
+                </span>
+            </button>
+            <div class="accordion-body">
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <div class="section-label">Summary: Brief summary of the poem</div>
+                        <p>The poem begins by describing the beautiful, dreamlike ascent of illegal fire balloons released as part of a religious tradition. The scene initially feels magical and celestial, but the poem turns sharply when one balloon falls and causes destruction. Bishop then focuses on terrified animals, especially the armadillo and baby rabbit, exposing the cruelty hidden beneath human celebration and suggesting that cherished traditions can cause repeated harm.</p>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Themes: List relevant themes</div>
+                        <div class="tag-row"><span class="theme-chip tag-purple">Symbolism</span><span class="theme-chip tag-blue">Beauty and violence</span><span class="theme-chip tag-pink">Tradition and harm</span><span class="theme-chip tag-cyan">The natural world</span><span class="theme-chip tag-orange">Social conscience</span><span class="theme-chip tag-terracotta">Human carelessness</span><span class="theme-chip tag-purple">Powerlessness</span></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Structure &amp; Form: Notes on structure</div>
+                        <ul class="styled-list"><li>The poem is carefully structured around a dramatic <strong>turn</strong> from beauty to disaster.</li><li>Early stanzas build a sense of wonder through elevated imagery and floating movement.</li><li>Present participles create momentum and a feeling of continuous motion.</li><li>The line <strong>"Last night another big one fell"</strong> marks the crucial shift in tone.</li><li>The final stanza becomes more explicitly critical and symbolic, broadening the poem from one event to a statement about repeated human harm.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Quotes &amp; Analysis:</div>
+                        <div class="quotes-grid"><div class="quote-card">
+            <blockquote>"This is the time of year / when almost every night / the frail, illegal fire balloons appear"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-religion" data-theme="religion">Religion</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>Bishop opens with a strange mixture of delicacy and danger. "Frail" suggests beauty and vulnerability, while "illegal" hints immediately at recklessness.</p>
+        </div><div class="quote-card">
+            <blockquote>"Climbing the mountain height, / rising toward a saint"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-religion" data-theme="religion">Religion</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The balloons are linked to religious aspiration. Bishop presents the tradition as idealistic and spiritually motivated, not merely foolish.</p>
+        </div><div class="quote-card">
+            <blockquote>"Once up against the sky it's hard / to tell them from the stars"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>This simile elevates the balloons into the realm of the celestial. Their beauty is real, which makes the later destruction more complex.</p>
+        </div><div class="quote-card">
+            <blockquote>"Flush and fill with light / that comes and goes, like hearts"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>The simile is delicate and imaginative. The balloons seem alive, pulsing like beating hearts, which adds emotional richness.</p>
+        </div><div class="quote-card">
+            <blockquote>"receding, dwindling"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The present participles create movement and help the balloons feel dynamic, drifting, and cinematic.</p>
+        </div><div class="quote-card">
+            <blockquote>"forsaking us"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>This personification makes the balloons seem almost wilful as they drift away from human control.</p>
+        </div><div class="quote-card">
+            <blockquote>"suddenly turning dangerous"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>This marks the start of the tonal shift. What looked harmless and beautiful becomes threatening.</p>
+        </div><div class="quote-card">
+            <blockquote>"Last night another big one fell"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>"Another" is devastating because it implies repetition. This is not a one-off accident but part of an ongoing pattern of harm.</p>
+        </div><div class="quote-card">
+            <blockquote>"splattered like an egg of fire against the cliff"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The simile is vivid and violent. The balloon's destruction is rendered in a grotesque but memorable image.</p>
+        </div><div class="quote-card">
+            <blockquote>"the owls who nest there / shrieked up out of sight"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The verb "shrieked" conveys panic and suffering. Bishop forces us to hear the consequences of the spectacle.</p>
+        </div><div class="quote-card">
+            <blockquote>"rose-flecked, head down, tail down"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The armadillo's posture expresses fear, exhaustion, and defeat. The creature becomes a symbol of helplessness.</p>
+        </div><div class="quote-card">
+            <blockquote>"a baby rabbit, dead in the road, / a handful of intangible ash / with fixed, ignited eyes"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The rabbit is one of Bishop's most shocking images. "Ignited" is a pun: literally burned, but also intensely alive or alert in a final terrible moment.</p>
+        </div><div class="quote-card">
+            <blockquote>"Too pretty, dreamlike mimicry!"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>Bishop condemns the false beauty of the balloons. Their mimicry of stars is seductive but destructive.</p>
+        </div><div class="quote-card">
+            <blockquote>"O falling fire and piercing cry / and panic"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The accumulation of distressing images replaces the earlier dreamlike wonder. The poem now foregrounds suffering.</p>
+        </div><div class="quote-card">
+            <blockquote>"a weak mailed fist / clenched ignorant against the sky"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>This final image suggests powerless protest. The armadillo becomes a symbol of creatures harmed by forces they cannot understand or resist.</p>
+        </div></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Poetic Techniques:</div>
+                        <ul class="styled-list techniques-list"><li><strong>Contrast:</strong> Bishop opposes dreamlike beauty with real destruction.</li><li><strong>Symbolism:</strong> the balloons symbolise traditions or spectacles that seem beautiful but cause repeated harm.</li><li><strong>Simile:</strong> "like hearts" and "like an egg of fire" make the imagery vivid and dynamic.</li><li><strong>Personification:</strong> "forsaking us" gives the balloons agency.</li><li><strong>Present participles:</strong> "receding, dwindling" create movement and tension.</li><li><strong>Sound effects and rhyme:</strong> energetic sounds heighten the dramatic scene.</li><li><strong>Exclamation:</strong> "Too pretty, dreamlike mimicry!" reveals moral outrage.</li><li><strong>Final emblematic image:</strong> the "weak mailed fist" leaves the reader with a symbol of helpless resistance.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Exam-Ready Points:</div>
+                        <ul class="check-list"><li>Bishop first seduces the reader with the beauty of the balloons before exposing their destructive consequences.</li><li>The poem critiques tradition by showing that inherited practices may continue even when they repeatedly cause harm.</li><li>The word "another" is central because it reveals the event as part of a pattern rather than an accident.</li><li>Bishop's sympathy lies with vulnerable creatures, giving the poem a strong social and moral conscience.</li><li>The armadillo becomes a symbol of powerless suffering in the face of careless human behaviour.</li><li>The poem's final exclamation, "Too pretty, dreamlike mimicry!", rejects surface beauty when it hides violence.</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section><section class="accordion-item" id="poem-the-fish">
+            <button class="accordion-toggle" type="button" aria-expanded="false">
+                <span class="accordion-title-wrap">
+                    <span class="accordion-kicker">Poem 4</span>
+                    <span class="accordion-title">The Fish</span>
+                </span>
+                <span class="accordion-meta">
+                    <label class="studied-label" onclick="event.stopPropagation();">
+                        <input class="studied-toggle" type="checkbox" data-poem="the-fish">
+                        <span>Studied ✓</span>
+                    </label>
+                    <span class="accordion-icon" aria-hidden="true">+</span>
+                </span>
+            </button>
+            <div class="accordion-body">
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <div class="section-label">Summary: Brief summary of the poem</div>
+                        <p>The speaker catches a large old fish and begins by simply describing it in close visual detail. As the poem develops, the fish becomes more than a catch: it is revealed as scarred, experienced, and enduring, having survived many previous encounters. The speaker comes to recognise the fish's dignity and resilience, experiences a moment of almost spiritual revelation, and releases it.</p>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Themes: List relevant themes</div>
+                        <div class="tag-row"><span class="theme-chip tag-purple">Symbolism</span><span class="theme-chip tag-blue">Survival and endurance</span><span class="theme-chip tag-pink">Reverence for age</span><span class="theme-chip tag-cyan">The natural world</span><span class="theme-chip tag-orange">Experience and wisdom</span><span class="theme-chip tag-terracotta">Transformation through perception</span><span class="theme-chip tag-purple">Respect for life</span></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Structure &amp; Form: Notes on structure</div>
+                        <ul class="styled-list"><li>The poem follows a first-person narrative, giving it immediacy and clarity.</li><li>It develops through sustained close observation: description leads gradually to insight.</li><li>The free verse form mirrors the speaker's unfolding thought process.</li><li>The turning point comes with the discovery of the old hooks and lines in the fish's mouth.</li><li>The ending lifts the poem from realism into a moment of transcendence and release.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Quotes &amp; Analysis:</div>
+                        <div class="quotes-grid"><div class="quote-card">
+            <blockquote>"I caught a tremendous fish"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The opening is simple, direct, and experiential. It sounds like the beginning of a story, grounding the poem in lived observation.</p>
+        </div><div class="quote-card">
+            <blockquote>"He didn't fight. / He hadn't fought at all"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>The repetition is striking because it gives the fish immediate character. Its passivity suggests exhaustion, age, or stoic dignity rather than weakness.</p>
+        </div><div class="quote-card">
+            <blockquote>"venerable"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>This adjective suggests age worthy of respect. Bishop does not merely describe an old fish; she elevates it.</p>
+        </div><div class="quote-card">
+            <blockquote>"homely"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>The fish is not glamorised. Bishop's respect for it includes its roughness and unattractive physicality.</p>
+        </div><div class="quote-card">
+            <blockquote>"His brown skin hung in strips / like ancient wallpaper"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>This simile memorably conveys age, damage, and history. The fish appears worn by time, almost archaeological.</p>
+        </div><div class="quote-card">
+            <blockquote>"shapes like full-blown roses / stained and lost through age"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>Even decay is rendered beautifully. Bishop's eye turns physical detail into something artistic and layered.</p>
+        </div><div class="quote-card">
+            <blockquote>"while his gills were breathing in / the terrible oxygen"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>"Terrible" is crucial because oxygen is life-giving to humans but harmful to the fish. The line forces us to imagine the scene from the fish's perspective.</p>
+        </div><div class="quote-card">
+            <blockquote>"I looked into his eyes"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>The act of looking becomes intimate and almost reciprocal. The poem is moving from possession toward recognition.</p>
+        </div><div class="quote-card">
+            <blockquote>"far larger than mine / but shallower"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>The description is mysterious and slightly uncanny. Bishop makes the fish feel both real and strangely otherworldly.</p>
+        </div><div class="quote-card">
+            <blockquote>"from his lower lip / if you could call it a lip"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>The self-correction shows precise observation and reminds us of the difficulty of bridging human and animal worlds.</p>
+        </div><div class="quote-card">
+            <blockquote>"five old pieces of fish-line"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>This discovery changes everything. The fish is no longer just a catch; it is a survivor with a history.</p>
+        </div><div class="quote-card">
+            <blockquote>"Like medals with their ribbons / frayed and wavering"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The hooks become symbols of honour. Survival itself is treated like heroism.</p>
+        </div><div class="quote-card">
+            <blockquote>"a five-haired beard of wisdom"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>This metaphor makes the fish seem like an old sage. Experience becomes a kind of earned authority.</p>
+        </div><div class="quote-card">
+            <blockquote>"trailing from his aching jaw"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span></div>
+            <p>The dignity of survival does not erase pain. Bishop honours endurance without sentimentalising it.</p>
+        </div><div class="quote-card">
+            <blockquote>"victory filled up / the little rented boat"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The speaker experiences a powerful emotional climax, but it is not the victory of domination. It is the victory of recognition and connection.</p>
+        </div><div class="quote-card">
+            <blockquote>"rainbow, rainbow, rainbow!"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-nature" data-theme="nature">Nature</span><span class="qtag theme-symbolism" data-theme="symbolism">Symbolism</span></div>
+            <p>The triple repetition creates a visionary, ecstatic effect. The moment feels transcendent, almost spiritual.</p>
+        </div><div class="quote-card">
+            <blockquote>"And I let the fish go"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-empathy" data-theme="empathy">Empathy/Compassion</span><span class="qtag theme-nature" data-theme="nature">Nature</span></div>
+            <p>The simple ending is deeply powerful. Release becomes the speaker's act of reverence and moral awakening.</p>
+        </div></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Poetic Techniques:</div>
+                        <ul class="styled-list techniques-list"><li><strong>First-person narration:</strong> creates immediacy and authenticity.</li><li><strong>Detailed visual imagery:</strong> Bishop's exact observation makes the fish vividly real.</li><li><strong>Simile:</strong> "like ancient wallpaper" and "Like medals" communicate age and honour.</li><li><strong>Metaphor:</strong> "beard of wisdom" presents the fish as a survivor-sage.</li><li><strong>Repetition:</strong> "rainbow, rainbow, rainbow!" captures wonder and transformation.</li><li><strong>Symbolism:</strong> the fish represents survival, experience, and dignity earned through suffering.</li><li><strong>Perspective shift:</strong> the speaker moves from catcher to admirer.</li><li><strong>Understated ending:</strong> the release is simple but emotionally decisive.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Exam-Ready Points:</div>
+                        <ul class="check-list"><li>The fish is a symbol of survival, endurance, and the dignity that comes from overcoming hardship.</li><li>Bishop's precise descriptive detail gives the poem credibility and allows symbolism to arise naturally.</li><li>The hooks in the fish's mouth are transformed into "medals," showing Bishop's reverence for experienced survivors.</li><li>The phrase "terrible oxygen" is important because it forces the reader to view the scene from the fish's perspective.</li><li>The rainbow marks a moment of transcendence in which the speaker sees beyond ownership or conquest.</li><li>The final release is the poem's moral climax: respect leads to mercy.</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section><section class="accordion-item" id="poem-first-death-in-nova-scotia">
+            <button class="accordion-toggle" type="button" aria-expanded="false">
+                <span class="accordion-title-wrap">
+                    <span class="accordion-kicker">Poem 5</span>
+                    <span class="accordion-title">First Death in Nova Scotia</span>
+                </span>
+                <span class="accordion-meta">
+                    <label class="studied-label" onclick="event.stopPropagation();">
+                        <input class="studied-toggle" type="checkbox" data-poem="first-death-in-nova-scotia">
+                        <span>Studied ✓</span>
+                    </label>
+                    <span class="accordion-icon" aria-hidden="true">+</span>
+                </span>
+            </button>
+            <div class="accordion-body">
+                <div class="accordion-content">
+                    <div class="section-block">
+                        <div class="section-label">Summary: Brief summary of the poem</div>
+                        <p>The poem recounts a child's first encounter with death as she looks at the body of her young cousin Arthur. The child cannot fully understand what has happened, so her attention shifts among the cold room, the royal pictures on the wall, the stuffed loon, and the coffin. Through this fragmented perspective, Bishop captures both the strangeness of death and the way childhood imagination protects the mind from fully grasping it.</p>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Themes: List relevant themes</div>
+                        <div class="tag-row"><span class="theme-chip tag-purple">Childhood and memory</span><span class="theme-chip tag-blue">Death and mortality</span><span class="theme-chip tag-pink">Innocence and incomprehension</span><span class="theme-chip tag-cyan">Symbolism</span><span class="theme-chip tag-orange">Family experience</span><span class="theme-chip tag-terracotta">Imagination as protection</span><span class="theme-chip tag-purple">Appearance versus reality</span></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Structure &amp; Form: Notes on structure</div>
+                        <ul class="styled-list"><li>The poem is structured through a child's wandering attention rather than through adult logic.</li><li>Bishop moves between the dead boy, the stuffed loon, the room, and the royal images, reproducing the child's inability to face death directly.</li><li>Repetition and simple language help create a child's voice.</li><li>The poem's similes and fantasies are crucial because they show how the child interprets the incomprehensible through familiar images.</li><li>The ending remains unresolved, which is fitting: death is not explained, only encountered.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Key Quotes &amp; Analysis:</div>
+                        <div class="quotes-grid"><div class="quote-card">
+            <blockquote>"In the cold, cold parlor"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span><span class="qtag theme-childhood" data-theme="childhood">Childhood</span></div>
+            <p>The repetition emphasises not only physical coldness but also the emotional chill of death. It immediately sets a mournful, sterile atmosphere.</p>
+        </div><div class="quote-card">
+            <blockquote>The chromographs of the royal family</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>These formal adult images create a strange ceremonial setting. The child notices them because they are visually striking, but they also suggest order and social ritual in contrast to private grief.</p>
+        </div><div class="quote-card">
+            <blockquote>The stuffed loon beneath them</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The loon doubles the death imagery. Its presence beside Arthur's corpse makes the room feel filled with dead bodies and unsettling stillness.</p>
+        </div><div class="quote-card">
+            <blockquote>"Since Uncle Arthur fired / a bullet into him, / he hadn't said a word"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The child's matter-of-fact statement about the loon is unsettling. It reflects innocence: the violence is registered, but not fully emotionally processed.</p>
+        </div><div class="quote-card">
+            <blockquote>"His breast was deep and white, / cold and caressable"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The description could apply to the loon or Arthur, showing the child's collapsing perspective. Death is perceived through sensory confusion.</p>
+        </div><div class="quote-card">
+            <blockquote>"his eyes were red glass, / much to be desired"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>The phrase captures a child's attraction to bright surfaces even in a death scene. This unsettling mix of desire and death is central to the poem.</p>
+        </div><div class="quote-card">
+            <blockquote>"Arthur's coffin was / a little frosted cake"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>This is a deeply childlike simile. Because the child cannot fully process a coffin, she imagines it through something familiar, decorative, and domestic.</p>
+        </div><div class="quote-card">
+            <blockquote>"Jack Frost had started to paint him"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>The child uses a comforting mythological figure to explain Arthur's pallor. Imagination becomes a shield against brutal reality.</p>
+        </div><div class="quote-card">
+            <blockquote>"He had just begun on his hair, / a few red strokes"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The image suggests the unfinished work of death. The child's explanation is imaginative, but it also makes Arthur's body vividly present.</p>
+        </div><div class="quote-card">
+            <blockquote>"and then Jack Frost had dropped the brush / and left him white, forever"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The word "forever" lands with emotional force. Even within the fantasy, permanence enters and childhood imagination can no longer fully soften the reality.</p>
+        </div><div class="quote-card">
+            <blockquote>"invited Arthur to be / the smallest page at court"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span></div>
+            <p>The royal figures are transformed into a fantasy afterlife. The child tries to fit death into the language of story and ceremony.</p>
+        </div><div class="quote-card">
+            <blockquote>"But how could Arthur go"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>The question reveals the child's logical crisis. She cannot reconcile the idea of departure with the physical stillness of the corpse.</p>
+        </div><div class="quote-card">
+            <blockquote>"with his eyes shut up so tight / and the roads deep in snow?"</blockquote>
+            <div class="quote-themes"><span class="qtag theme-childhood" data-theme="childhood">Childhood</span><span class="qtag theme-appearance" data-theme="appearance">Appearance vs Reality</span><span class="qtag theme-suffering" data-theme="suffering">Suffering/Survival</span></div>
+            <p>This ending beautifully captures childhood incomprehension. Death remains impossible because the child imagines it in literal, practical terms.</p>
+        </div></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Poetic Techniques:</div>
+                        <ul class="styled-list techniques-list"><li><strong>Repetition:</strong> "cold, cold" emphasises atmosphere and shock.</li><li><strong>Child perspective:</strong> simple phrasing and wandering focus recreate a child's mind.</li><li><strong>Simile:</strong> "a little frosted cake" translates death into childlike imagery.</li><li><strong>Fantasy and personification:</strong> Jack Frost helps the child explain what she cannot understand.</li><li><strong>Juxtaposition:</strong> the dead loon and dead boy reflect and intensify one another.</li><li><strong>Symbolism:</strong> the snow, coffin, loon, and royal figures all deepen the child's experience of death.</li><li><strong>Questioning:</strong> the final question preserves uncertainty and emotional honesty.</li><li><strong>Shifting focus:</strong> Bishop formally imitates the child's inability to look steadily at death.</li></ul>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-label">Exam-Ready Points:</div>
+                        <ul class="check-list"><li>Bishop captures a child's first encounter with death by using fragmented attention and childlike comparisons.</li><li>The poem is moving because it shows not full understanding, but partial understanding struggling with what it cannot master.</li><li>The loon acts as a disturbing mirror for Arthur, doubling the poem's death imagery.</li><li>The simile of the coffin as "a little frosted cake" reveals the innocence and limitations of the child's mind.</li><li>Jack Frost is an imaginative defence mechanism that softens the horror of death.</li><li>The ending is powerful because the child cannot resolve the practical impossibility of Arthur "going" anywhere.</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+      </article>
+    </section>
+
+    <section class="tab-panel" id="tab-themes">
+      <article class="panel-card">
+        <h2>Themes in Focus</h2>
+        <p class="panel-intro">Each theme below keeps Bishop's original notes intact, then links you back to poems where the theme comes alive.</p>
+        <div class="theme-grid"><article class="theme-card" id="theme-symbolism" data-theme-id="symbolism">
+        <div class="theme-card-header">
+            <h3>Symbolism</h3>
+            <span class="theme-card-badge tag-purple">Theme</span>
+        </div>
+        <p>Bishop's poems are rarely only about their surface subjects; the fish, armadillo, filling station, pigsty, or coffin all point beyond themselves.</p>
+        <div class="theme-examples">
+            <button class="example-pill" type="button" data-open-poem="the-filling-station">The Filling Station</button><button class="example-pill" type="button" data-open-poem="the-prodigal">The Prodigal</button><button class="example-pill" type="button" data-open-poem="the-armadillo">The Armadillo</button><button class="example-pill" type="button" data-open-poem="the-fish">The Fish</button><button class="example-pill" type="button" data-open-poem="first-death-in-nova-scotia">First Death in Nova Scotia</button>
+        </div>
+    <div class="theme-quotes"><button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Filling Station</span><blockquote>"a big dim doily"</blockquote></div><div class="mini-quote"><span class="quote-source">The Prodigal</span><blockquote>"the pigsties"</blockquote></div><div class="mini-quote"><span class="quote-source">The Armadillo</span><blockquote>"Too pretty, dreamlike mimicry!"</blockquote></div><div class="mini-quote"><span class="quote-source">The Fish</span><blockquote>"Like medals with their ribbons / frayed and wavering"</blockquote></div></div></div></article><article class="theme-card" id="theme-the-natural-world" data-theme-id="nature">
+        <div class="theme-card-header">
+            <h3>The Natural World</h3>
+            <span class="theme-card-badge tag-blue">Theme</span>
+        </div>
+        <p>Animals and landscapes are observed closely, but nature in Bishop is also a way of exploring human feeling, suffering, endurance, and mortality.</p>
+        <div class="theme-examples">
+            <button class="example-pill" type="button" data-open-poem="the-fish">The Fish</button><button class="example-pill" type="button" data-open-poem="the-armadillo">The Armadillo</button><button class="example-pill" type="button" data-open-poem="the-prodigal">The Prodigal</button>
+        </div>
+    <div class="theme-quotes"><button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Armadillo</span><blockquote>"the owls who nest there / shrieked up out of sight"</blockquote></div><div class="mini-quote"><span class="quote-source">The Armadillo</span><blockquote>"rose-flecked, head down, tail down"</blockquote></div><div class="mini-quote"><span class="quote-source">The Fish</span><blockquote>"while his gills were breathing in / the terrible oxygen"</blockquote></div><div class="mini-quote"><span class="quote-source">The Fish</span><blockquote>"And I let the fish go"</blockquote></div></div></div></article><article class="theme-card" id="theme-childhood-memory" data-theme-id="childhood">
+        <div class="theme-card-header">
+            <h3>Childhood &amp; Memory</h3>
+            <span class="theme-card-badge tag-pink">Theme</span>
+        </div>
+        <p>Bishop often revisits childhood experience, especially moments of confusion, wonder, or shock.</p>
+        <div class="theme-examples">
+            <button class="example-pill" type="button" data-open-poem="first-death-in-nova-scotia">First Death in Nova Scotia</button>
+        </div>
+    <div class="theme-quotes"><button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">First Death in Nova Scotia</span><blockquote>"Arthur's coffin was / a little frosted cake"</blockquote></div><div class="mini-quote"><span class="quote-source">First Death in Nova Scotia</span><blockquote>"Jack Frost had started to paint him"</blockquote></div><div class="mini-quote"><span class="quote-source">First Death in Nova Scotia</span><blockquote>"But how could Arthur go"</blockquote></div></div></div></article><article class="theme-card" id="theme-suffering-survival" data-theme-id="suffering">
+        <div class="theme-card-header">
+            <h3>Suffering &amp; Survival</h3>
+            <span class="theme-card-badge tag-cyan">Theme</span>
+        </div>
+        <p>Her poems repeatedly examine endurance, hardship, degradation, and the dignity of survival.</p>
+        <div class="theme-examples">
+            <button class="example-pill" type="button" data-open-poem="the-fish">The Fish</button><button class="example-pill" type="button" data-open-poem="the-prodigal">The Prodigal</button><button class="example-pill" type="button" data-open-poem="the-armadillo">The Armadillo</button>
+        </div>
+    <div class="theme-quotes"><button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Prodigal</span><blockquote>"The brown enormous odor he lived by / was too close"</blockquote></div><div class="mini-quote"><span class="quote-source">The Armadillo</span><blockquote>"a baby rabbit, dead in the road, / a handful of intangible ash / with fixed, ignited eyes"</blockquote></div><div class="mini-quote"><span class="quote-source">The Fish</span><blockquote>"trailing from his aching jaw"</blockquote></div><div class="mini-quote"><span class="quote-source">First Death in Nova Scotia</span><blockquote>"and then Jack Frost had dropped the brush / and left him white, forever"</blockquote></div></div></div></article><article class="theme-card" id="theme-religion-biblical-echoes" data-theme-id="religion">
+        <div class="theme-card-header">
+            <h3>Religion &amp; Biblical Echoes</h3>
+            <span class="theme-card-badge tag-orange">Theme</span>
+        </div>
+        <p>Biblical stories and religious imagery deepen the moral and symbolic dimensions of her work.</p>
+        <div class="theme-examples">
+            <button class="example-pill" type="button" data-open-poem="the-prodigal">The Prodigal</button><button class="example-pill" type="button" data-open-poem="the-armadillo">The Armadillo</button>
+        </div>
+    <div class="theme-quotes"><button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Prodigal</span><blockquote>"forked lightning"</blockquote></div><div class="mini-quote"><span class="quote-source">The Prodigal</span><blockquote>Reference to Noah's ark</blockquote></div><div class="mini-quote"><span class="quote-source">The Armadillo</span><blockquote>"Climbing the mountain height, / rising toward a saint"</blockquote></div></div></div></article><article class="theme-card" id="theme-compassion-empathy" data-theme-id="empathy">
+        <div class="theme-card-header">
+            <h3>Compassion &amp; Empathy</h3>
+            <span class="theme-card-badge tag-terracotta">Theme</span>
+        </div>
+        <p>Bishop frequently pushes the reader beyond quick judgement toward a more humane understanding of others.</p>
+        <div class="theme-examples">
+            <button class="example-pill" type="button" data-open-poem="the-filling-station">The Filling Station</button><button class="example-pill" type="button" data-open-poem="the-prodigal">The Prodigal</button><button class="example-pill" type="button" data-open-poem="the-fish">The Fish</button>
+        </div>
+    <div class="theme-quotes"><button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Filling Station</span><blockquote>"Somebody loves us all"</blockquote></div><div class="mini-quote"><span class="quote-source">The Prodigal</span><blockquote>"in his shuddering insights"</blockquote></div><div class="mini-quote"><span class="quote-source">The Fish</span><blockquote>"I looked into his eyes"</blockquote></div><div class="mini-quote"><span class="quote-source">The Fish</span><blockquote>"And I let the fish go"</blockquote></div></div></div></article><article class="theme-card" id="theme-distance-between-appearance-and-reality" data-theme-id="appearance">
+        <div class="theme-card-header">
+            <h3>Distance Between Appearance and Reality</h3>
+            <span class="theme-card-badge tag-purple">Theme</span>
+        </div>
+        <p>Her speakers often begin with a surface judgement, then move toward a deeper and more unsettling truth.</p>
+        <div class="theme-examples">
+            <button class="example-pill" type="button" data-open-poem="the-filling-station">The Filling Station</button><button class="example-pill" type="button" data-open-poem="the-armadillo">The Armadillo</button><button class="example-pill" type="button" data-open-poem="first-death-in-nova-scotia">First Death in Nova Scotia</button>
+        </div>
+    <div class="theme-quotes"><button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Filling Station</span><blockquote>"Oh, but it is dirty!"</blockquote></div><div class="mini-quote"><span class="quote-source">The Filling Station</span><blockquote>"Why the extraneous plant? / Why the taboret? / Why, oh why, the doily?"</blockquote></div><div class="mini-quote"><span class="quote-source">First Death in Nova Scotia</span><blockquote>"His breast was deep and white, / cold and caressable"</blockquote></div><div class="mini-quote"><span class="quote-source">First Death in Nova Scotia</span><blockquote>"Arthur's coffin was / a little frosted cake"</blockquote></div></div></div></article><article class="theme-card" id="theme-gender-domesticity" data-theme-id="gender">
+        <div class="theme-card-header">
+            <h3>Gender &amp; Domesticity</h3>
+            <span class="theme-card-badge tag-blue">Theme</span>
+        </div>
+        <p>In some poems, Bishop contrasts masculine labour or roughness with feminine care, nurture, and emotional connection.</p>
+        <div class="theme-examples">
+            <button class="example-pill" type="button" data-open-poem="the-filling-station">The Filling Station</button>
+        </div>
+    <div class="theme-quotes"><button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Filling Station</span><blockquote>"Father wears a dirty, / oil-soaked monkey suit"</blockquote></div><div class="mini-quote"><span class="quote-source">The Filling Station</span><blockquote>"a big dim doily"</blockquote></div><div class="mini-quote"><span class="quote-source">The Filling Station</span><blockquote>"Somebody embroidered the doily"</blockquote></div><div class="mini-quote"><span class="quote-source">The Filling Station</span><blockquote>"Somebody waters the plant"</blockquote></div></div></div></article></div>
+      </article>
+    </section>
+
+    <section class="tab-panel" id="tab-exam">
+      <div class="exam-grid">
+        <article class="panel-card exam-section">
+          <h2>Comparative Points</h2>
+          <p class="panel-intro">How this poet compares to others on the course</p>
+          <ul class="compact-list"><li><strong>Compared with Heaney:</strong> Like Seamus Heaney, Bishop often writes about memory, family, and childhood, but Bishop is generally more abstract and symbol-driven. Heaney is often more rooted in place and personal voice, while Bishop's speakers can be more distanced and uncertain.</li><li><strong>Compared with Paula Meehan:</strong> Meehan often feels more direct, personal, and socially grounded. Bishop, by contrast, tends to work through symbolic structures and layered speakers rather than straightforward confession.</li><li><strong>Compared with Yeats:</strong> Like W.B. Yeats, Bishop can be highly symbolic, but her symbols usually arise from sharply observed objects or creatures rather than from mythic or historical systems. Her style is quieter, more restrained, and more observational.</li><li><strong>Compared with poets of overt self-expression:</strong> Bishop is less openly confessional. The speaker in her poems may be biased, limited, or dramatically constructed, so students should avoid assuming speaker and poet are identical.</li><li><strong>Shared strengths with major LC poets:</strong> Like the best poets on the course, Bishop combines concrete imagery with larger emotional and philosophical meaning.</li></ul>
+        </article>
+        <article class="panel-card exam-section">
+          <h2>Sample Essay Angles</h2>
+          <p class="panel-intro">Possible exam question approaches</p>
+          <ul class="compact-list"><li><strong>Bishop as a poet of symbolism:</strong> Show how the central image in each poem opens into a larger meaning — the fish as survival, the filling station as hidden love, the pigsty as addiction, the fire balloons as destructive tradition, and Arthur's coffin as incomprehensible death.</li><li><strong>Bishop's changing speakers:</strong> Discuss how her speakers do not simply describe; they develop, revise judgements, and move toward deeper understanding.</li><li><strong>Bishop's compassion:</strong> Explore how she pushes readers beyond disgust, fear, or distance into empathy, especially in <em>The Prodigal</em>, <em>The Filling Station</em>, and <em>The Fish</em>.</li><li><strong>The natural world in Bishop:</strong> Analyse how animals are never just animals; they become symbols through which Bishop explores human suffering, endurance, and vulnerability.</li><li><strong>Childhood and perception:</strong> Use <em>First Death in Nova Scotia</em> to show how Bishop captures the limits of childhood understanding.</li><li><strong>Beauty versus truth:</strong> Discuss how Bishop often begins with striking description or beauty, then complicates it with moral unease, as in <em>The Armadillo</em>.</li><li><strong>Style and difficulty:</strong> Argue that Bishop's poetry is rewarding because its apparent simplicity hides abstract and layered meanings.</li></ul>
+        </article>
+      </div>
+      <article class="panel-card">
+        <h2>Quick-Reference Quotes</h2>
+        <p class="panel-intro">Every key quote and analysis point from the notes, ready for rapid review.</p>
+        <div class="quick-quote-wrap"><div class="quick-quote-group"><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"Oh, but it is dirty!"</blockquote>
+                <p>This dramatic interjection is a high-impact opening. The exclamation throws the reader straight into the speaker's disgust and establishes her initially judgemental, almost snobbish tone.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"oil-soaked, oil-permeated"</blockquote>
+                <p>The repetition exaggerates the saturation of grease and creates a comic but unpleasant excess. Bishop "doubles down" on the filth, making the setting feel overwhelming.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"Be careful with that match!"</blockquote>
+                <p>The imperative suggests danger and reinforces how completely the station is steeped in oil. It also helps create the speaker's superior, commanding attitude.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"Father wears a dirty, / oil-soaked monkey suit"</blockquote>
+                <p>The father's identity is reduced to his work clothes. "Monkey suit" has a dismissive, mocking quality, showing the speaker's early contempt.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"all quite thoroughly dirty"</blockquote>
+                <p>The blanket description denies individuality to the men. The speaker sees them as a single greasy mass rather than as distinct human beings.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"Do they live in the station?"</blockquote>
+                <p>This question sounds contemptuous and incredulous. It shows how the speaker initially cannot imagine dignity, privacy, or family life existing in such a place.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"There are cans of motor oil, / and after them, some pegs, / some shirts"</blockquote>
+                <p>The poem begins to blur the boundary between workplace and home. Domestic life slowly emerges from behind the industrial surface.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"a big dim doily"</blockquote>
+                <p>The doily is a crucial symbol of care, delicacy, and domestic attention. Its presence is unexpected amid the grime, making it all the more powerful.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"Why the extraneous plant? / Why the taboret? / Why, oh why, the doily?"</blockquote>
+                <p>The repetition of questions shows a tonal change: disgust has become curiosity. The speaker is now genuinely trying to understand what lies beneath appearances.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"Somebody embroidered the doily"</blockquote>
+                <p>The repeated "somebody" emphasises the unseen labour of care. Bishop evokes an absent figure whose love is visible through small acts rather than direct presence.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"Somebody waters the plant"</blockquote>
+                <p>This image of nurture contrasts strongly with the masculine, oily environment. It suggests persistence of life and tenderness in an unlikely place.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Filling Station</div>
+                <blockquote>"Somebody loves us all"</blockquote>
+                <p>The final revelation transforms the poem. The filling station becomes a symbol of human need for care and belonging. The universal "us all" expands the poem beyond this family to a larger statement about love.</p>
+            </div></div><div class="quick-quote-group"><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"The brown enormous odor he lived by / was too close"</blockquote>
+                <p>Bishop begins with smell, immediately making the reader inhabit the man's degrading world. The sensory detail is invasive and uncomfortable.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"lives of the dawn / and the dust"</blockquote>
+                <p>The phrasing suggests exhaustion, poverty, and repetitive existence. His life has become reduced and animal-like.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"among the trash"</blockquote>
+                <p>The setting symbolises degradation. He is not merely in a dirty place; he has fallen socially, morally, and spiritually.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"the pigsties"</blockquote>
+                <p>The pigsty is the central symbol of addiction and self-abasement. Like many Bishop titles and settings, it points beyond itself to an inner condition.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"self-righteous eyes"</blockquote>
+                <p>This striking phrase applied to the pigs humiliates the man further. Even in the pigs' world, he seems the outsider, judged and diminished.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"burning puddles"</blockquote>
+                <p>This biblical, almost apocalyptic image gives the sty a hellish atmosphere. The setting feels morally charged, not just physically disgusting.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"forked lightning"</blockquote>
+                <p>The biblical resonance suggests judgement, revelation, and divine warning. Bishop elevates the scene beyond realism into symbolic territory.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>Reference to Noah's ark</blockquote>
+                <p>The allusion introduces ideas of judgement, survival, and renewal. Biblical imagery shadows the poem without becoming explicit sermonising.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>The sow eating her own young</blockquote>
+                <p>This shocking image symbolises the destruction of the future to satisfy present appetite. It reflects addiction as a force that consumes what should be protected.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"in his shuddering insights"</blockquote>
+                <p>The phrase suggests painful moments of clarity rather than calm reflection. His self-knowledge comes physically, violently, and with difficulty.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Prodigal</div>
+                <blockquote>"but it took him a long time / finally to make his mind up to go home"</blockquote>
+                <p>The understated ending is moving because it avoids easy redemption. Bishop recognises that return, repentance, and recovery are slow and difficult.</p>
+            </div></div><div class="quick-quote-group"><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"This is the time of year / when almost every night / the frail, illegal fire balloons appear"</blockquote>
+                <p>Bishop opens with a strange mixture of delicacy and danger. "Frail" suggests beauty and vulnerability, while "illegal" hints immediately at recklessness.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"Climbing the mountain height, / rising toward a saint"</blockquote>
+                <p>The balloons are linked to religious aspiration. Bishop presents the tradition as idealistic and spiritually motivated, not merely foolish.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"Once up against the sky it's hard / to tell them from the stars"</blockquote>
+                <p>This simile elevates the balloons into the realm of the celestial. Their beauty is real, which makes the later destruction more complex.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"Flush and fill with light / that comes and goes, like hearts"</blockquote>
+                <p>The simile is delicate and imaginative. The balloons seem alive, pulsing like beating hearts, which adds emotional richness.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"receding, dwindling"</blockquote>
+                <p>The present participles create movement and help the balloons feel dynamic, drifting, and cinematic.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"forsaking us"</blockquote>
+                <p>This personification makes the balloons seem almost wilful as they drift away from human control.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"suddenly turning dangerous"</blockquote>
+                <p>This marks the start of the tonal shift. What looked harmless and beautiful becomes threatening.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"Last night another big one fell"</blockquote>
+                <p>"Another" is devastating because it implies repetition. This is not a one-off accident but part of an ongoing pattern of harm.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"splattered like an egg of fire against the cliff"</blockquote>
+                <p>The simile is vivid and violent. The balloon's destruction is rendered in a grotesque but memorable image.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"the owls who nest there / shrieked up out of sight"</blockquote>
+                <p>The verb "shrieked" conveys panic and suffering. Bishop forces us to hear the consequences of the spectacle.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"rose-flecked, head down, tail down"</blockquote>
+                <p>The armadillo's posture expresses fear, exhaustion, and defeat. The creature becomes a symbol of helplessness.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"a baby rabbit, dead in the road, / a handful of intangible ash / with fixed, ignited eyes"</blockquote>
+                <p>The rabbit is one of Bishop's most shocking images. "Ignited" is a pun: literally burned, but also intensely alive or alert in a final terrible moment.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"Too pretty, dreamlike mimicry!"</blockquote>
+                <p>Bishop condemns the false beauty of the balloons. Their mimicry of stars is seductive but destructive.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"O falling fire and piercing cry / and panic"</blockquote>
+                <p>The accumulation of distressing images replaces the earlier dreamlike wonder. The poem now foregrounds suffering.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Armadillo</div>
+                <blockquote>"a weak mailed fist / clenched ignorant against the sky"</blockquote>
+                <p>This final image suggests powerless protest. The armadillo becomes a symbol of creatures harmed by forces they cannot understand or resist.</p>
+            </div></div><div class="quick-quote-group"><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"I caught a tremendous fish"</blockquote>
+                <p>The opening is simple, direct, and experiential. It sounds like the beginning of a story, grounding the poem in lived observation.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"He didn't fight. / He hadn't fought at all"</blockquote>
+                <p>The repetition is striking because it gives the fish immediate character. Its passivity suggests exhaustion, age, or stoic dignity rather than weakness.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"venerable"</blockquote>
+                <p>This adjective suggests age worthy of respect. Bishop does not merely describe an old fish; she elevates it.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"homely"</blockquote>
+                <p>The fish is not glamorised. Bishop's respect for it includes its roughness and unattractive physicality.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"His brown skin hung in strips / like ancient wallpaper"</blockquote>
+                <p>This simile memorably conveys age, damage, and history. The fish appears worn by time, almost archaeological.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"shapes like full-blown roses / stained and lost through age"</blockquote>
+                <p>Even decay is rendered beautifully. Bishop's eye turns physical detail into something artistic and layered.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"while his gills were breathing in / the terrible oxygen"</blockquote>
+                <p>"Terrible" is crucial because oxygen is life-giving to humans but harmful to the fish. The line forces us to imagine the scene from the fish's perspective.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"I looked into his eyes"</blockquote>
+                <p>The act of looking becomes intimate and almost reciprocal. The poem is moving from possession toward recognition.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"far larger than mine / but shallower"</blockquote>
+                <p>The description is mysterious and slightly uncanny. Bishop makes the fish feel both real and strangely otherworldly.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"from his lower lip / if you could call it a lip"</blockquote>
+                <p>The self-correction shows precise observation and reminds us of the difficulty of bridging human and animal worlds.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"five old pieces of fish-line"</blockquote>
+                <p>This discovery changes everything. The fish is no longer just a catch; it is a survivor with a history.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"Like medals with their ribbons / frayed and wavering"</blockquote>
+                <p>The hooks become symbols of honour. Survival itself is treated like heroism.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"a five-haired beard of wisdom"</blockquote>
+                <p>This metaphor makes the fish seem like an old sage. Experience becomes a kind of earned authority.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"trailing from his aching jaw"</blockquote>
+                <p>The dignity of survival does not erase pain. Bishop honours endurance without sentimentalising it.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"victory filled up / the little rented boat"</blockquote>
+                <p>The speaker experiences a powerful emotional climax, but it is not the victory of domination. It is the victory of recognition and connection.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"rainbow, rainbow, rainbow!"</blockquote>
+                <p>The triple repetition creates a visionary, ecstatic effect. The moment feels transcendent, almost spiritual.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">The Fish</div>
+                <blockquote>"And I let the fish go"</blockquote>
+                <p>The simple ending is deeply powerful. Release becomes the speaker's act of reverence and moral awakening.</p>
+            </div></div><div class="quick-quote-group"><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"In the cold, cold parlor"</blockquote>
+                <p>The repetition emphasises not only physical coldness but also the emotional chill of death. It immediately sets a mournful, sterile atmosphere.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>The chromographs of the royal family</blockquote>
+                <p>These formal adult images create a strange ceremonial setting. The child notices them because they are visually striking, but they also suggest order and social ritual in contrast to private grief.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>The stuffed loon beneath them</blockquote>
+                <p>The loon doubles the death imagery. Its presence beside Arthur's corpse makes the room feel filled with dead bodies and unsettling stillness.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"Since Uncle Arthur fired / a bullet into him, / he hadn't said a word"</blockquote>
+                <p>The child's matter-of-fact statement about the loon is unsettling. It reflects innocence: the violence is registered, but not fully emotionally processed.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"His breast was deep and white, / cold and caressable"</blockquote>
+                <p>The description could apply to the loon or Arthur, showing the child's collapsing perspective. Death is perceived through sensory confusion.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"his eyes were red glass, / much to be desired"</blockquote>
+                <p>The phrase captures a child's attraction to bright surfaces even in a death scene. This unsettling mix of desire and death is central to the poem.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"Arthur's coffin was / a little frosted cake"</blockquote>
+                <p>This is a deeply childlike simile. Because the child cannot fully process a coffin, she imagines it through something familiar, decorative, and domestic.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"Jack Frost had started to paint him"</blockquote>
+                <p>The child uses a comforting mythological figure to explain Arthur's pallor. Imagination becomes a shield against brutal reality.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"He had just begun on his hair, / a few red strokes"</blockquote>
+                <p>The image suggests the unfinished work of death. The child's explanation is imaginative, but it also makes Arthur's body vividly present.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"and then Jack Frost had dropped the brush / and left him white, forever"</blockquote>
+                <p>The word "forever" lands with emotional force. Even within the fantasy, permanence enters and childhood imagination can no longer fully soften the reality.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"invited Arthur to be / the smallest page at court"</blockquote>
+                <p>The royal figures are transformed into a fantasy afterlife. The child tries to fit death into the language of story and ceremony.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"But how could Arthur go"</blockquote>
+                <p>The question reveals the child's logical crisis. She cannot reconcile the idea of departure with the physical stillness of the corpse.</p>
+            </div><div class="mini-quote-card">
+                <div class="mini-quote-poem">First Death in Nova Scotia</div>
+                <blockquote>"with his eyes shut up so tight / and the roads deep in snow?"</blockquote>
+                <p>This ending beautifully captures childhood incomprehension. Death remains impossible because the child imagines it in literal, practical terms.</p>
+            </div></div></div>
+      </article>
+      <article class="panel-card details-panel">
+        <details class="source-notes">
+          <summary>Complete Source Notes</summary>
+          <pre># Elizabeth Bishop — Leaving Cert Poetry Notes
+
+## Poet Overview
+- Elizabeth Bishop is a twentieth-century American poet whose work often draws on observation, memory, travel, childhood experience, religion, and the natural world.
+- In these poems, Bishop is deeply interested in symbolism: the central image or creature in the title often carries the deepest meaning of the poem.
+- Her poetry can seem deceptively simple on first reading, but it is often abstract and layered, requiring the reader to dig beneath the surface narrative.
+- She frequently writes through speakers who are complex, limited, biased, or uncertain, so the speaker's voice does not always neatly match Bishop's own views.
+- Across these poems, Bishop combines vivid physical detail with emotional restraint, allowing symbols, images, and structure to reveal meaning gradually.
+
+## Key Themes
+- **Symbolism:** Bishop's poems are rarely only about their surface subjects; the fish, armadillo, filling station, pigsty, or coffin all point beyond themselves.
+- **The Natural World:** Animals and landscapes are observed closely, but nature in Bishop is also a way of exploring human feeling, suffering, endurance, and mortality.
+- **Childhood &amp; Memory:** Bishop often revisits childhood experience, especially moments of confusion, wonder, or shock.
+- **Suffering &amp; Survival:** Her poems repeatedly examine endurance, hardship, degradation, and the dignity of survival.
+- **Religion &amp; Biblical Echoes:** Biblical stories and religious imagery deepen the moral and symbolic dimensions of her work.
+- **Compassion &amp; Empathy:** Bishop frequently pushes the reader beyond quick judgement toward a more humane understanding of others.
+- **Distance Between Appearance and Reality:** Her speakers often begin with a surface judgement, then move toward a deeper and more unsettling truth.
+- **Gender &amp; Domesticity:** In some poems, Bishop contrasts masculine labour or roughness with feminine care, nurture, and emotional connection.
+
+## Poems
+
+### The Filling Station
+
+**Summary:** Brief summary of the poem
+
+The speaker encounters a filthy petrol station and initially reacts with disgust and superiority. As the poem develops, however, the speaker notices small signs of care and domestic life hidden within the dirt. This discovery transforms the poem from a sneering description of masculine grime into a meditation on tenderness, care, and the unseen presence of love.
+
+**Key Themes:** List relevant themes
+
+- Symbolism
+- Gender dynamics
+- Appearance versus reality
+- Compassion and human connection
+- Speaker development
+- Domesticity and care
+
+**Structure &amp; Form:** Notes on structure
+
+- The poem begins abruptly, **in medias res**, with an exclamatory reaction that immediately captures attention.
+- Bishop structures the poem around a clear movement from **contempt to curiosity to insight**.
+- A series of questions marks the speaker's changing attitude and shows her mind working through what she sees.
+- The free verse form feels conversational, but Bishop carefully controls repetition and tonal shifts.
+- The ending broadens from a particular filling station to a universal idea of love: the poem widens in scope as it closes.
+
+**Key Quotes &amp; Analysis:**
+- **"Oh, but it is dirty!"** — This dramatic interjection is a high-impact opening. The exclamation throws the reader straight into the speaker's disgust and establishes her initially judgemental, almost snobbish tone.
+- **"oil-soaked, oil-permeated"** — The repetition exaggerates the saturation of grease and creates a comic but unpleasant excess. Bishop "doubles down" on the filth, making the setting feel overwhelming.
+- **"Be careful with that match!"** — The imperative suggests danger and reinforces how completely the station is steeped in oil. It also helps create the speaker's superior, commanding attitude.
+- **"Father wears a dirty, / oil-soaked monkey suit"** — The father's identity is reduced to his work clothes. "Monkey suit" has a dismissive, mocking quality, showing the speaker's early contempt.
+- **"all quite thoroughly dirty"** — The blanket description denies individuality to the men. The speaker sees them as a single greasy mass rather than as distinct human beings.
+- **"Do they live in the station?"** — This question sounds contemptuous and incredulous. It shows how the speaker initially cannot imagine dignity, privacy, or family life existing in such a place.
+- **"There are cans of motor oil, / and after them, some pegs, / some shirts"** — The poem begins to blur the boundary between workplace and home. Domestic life slowly emerges from behind the industrial surface.
+- **"a big dim doily"** — The doily is a crucial symbol of care, delicacy, and domestic attention. Its presence is unexpected amid the grime, making it all the more powerful.
+- **"Why the extraneous plant? / Why the taboret? / Why, oh why, the doily?"** — The repetition of questions shows a tonal change: disgust has become curiosity. The speaker is now genuinely trying to understand what lies beneath appearances.
+- **"Somebody embroidered the doily"** — The repeated "somebody" emphasises the unseen labour of care. Bishop evokes an absent figure whose love is visible through small acts rather than direct presence.
+- **"Somebody waters the plant"** — This image of nurture contrasts strongly with the masculine, oily environment. It suggests persistence of life and tenderness in an unlikely place.
+- **"Somebody loves us all"** — The final revelation transforms the poem. The filling station becomes a symbol of human need for care and belonging. The universal "us all" expands the poem beyond this family to a larger statement about love.
+
+**Poetic Techniques:**
+- **Exclamation:** "Oh, but it is dirty!" creates an immediate dramatic hook.
+- **Repetition:** "oil-soaked, oil-permeated" intensifies the greasy atmosphere.
+- **Imperative:** "Be careful with that match!" conveys danger and superiority.
+- **Questioning:** "Why the extraneous plant?" shows the speaker's development from judgement to reflection.
+- **Symbolism:** the doily, plant, and taboret symbolise domestic care and hidden love.
+- **Contrast:** masculine labour and feminine domesticity are sharply set against each other.
+- **Tone shift:** Bishop moves from mockery and disgust to warmth and wonder.
+- **Universal ending:** the poem broadens from one setting to a general truth about love.
+
+**Exam-Ready Points:**
+- Bishop uses the filling station as a symbol rather than merely a setting; the real subject is hidden human care.
+- The poem is powerful because the speaker changes: she begins in contempt but ends in recognition.
+- Bishop contrasts rough masculine labour with signs of feminine domesticity to explore gendered ideas of value.
+- The repeated questions dramatise the speaker's changing consciousness and invite the reader to rethink first impressions.
+- The ending is memorable because it transforms a dirty, ordinary place into proof that "Somebody loves us all."
+- The speaker's snobbery is important: Bishop does not present a simple lyric self, but a complex and possibly flawed voice.
+
+---
+
+### The Prodigal
+
+**Summary:** Brief summary of the poem
+
+The poem presents a degraded man, likely an alcoholic or drifter, living among pigs in a foul, degrading environment. Though the title refers to the biblical Prodigal Son, Bishop never directly retells that parable. Instead, the biblical story acts as a frame through which we interpret the man's fall, self-disgust, and eventual moment of recognition that he must return home.
+
+**Key Themes:** List relevant themes
+
+- Symbolism
+- Addiction and degradation
+- Compassion and uncomfortable empathy
+- Biblical allusion
+- Exile and return
+- Human suffering
+- Moral and spiritual crisis
+
+**Structure &amp; Form:** Notes on structure
+
+- The poem works through descriptive free verse, building up the physical horror of the pigsty before moving toward insight.
+- Bishop uses the title as a major interpretive key: the biblical story is present even when not explicitly mentioned.
+- The poem's structure mirrors a mental journey from degradation toward self-awareness.
+- Graphic sensory detail forces the reader into the scene before any moral resolution is offered.
+- The final movement toward "home" is understated, making the emotional breakthrough feel hard-won rather than sentimental.
+
+**Key Quotes &amp; Analysis:**
+- **"The brown enormous odor he lived by / was too close"** — Bishop begins with smell, immediately making the reader inhabit the man's degrading world. The sensory detail is invasive and uncomfortable.
+- **"lives of the dawn / and the dust"** — The phrasing suggests exhaustion, poverty, and repetitive existence. His life has become reduced and animal-like.
+- **"among the trash"** — The setting symbolises degradation. He is not merely in a dirty place; he has fallen socially, morally, and spiritually.
+- **"the pigsties"** — The pigsty is the central symbol of addiction and self-abasement. Like many Bishop titles and settings, it points beyond itself to an inner condition.
+- **"self-righteous eyes"** — This striking phrase applied to the pigs humiliates the man further. Even in the pigs' world, he seems the outsider, judged and diminished.
+- **"burning puddles"** — This biblical, almost apocalyptic image gives the sty a hellish atmosphere. The setting feels morally charged, not just physically disgusting.
+- **"forked lightning"** — The biblical resonance suggests judgement, revelation, and divine warning. Bishop elevates the scene beyond realism into symbolic territory.
+- **Reference to Noah's ark** — The allusion introduces ideas of judgement, survival, and renewal. Biblical imagery shadows the poem without becoming explicit sermonising.
+- **The sow eating her own young** — This shocking image symbolises the destruction of the future to satisfy present appetite. It reflects addiction as a force that consumes what should be protected.
+- **"in his shuddering insights"** — The phrase suggests painful moments of clarity rather than calm reflection. His self-knowledge comes physically, violently, and with difficulty.
+- **"but it took him a long time / finally to make his mind up to go home"** — The understated ending is moving because it avoids easy redemption. Bishop recognises that return, repentance, and recovery are slow and difficult.
+
+**Poetic Techniques:**
+- **Biblical allusion:** the title invokes the Prodigal Son, creating a parallel narrative.
+- **Symbolism:** the pigsty represents addiction, degradation, and exile from the self.
+- **Sensory imagery:** stink, filth, and physical decay force the reader into the addict's reality.
+- **Animal imagery:** the overlap between man and pig blurs human dignity and degradation.
+- **Religious imagery:** burning puddles, lightning, and ark imagery deepen the poem's moral seriousness.
+- **Juxtaposition:** bodily filth is placed beside spiritual significance.
+- **Understatement:** the decision to return home is quiet, which makes it feel real.
+
+**Exam-Ready Points:**
+- Bishop uses the biblical title as a narrative foil: the poem gains meaning through comparison with the parable of the Prodigal Son.
+- The pigsty is a symbol for addiction's degrading reality rather than merely a literal setting.
+- The poem is socially conscious because it refuses to let the reader keep a safe, judgemental distance from the addict.
+- Graphic detail is central to the poem's effect: Bishop forces us to confront suffering directly.
+- The sow eating her young is a powerful symbol of addiction sacrificing the future for immediate appetite.
+- The ending is effective because Bishop avoids easy forgiveness and instead shows insight as painful and gradual.
+
+---
+
+### The Armadillo
+
+**Summary:** Brief summary of the poem
+
+The poem begins by describing the beautiful, dreamlike ascent of illegal fire balloons released as part of a religious tradition. The scene initially feels magical and celestial, but the poem turns sharply when one balloon falls and causes destruction. Bishop then focuses on terrified animals, especially the armadillo and baby rabbit, exposing the cruelty hidden beneath human celebration and suggesting that cherished traditions can cause repeated harm.
+
+**Key Themes:** List relevant themes
+
+- Symbolism
+- Beauty and violence
+- Tradition and harm
+- The natural world
+- Social conscience
+- Human carelessness
+- Powerlessness
+
+**Structure &amp; Form:** Notes on structure
+
+- The poem is carefully structured around a dramatic **turn** from beauty to disaster.
+- Early stanzas build a sense of wonder through elevated imagery and floating movement.
+- Present participles create momentum and a feeling of continuous motion.
+- The line **"Last night another big one fell"** marks the crucial shift in tone.
+- The final stanza becomes more explicitly critical and symbolic, broadening the poem from one event to a statement about repeated human harm.
+
+**Key Quotes &amp; Analysis:**
+- **"This is the time of year / when almost every night / the frail, illegal fire balloons appear"** — Bishop opens with a strange mixture of delicacy and danger. "Frail" suggests beauty and vulnerability, while "illegal" hints immediately at recklessness.
+- **"Climbing the mountain height, / rising toward a saint"** — The balloons are linked to religious aspiration. Bishop presents the tradition as idealistic and spiritually motivated, not merely foolish.
+- **"Once up against the sky it's hard / to tell them from the stars"** — This simile elevates the balloons into the realm of the celestial. Their beauty is real, which makes the later destruction more complex.
+- **"Flush and fill with light / that comes and goes, like hearts"** — The simile is delicate and imaginative. The balloons seem alive, pulsing like beating hearts, which adds emotional richness.
+- **"receding, dwindling"** — The present participles create movement and help the balloons feel dynamic, drifting, and cinematic.
+- **"forsaking us"** — This personification makes the balloons seem almost wilful as they drift away from human control.
+- **"suddenly turning dangerous"** — This marks the start of the tonal shift. What looked harmless and beautiful becomes threatening.
+- **"Last night another big one fell"** — "Another" is devastating because it implies repetition. This is not a one-off accident but part of an ongoing pattern of harm.
+- **"splattered like an egg of fire against the cliff"** — The simile is vivid and violent. The balloon's destruction is rendered in a grotesque but memorable image.
+- **"the owls who nest there / shrieked up out of sight"** — The verb "shrieked" conveys panic and suffering. Bishop forces us to hear the consequences of the spectacle.
+- **"rose-flecked, head down, tail down"** — The armadillo's posture expresses fear, exhaustion, and defeat. The creature becomes a symbol of helplessness.
+- **"a baby rabbit, dead in the road, / a handful of intangible ash / with fixed, ignited eyes"** — The rabbit is one of Bishop's most shocking images. "Ignited" is a pun: literally burned, but also intensely alive or alert in a final terrible moment.
+- **"Too pretty, dreamlike mimicry!"** — Bishop condemns the false beauty of the balloons. Their mimicry of stars is seductive but destructive.
+- **"O falling fire and piercing cry / and panic"** — The accumulation of distressing images replaces the earlier dreamlike wonder. The poem now foregrounds suffering.
+- **"a weak mailed fist / clenched ignorant against the sky"** — This final image suggests powerless protest. The armadillo becomes a symbol of creatures harmed by forces they cannot understand or resist.
+
+**Poetic Techniques:**
+- **Contrast:** Bishop opposes dreamlike beauty with real destruction.
+- **Symbolism:** the balloons symbolise traditions or spectacles that seem beautiful but cause repeated harm.
+- **Simile:** "like hearts" and "like an egg of fire" make the imagery vivid and dynamic.
+- **Personification:** "forsaking us" gives the balloons agency.
+- **Present participles:** "receding, dwindling" create movement and tension.
+- **Sound effects and rhyme:** energetic sounds heighten the dramatic scene.
+- **Exclamation:** "Too pretty, dreamlike mimicry!" reveals moral outrage.
+- **Final emblematic image:** the "weak mailed fist" leaves the reader with a symbol of helpless resistance.
+
+**Exam-Ready Points:**
+- Bishop first seduces the reader with the beauty of the balloons before exposing their destructive consequences.
+- The poem critiques tradition by showing that inherited practices may continue even when they repeatedly cause harm.
+- The word "another" is central because it reveals the event as part of a pattern rather than an accident.
+- Bishop's sympathy lies with vulnerable creatures, giving the poem a strong social and moral conscience.
+- The armadillo becomes a symbol of powerless suffering in the face of careless human behaviour.
+- The poem's final exclamation, "Too pretty, dreamlike mimicry!", rejects surface beauty when it hides violence.
+
+---
+
+### The Fish
+
+**Summary:** Brief summary of the poem
+
+The speaker catches a large old fish and begins by simply describing it in close visual detail. As the poem develops, the fish becomes more than a catch: it is revealed as scarred, experienced, and enduring, having survived many previous encounters. The speaker comes to recognise the fish's dignity and resilience, experiences a moment of almost spiritual revelation, and releases it.
+
+**Key Themes:** List relevant themes
+
+- Symbolism
+- Survival and endurance
+- Reverence for age
+- The natural world
+- Experience and wisdom
+- Transformation through perception
+- Respect for life
+
+**Structure &amp; Form:** Notes on structure
+
+- The poem follows a first-person narrative, giving it immediacy and clarity.
+- It develops through sustained close observation: description leads gradually to insight.
+- The free verse form mirrors the speaker's unfolding thought process.
+- The turning point comes with the discovery of the old hooks and lines in the fish's mouth.
+- The ending lifts the poem from realism into a moment of transcendence and release.
+
+**Key Quotes &amp; Analysis:**
+- **"I caught a tremendous fish"** — The opening is simple, direct, and experiential. It sounds like the beginning of a story, grounding the poem in lived observation.
+- **"He didn't fight. / He hadn't fought at all"** — The repetition is striking because it gives the fish immediate character. Its passivity suggests exhaustion, age, or stoic dignity rather than weakness.
+- **"venerable"** — This adjective suggests age worthy of respect. Bishop does not merely describe an old fish; she elevates it.
+- **"homely"** — The fish is not glamorised. Bishop's respect for it includes its roughness and unattractive physicality.
+- **"His brown skin hung in strips / like ancient wallpaper"** — This simile memorably conveys age, damage, and history. The fish appears worn by time, almost archaeological.
+- **"shapes like full-blown roses / stained and lost through age"** — Even decay is rendered beautifully. Bishop's eye turns physical detail into something artistic and layered.
+- **"while his gills were breathing in / the terrible oxygen"** — "Terrible" is crucial because oxygen is life-giving to humans but harmful to the fish. The line forces us to imagine the scene from the fish's perspective.
+- **"I looked into his eyes"** — The act of looking becomes intimate and almost reciprocal. The poem is moving from possession toward recognition.
+- **"far larger than mine / but shallower"** — The description is mysterious and slightly uncanny. Bishop makes the fish feel both real and strangely otherworldly.
+- **"from his lower lip / if you could call it a lip"** — The self-correction shows precise observation and reminds us of the difficulty of bridging human and animal worlds.
+- **"five old pieces of fish-line"** — This discovery changes everything. The fish is no longer just a catch; it is a survivor with a history.
+- **"Like medals with their ribbons / frayed and wavering"** — The hooks become symbols of honour. Survival itself is treated like heroism.
+- **"a five-haired beard of wisdom"** — This metaphor makes the fish seem like an old sage. Experience becomes a kind of earned authority.
+- **"trailing from his aching jaw"** — The dignity of survival does not erase pain. Bishop honours endurance without sentimentalising it.
+- **"victory filled up / the little rented boat"** — The speaker experiences a powerful emotional climax, but it is not the victory of domination. It is the victory of recognition and connection.
+- **"rainbow, rainbow, rainbow!"** — The triple repetition creates a visionary, ecstatic effect. The moment feels transcendent, almost spiritual.
+- **"And I let the fish go"** — The simple ending is deeply powerful. Release becomes the speaker's act of reverence and moral awakening.
+
+**Poetic Techniques:**
+- **First-person narration:** creates immediacy and authenticity.
+- **Detailed visual imagery:** Bishop's exact observation makes the fish vividly real.
+- **Simile:** "like ancient wallpaper" and "Like medals" communicate age and honour.
+- **Metaphor:** "beard of wisdom" presents the fish as a survivor-sage.
+- **Repetition:** "rainbow, rainbow, rainbow!" captures wonder and transformation.
+- **Symbolism:** the fish represents survival, experience, and dignity earned through suffering.
+- **Perspective shift:** the speaker moves from catcher to admirer.
+- **Understated ending:** the release is simple but emotionally decisive.
+
+**Exam-Ready Points:**
+- The fish is a symbol of survival, endurance, and the dignity that comes from overcoming hardship.
+- Bishop's precise descriptive detail gives the poem credibility and allows symbolism to arise naturally.
+- The hooks in the fish's mouth are transformed into "medals," showing Bishop's reverence for experienced survivors.
+- The phrase "terrible oxygen" is important because it forces the reader to view the scene from the fish's perspective.
+- The rainbow marks a moment of transcendence in which the speaker sees beyond ownership or conquest.
+- The final release is the poem's moral climax: respect leads to mercy.
+
+---
+
+### First Death in Nova Scotia
+
+**Summary:** Brief summary of the poem
+
+The poem recounts a child's first encounter with death as she looks at the body of her young cousin Arthur. The child cannot fully understand what has happened, so her attention shifts among the cold room, the royal pictures on the wall, the stuffed loon, and the coffin. Through this fragmented perspective, Bishop captures both the strangeness of death and the way childhood imagination protects the mind from fully grasping it.
+
+**Key Themes:** List relevant themes
+
+- Childhood and memory
+- Death and mortality
+- Innocence and incomprehension
+- Symbolism
+- Family experience
+- Imagination as protection
+- Appearance versus reality
+
+**Structure &amp; Form:** Notes on structure
+
+- The poem is structured through a child's wandering attention rather than through adult logic.
+- Bishop moves between the dead boy, the stuffed loon, the room, and the royal images, reproducing the child's inability to face death directly.
+- Repetition and simple language help create a child's voice.
+- The poem's similes and fantasies are crucial because they show how the child interprets the incomprehensible through familiar images.
+- The ending remains unresolved, which is fitting: death is not explained, only encountered.
+
+**Key Quotes &amp; Analysis:**
+- **"In the cold, cold parlor"** — The repetition emphasises not only physical coldness but also the emotional chill of death. It immediately sets a mournful, sterile atmosphere.
+- **The chromographs of the royal family** — These formal adult images create a strange ceremonial setting. The child notices them because they are visually striking, but they also suggest order and social ritual in contrast to private grief.
+- **The stuffed loon beneath them** — The loon doubles the death imagery. Its presence beside Arthur's corpse makes the room feel filled with dead bodies and unsettling stillness.
+- **"Since Uncle Arthur fired / a bullet into him, / he hadn't said a word"** — The child's matter-of-fact statement about the loon is unsettling. It reflects innocence: the violence is registered, but not fully emotionally processed.
+- **"His breast was deep and white, / cold and caressable"** — The description could apply to the loon or Arthur, showing the child's collapsing perspective. Death is perceived through sensory confusion.
+- **"his eyes were red glass, / much to be desired"** — The phrase captures a child's attraction to bright surfaces even in a death scene. This unsettling mix of desire and death is central to the poem.
+- **"Arthur's coffin was / a little frosted cake"** — This is a deeply childlike simile. Because the child cannot fully process a coffin, she imagines it through something familiar, decorative, and domestic.
+- **"Jack Frost had started to paint him"** — The child uses a comforting mythological figure to explain Arthur's pallor. Imagination becomes a shield against brutal reality.
+- **"He had just begun on his hair, / a few red strokes"** — The image suggests the unfinished work of death. The child's explanation is imaginative, but it also makes Arthur's body vividly present.
+- **"and then Jack Frost had dropped the brush / and left him white, forever"** — The word "forever" lands with emotional force. Even within the fantasy, permanence enters and childhood imagination can no longer fully soften the reality.
+- **"invited Arthur to be / the smallest page at court"** — The royal figures are transformed into a fantasy afterlife. The child tries to fit death into the language of story and ceremony.
+- **"But how could Arthur go"** — The question reveals the child's logical crisis. She cannot reconcile the idea of departure with the physical stillness of the corpse.
+- **"with his eyes shut up so tight / and the roads deep in snow?"** — This ending beautifully captures childhood incomprehension. Death remains impossible because the child imagines it in literal, practical terms.
+
+**Poetic Techniques:**
+- **Repetition:** "cold, cold" emphasises atmosphere and shock.
+- **Child perspective:** simple phrasing and wandering focus recreate a child's mind.
+- **Simile:** "a little frosted cake" translates death into childlike imagery.
+- **Fantasy and personification:** Jack Frost helps the child explain what she cannot understand.
+- **Juxtaposition:** the dead loon and dead boy reflect and intensify one another.
+- **Symbolism:** the snow, coffin, loon, and royal figures all deepen the child's experience of death.
+- **Questioning:** the final question preserves uncertainty and emotional honesty.
+- **Shifting focus:** Bishop formally imitates the child's inability to look steadily at death.
+
+**Exam-Ready Points:**
+- Bishop captures a child's first encounter with death by using fragmented attention and childlike comparisons.
+- The poem is moving because it shows not full understanding, but partial understanding struggling with what it cannot master.
+- The loon acts as a disturbing mirror for Arthur, doubling the poem's death imagery.
+- The simile of the coffin as "a little frosted cake" reveals the innocence and limitations of the child's mind.
+- Jack Frost is an imaginative defence mechanism that softens the horror of death.
+- The ending is powerful because the child cannot resolve the practical impossibility of Arthur "going" anywhere.
+
+---
+
+## Comparative Points
+How this poet compares to others on the course
+
+- **Compared with Heaney:** Like Seamus Heaney, Bishop often writes about memory, family, and childhood, but Bishop is generally more abstract and symbol-driven. Heaney is often more rooted in place and personal voice, while Bishop's speakers can be more distanced and uncertain.
+- **Compared with Paula Meehan:** Meehan often feels more direct, personal, and socially grounded. Bishop, by contrast, tends to work through symbolic structures and layered speakers rather than straightforward confession.
+- **Compared with Yeats:** Like W.B. Yeats, Bishop can be highly symbolic, but her symbols usually arise from sharply observed objects or creatures rather than from mythic or historical systems. Her style is quieter, more restrained, and more observational.
+- **Compared with poets of overt self-expression:** Bishop is less openly confessional. The speaker in her poems may be biased, limited, or dramatically constructed, so students should avoid assuming speaker and poet are identical.
+- **Shared strengths with major LC poets:** Like the best poets on the course, Bishop combines concrete imagery with larger emotional and philosophical meaning.
+
+## Sample Essay Angles
+Possible exam question approaches
+
+- **Bishop as a poet of symbolism:** Show how the central image in each poem opens into a larger meaning — the fish as survival, the filling station as hidden love, the pigsty as addiction, the fire balloons as destructive tradition, and Arthur's coffin as incomprehensible death.
+- **Bishop's changing speakers:** Discuss how her speakers do not simply describe; they develop, revise judgements, and move toward deeper understanding.
+- **Bishop's compassion:** Explore how she pushes readers beyond disgust, fear, or distance into empathy, especially in *The Prodigal*, *The Filling Station*, and *The Fish*.
+- **The natural world in Bishop:** Analyse how animals are never just animals; they become symbols through which Bishop explores human suffering, endurance, and vulnerability.
+- **Childhood and perception:** Use *First Death in Nova Scotia* to show how Bishop captures the limits of childhood understanding.
+- **Beauty versus truth:** Discuss how Bishop often begins with striking description or beauty, then complicates it with moral unease, as in *The Armadillo*.
+- **Style and difficulty:** Argue that Bishop's poetry is rewarding because its apparent simplicity hides abstract and layered meanings.
+
+---
+</pre>
+        </details>
+      </article>
+    </section>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.tab-panel');
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    const progressCount = document.getElementById('progress-count');
+
+    function setActiveTab(tabName) {
+      tabs.forEach(button => {
+        const active = button.dataset.tab === tabName;
+        button.classList.toggle('active', active);
+      });
+      panels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === `tab-${tabName}`);
+      });
+      localStorage.setItem('bishop-active-tab', tabName);
+    }
+
+    tabs.forEach(button => button.addEventListener('click', () => setActiveTab(button.dataset.tab)));
+
+    function openAccordion(item, shouldOpen) {
+      const body = item.querySelector('.accordion-body');
+      const button = item.querySelector('.accordion-toggle');
+      item.classList.toggle('open', shouldOpen);
+      button.setAttribute('aria-expanded', String(shouldOpen));
+      if (shouldOpen) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+      } else {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          body.style.maxHeight = '0px';
+        });
+      }
+    }
+
+    accordionItems.forEach(item => {
+      const toggle = item.querySelector('.accordion-toggle');
+      toggle.addEventListener('click', () => openAccordion(item, !item.classList.contains('open')));
+    });
+
+    function syncAccordionHeights() {
+      document.querySelectorAll('.accordion-item.open .accordion-body').forEach(body => {
+        body.style.maxHeight = body.scrollHeight + 'px';
+      });
+    }
+    window.addEventListener('resize', syncAccordionHeights);
+
+    function updateProgress() {
+      const checkboxes = Array.from(document.querySelectorAll('.studied-toggle'));
+      const studied = checkboxes.filter(box => box.checked).length;
+      progressCount.textContent = `${studied}/${checkboxes.length} studied`;
+      checkboxes.forEach(box => {
+        const item = box.closest('.accordion-item');
+        item.classList.toggle('studied', box.checked);
+      });
+    }
+
+    document.querySelectorAll('.studied-toggle').forEach(box => {
+      const key = `bishop-studied-${box.dataset.poem}`;
+      box.checked = localStorage.getItem(key) === 'true';
+      box.addEventListener('change', () => {
+        localStorage.setItem(key, String(box.checked));
+        updateProgress();
+      });
+    });
+
+    document.querySelectorAll('[data-open-poem]').forEach(button => {
+      button.addEventListener('click', () => {
+        const poemId = button.dataset.openPoem;
+        const target = document.getElementById(`poem-${poemId}`);
+        if (!target) return;
+        setActiveTab('poems');
+        if (!target.classList.contains('open')) openAccordion(target, true);
+        syncAccordionHeights();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    document.querySelectorAll('.jump-theme').forEach(button => {
+      button.addEventListener('click', () => {
+        const target = document.getElementById(`theme-${button.dataset.theme}`);
+        if (!target) return;
+        setActiveTab('themes');
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    document.querySelectorAll('.theme-quotes-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const list = btn.nextElementSibling;
+        const isHidden = list.style.display === 'none';
+        list.style.display = isHidden ? 'grid' : 'none';
+        btn.textContent = isHidden ? 'Hide Quotes ▴' : 'View Quotes ▾';
+        btn.setAttribute('aria-expanded', String(isHidden));
+      });
+    });
+
+    document.querySelectorAll('.qtag').forEach(tag => {
+      tag.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const theme = tag.dataset.theme;
+        setActiveTab('themes');
+        const themeCard = document.querySelector(`[data-theme-id="${theme}"]`);
+        if (themeCard) {
+          const toggle = themeCard.querySelector('.theme-quotes-toggle');
+          const list = themeCard.querySelector('.theme-quotes-list');
+          if (toggle && list && list.style.display === 'none') {
+            list.style.display = 'grid';
+            toggle.textContent = 'Hide Quotes ▴';
+            toggle.setAttribute('aria-expanded', 'true');
+          }
+          themeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          themeCard.style.boxShadow = '0 0 0 3px rgba(138, 70, 206, 0.3)';
+          setTimeout(() => { themeCard.style.boxShadow = ''; }, 2000);
+        }
+      });
+    });
+
+    const savedTab = localStorage.getItem('bishop-active-tab') || 'overview';
+    setActiveTab(savedTab);
+    updateProgress();
+  </script>
+</body>
+</html>

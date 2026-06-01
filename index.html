@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaving Cert Poetry Notes</title>
+    <style>
+        :root {
+            --bg: #FAF9F5;
+            --fg: #1F1E1D;
+            --accent: #1C6BBB;
+            --emphasis: #C96442;
+            --pink: #D73A83;
+            --purple: #8A46CE;
+            --blue: #1F6FE4;
+            --cyan: #2D8F8F;
+            --orange: #B56613;
+            --green: #26831A;
+            --gray: #6F6F78;
+            --border: #E8E6E1;
+            --card-bg: #FFFFFF;
+            --shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            color: var(--purple);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .poets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .poet-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .poet-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .poet-card h2 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .poet-card .dates {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .poet-card .poems-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .poet-card .poems-list li {
+            padding: 0.3rem 0;
+            color: var(--fg);
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .poet-card .poems-list li:last-child {
+            border-bottom: none;
+        }
+
+        .poet-card .poems-list li::before {
+            content: "📝 ";
+            font-size: 0.85rem;
+        }
+
+        .poet-card .tag {
+            display: inline-block;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.8rem;
+            color: var(--purple);
+            margin-top: 1rem;
+            margin-right: 0.3rem;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            width: 100%;
+            max-width: 900px;
+        }
+
+        @media (max-width: 480px) {
+            .poets-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 1.8rem; }
+            body { padding: 1.5rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leaving Cert Poetry Notes</h1>
+        <p class="subtitle">Interactive study notes for Paper 2 — Higher Level English</p>
+
+        <div class="poets-grid">
+            <a href="seamus_heaney.html" class="poet-card">
+                <h2>Seamus Heaney</h2>
+                <p class="dates">1939–2013 · Northern Ireland</p>
+                <ul class="poems-list">
+                    <li>The Forge</li>
+                    <li>The Underground</li>
+                    <li>A Call</li>
+                    <li>Bogland</li>
+                    <li>Constable Calls</li>
+                </ul>
+                <span class="tag">Craft</span>
+                <span class="tag">Identity</span>
+                <span class="tag">Landscape</span>
+            </a>
+
+            <a href="wb_yeats.html" class="poet-card">
+                <h2>WB Yeats</h2>
+                <p class="dates">1865–1939 · Ireland</p>
+                <ul class="poems-list">
+                    <li>The Lake Isle of Innisfree</li>
+                    <li>The Wild Swans at Coole</li>
+                    <li>September 1913</li>
+                    <li>Sailing to Byzantium</li>
+                    <li>Politics</li>
+                </ul>
+                <span class="tag">Contrast</span>
+                <span class="tag">Ageing</span>
+                <span class="tag">Idealism</span>
+            </a>
+
+            <a href="elizabeth_bishop.html" class="poet-card">
+                <h2>Elizabeth Bishop</h2>
+                <p class="dates">1911–1979 · United States</p>
+                <ul class="poems-list">
+                    <li>The Filling Station</li>
+                    <li>The Prodigal</li>
+                    <li>The Armadillo</li>
+                    <li>The Fish</li>
+                    <li>First Death in Nova Scotia</li>
+                </ul>
+                <span class="tag">Symbolism</span>
+                <span class="tag">Empathy</span>
+                <span class="tag">Observation</span>
+            </a>
+
+            <a href="eilean_ni_chuilleanain.html" class="poet-card">
+                <h2>Eiléan Ní Chuilleanáin</h2>
+                <p class="dates">1942–present · Ireland</p>
+                <ul class="poems-list">
+                    <li>Street</li>
+                    <li>Deaths and Engines</li>
+                    <li>All for You</li>
+                    <li>Following</li>
+                    <li>The Bend in the Road</li>
+                </ul>
+                <span class="tag">Ambiguity</span>
+                <span class="tag">Liminality</span>
+                <span class="tag">Concealment</span>
+            </a>
+        </div>
+
+        <footer>
+            <p>Generated from lecture transcripts · Leaving Cert Higher Level English · Paper 2 Poetry</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seamus Heaney — Interactive Study Notes</title>
+  <style>
+    :root {
+      --bg: #FAF9F5;
+      --text: #1F1E1D;
+      --accent: #1C6BBB;
+      --quote: #C96442;
+      --keyword: #D73A83;
+      --heading: #8A46CE;
+      --interactive: #1F6FE4;
+      --constant: #2D8F8F;
+      --parameter: #B56613;
+      --string: #26831A;
+      --gray: #6F6F78;
+      --border: #E8E6E1;
+      --card: #FFFFFF;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --quote-bg: #FFF6F1;
+      --tag-bg: #F3F0FB;
+      --ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --body-font: Georgia, 'Times New Roman', serif;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --transition: 220ms ease;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #fcfbf8 0%, var(--bg) 100%);
+      color: var(--text);
+      font: 16px/1.7 var(--body-font);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color var(--transition), opacity var(--transition);
+    }
+
+    a:hover { opacity: 0.8; }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .top-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: 600 0.95rem var(--ui-font);
+      margin-bottom: 18px;
+    }
+
+    .hero {
+      background: radial-gradient(circle at top right, rgba(138, 70, 206, 0.08), transparent 36%), var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 32px;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(28, 107, 187, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font: 700 0.82rem/1.2 var(--ui-font);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--heading);
+      margin-bottom: 10px;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--heading);
+      margin-top: 0;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-meta {
+      color: var(--gray);
+      font: 600 1rem var(--ui-font);
+      margin-bottom: 18px;
+    }
+
+    .hero-description {
+      font-size: 1.08rem;
+      max-width: 74ch;
+      margin: 0 0 22px;
+    }
+
+    .tag-row,
+    .theme-tags,
+    .poem-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--tag-bg);
+      font: 700 0.84rem/1 var(--ui-font);
+      color: var(--heading);
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .tag:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .tag.craft { background: rgba(28, 107, 187, 0.1); color: var(--accent); }
+    .tag.identity { background: rgba(215, 58, 131, 0.1); color: var(--keyword); }
+    .tag.landscape { background: rgba(45, 143, 143, 0.12); color: var(--constant); }
+    .tag.family { background: rgba(181, 102, 19, 0.12); color: var(--parameter); }
+    .tag.memory { background: rgba(138, 70, 206, 0.1); color: var(--heading); }
+    .tag.fear { background: rgba(201, 100, 66, 0.12); color: var(--quote); }
+    .tag.history { background: rgba(38, 131, 26, 0.12); color: var(--string); }
+    .tag.myth { background: rgba(31, 111, 228, 0.1); color: var(--interactive); }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 10px;
+      border: 1px solid rgba(232, 230, 225, 0.85);
+      background: rgba(250, 249, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--gray);
+      font: 700 0.95rem var(--ui-font);
+      padding: 12px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .tab-btn:hover,
+    .tab-btn:focus-visible {
+      color: var(--interactive);
+      background: rgba(31, 111, 228, 0.08);
+      outline: none;
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--interactive), var(--accent));
+      box-shadow: var(--shadow);
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 280ms ease;
+    }
+
+    .tab-panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      grid-column: span 12;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .card p:last-child,
+    .card ul:last-child,
+    .card ol:last-child { margin-bottom: 0; }
+
+    .split-7 { grid-column: span 7; }
+    .split-5 { grid-column: span 5; }
+    .split-6 { grid-column: span 6; }
+    .split-4 { grid-column: span 4; }
+
+    ul.clean,
+    ol.clean {
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+
+    li + li { margin-top: 10px; }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--gray);
+      font: 700 0.8rem var(--ui-font);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .accordion-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .accordion-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .accordion-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    }
+
+    .accordion-item.open {
+      border-color: rgba(28, 107, 187, 0.35);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 22px 24px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      font: inherit;
+      color: inherit;
+      transition: background var(--transition);
+    }
+
+    .accordion-trigger:hover { background: rgba(28, 107, 187, 0.035); }
+
+    .accordion-head h3 {
+      margin-bottom: 8px;
+      color: var(--heading);
+    }
+
+    .accordion-subtitle {
+      color: var(--gray);
+      margin: 0;
+      font-size: 0.98rem;
+      max-width: 60ch;
+    }
+
+    .accordion-tools {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .progress-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(38, 131, 26, 0.08);
+      border: 1px solid rgba(38, 131, 26, 0.18);
+      color: var(--string);
+      font: 700 0.84rem var(--ui-font);
+      cursor: pointer;
+      user-select: none;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .progress-label:hover { transform: translateY(-1px); }
+
+    .progress-label input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--string);
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .chevron {
+      width: 16px;
+      height: 16px;
+      border-right: 2px solid var(--interactive);
+      border-bottom: 2px solid var(--interactive);
+      transform: rotate(45deg);
+      transition: transform var(--transition);
+      margin-top: 8px;
+    }
+
+    .accordion-item.open .chevron {
+      transform: rotate(-135deg);
+      margin-top: 16px;
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 320ms ease;
+    }
+
+    .accordion-inner {
+      padding: 0 24px 24px;
+      border-top: 1px solid rgba(232, 230, 225, 0.7);
+    }
+
+    .poem-section {
+      padding-top: 20px;
+    }
+
+    .poem-section + .poem-section {
+      border-top: 1px dashed var(--border);
+      margin-top: 20px;
+    }
+
+    .poem-section h4 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: var(--interactive);
+      font-family: var(--ui-font);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .quote-card {
+      border: 1px solid rgba(201, 100, 66, 0.22);
+      background: var(--quote-bg);
+      border-left: 5px solid var(--quote);
+      border-radius: 0 14px 14px 0;
+      padding: 16px 18px;
+      margin: 16px 0 12px;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .quote-card:hover {
+      transform: translateX(2px);
+      box-shadow: var(--shadow);
+      background: #fff3ec;
+    }
+
+    .quote-card blockquote {
+      margin: 0;
+      color: var(--quote);
+      font-size: 1.06rem;
+      font-style: italic;
+    }
+
+    .quote-analysis {
+      margin: 0 0 14px;
+    }
+
+    .quote-analysis:last-child { margin-bottom: 0; }
+
+
+    .quote-themes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0 4px;
+    }
+
+    .qtag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font: 600 0.72rem var(--ui-font);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: var(--tag-bg);
+      color: var(--heading);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .qtag:hover {
+      background: rgba(138, 70, 206, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .qtag[data-theme="craft"] { color: var(--accent); }
+    .qtag[data-theme="identity"] { color: var(--keyword); }
+    .qtag[data-theme="landscape"] { color: var(--constant); }
+    .qtag[data-theme="family"] { color: var(--parameter); }
+    .qtag[data-theme="memory"] { color: var(--heading); }
+    .qtag[data-theme="fear"] { color: var(--quote); }
+    .qtag[data-theme="history"] { color: var(--string); }
+    .qtag[data-theme="myth"] { color: var(--interactive); }
+
+    .theme-quotes { margin-top: 12px; }
+
+    .theme-quotes-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 6px 14px;
+      font: 600 0.82rem var(--ui-font);
+      color: var(--accent);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .theme-quotes-toggle:hover {
+      background: rgba(28, 107, 187, 0.06);
+    }
+
+    .theme-quotes-list {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .mini-quote {
+      padding: 10px 14px;
+      background: var(--quote-bg);
+      border-left: 3px solid var(--quote);
+      border-radius: 8px;
+    }
+
+    .mini-quote .quote-source {
+      display: block;
+      font: 700 0.75rem var(--ui-font);
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .mini-quote blockquote {
+      margin: 0;
+      font-style: italic;
+      color: var(--quote);
+      font-size: 0.92rem;
+    }
+
+    .technique-list li::marker { color: var(--interactive); }
+
+    .exam-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .exam-checklist li {
+      position: relative;
+      padding-left: 34px;
+      margin: 0;
+    }
+
+    .exam-checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font: 800 0.88rem var(--ui-font);
+      color: #fff;
+      background: linear-gradient(135deg, var(--interactive), var(--accent));
+      box-shadow: var(--shadow);
+    }
+
+    .theme-grid,
+    .tip-grid,
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .theme-card,
+    .tip-card,
+    .mini-quote-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .theme-card:hover,
+    .tip-card:hover,
+    .mini-quote-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    }
+
+    .theme-card h3,
+    .tip-card h3,
+    .mini-quote-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+      color: var(--heading);
+    }
+
+    .mini-quote-card blockquote {
+      margin: 0 0 12px;
+      padding-left: 14px;
+      border-left: 3px solid var(--quote);
+      color: var(--quote);
+      font-style: italic;
+    }
+
+    .muted {
+      color: var(--gray);
+      font-family: var(--ui-font);
+      font-size: 0.95rem;
+    }
+
+    .overview-points li strong,
+    .quick-list li strong,
+    .essay-list li strong {
+      color: var(--keyword);
+    }
+
+    .overview-points li,
+    .essay-list li,
+    .quick-list li {
+      margin-top: 12px;
+    }
+
+    .pill-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(31, 111, 228, 0.06);
+      color: var(--interactive);
+      border: 1px solid rgba(31, 111, 228, 0.12);
+      font: 700 0.88rem var(--ui-font);
+      margin-bottom: 10px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: 600 0.84rem var(--ui-font);
+      color: var(--gray);
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+    }
+
+    @media (max-width: 900px) {
+      .split-7, .split-5, .split-6, .split-4 { grid-column: span 12; }
+      .accordion-trigger {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .accordion-tools {
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page { width: min(100% - 20px, 1180px); padding-top: 20px; }
+      .hero, .card, .accordion-trigger, .accordion-inner { padding-left: 18px; padding-right: 18px; }
+      .hero { padding-top: 24px; padding-bottom: 24px; }
+      .tabs {
+        top: 8px;
+        gap: 8px;
+        padding: 8px;
+      }
+      .tab-btn {
+        flex: 1 1 calc(50% - 8px);
+        text-align: center;
+      }
+      .progress-label {
+        padding: 9px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="top-link" href="index.html">← Back to Index</a>
+
+    <header class="hero">
+      <div class="eyebrow">Claude Light Theme Study Page</div>
+      <h1>Seamus Heaney</h1>
+      <div class="hero-meta">1939–2013 • County Derry, Northern Ireland • Leaving Cert Poetry</div>
+      <p class="hero-description">Seamus Heaney was born in County Derry in Northern Ireland in 1939, and his poetry is deeply shaped by his rural upbringing, family life, and the political tensions of the North. His work moves from intimate domestic scenes to wider questions about Ireland, history, land, and conflict while remaining thoughtful, musical, vivid, and rooted in precise physical detail.</p>
+      <div class="tag-row">
+        <span class="tag craft">Craft and Artistry</span>
+        <span class="tag identity">Identity</span>
+        <span class="tag landscape">Landscape and Place</span>
+        <span class="tag family">Family and Relationships</span>
+        <span class="tag memory">Time, Memory, Mortality</span>
+        <span class="tag fear">Authority and Fear</span>
+        <span class="tag history">History and National Consciousness</span>
+        <span class="tag myth">Myth and Allusion</span>
+      </div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-swatch" style="background:#C96442"></span> Poetry quotes</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#1F6FE4"></span> Interactive sections</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#8A46CE"></span> Headings & ideas</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#D73A83"></span> Key terms</span>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Study page sections">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="poems">Poems</button>
+      <button class="tab-btn" data-tab="themes">Themes</button>
+      <button class="tab-btn" data-tab="exam-tips">Exam Tips</button>
+    </nav>
+
+    <section class="tab-panel active" id="overview">
+      <div class="grid">
+        <article class="card split-7">
+          <span class="section-label">Poet Overview</span>
+          <h2>The poet as craftsman, witness, and memory-keeper</h2>
+          <ul class="clean overview-points">
+            <li>Seamus Heaney was born in County Derry in Northern Ireland in 1939, and his poetry is deeply shaped by his rural upbringing, family life, and the political tensions of the North.</li>
+            <li>He is often concerned with both <strong>personal identity</strong> and <strong>national identity</strong>: his poems move from intimate domestic scenes to wider questions about Ireland, history, land, and conflict.</li>
+            <li>A key idea in Heaney is <strong>craft</strong>. He repeatedly presents the poet as a maker or craftsman, someone who works carefully with language just as a blacksmith, farmer, or digger works with tools.</li>
+            <li>His poems are rooted in <strong>landscape</strong>: bogs, fields, farmyards, roads, and ordinary rural spaces become symbols of memory, culture, and belonging.</li>
+            <li>Heaney frequently uses <strong>narrative allusion</strong>, drawing on Greek myth, fairy tale, biblical echoes, and older literary traditions to deepen personal experience.</li>
+            <li>His voice is often thoughtful, musical, and vivid. Even when dealing with politics or fear, he tends to embed large themes inside precise physical detail.</li>
+          </ul>
+        </article>
+
+        <aside class="card split-5">
+          <span class="section-label">Key Themes</span>
+          <h2>Revision tags</h2>
+          <div class="theme-tags" style="margin-bottom:18px;">
+            <span class="tag craft">Craft and Artistry</span>
+            <span class="tag identity">Identity</span>
+            <span class="tag landscape">Landscape and Place</span>
+            <span class="tag family">Family and Relationships</span>
+            <span class="tag memory">Time, Memory, and Mortality</span>
+            <span class="tag fear">Authority and Fear</span>
+            <span class="tag history">History and National Consciousness</span>
+            <span class="tag myth">Myth and Allusion</span>
+          </div>
+          <ul class="clean quick-list">
+            <li><strong>Craft and Artistry:</strong> Heaney is “always about craft.” He is fascinated by making, skill, labour, and the link between physical work and poetic creation.</li>
+            <li><strong>Identity:</strong> His poetry explores who he is as an individual shaped by childhood, family, and place, but also as an Irish writer formed by Northern Ireland's history.</li>
+            <li><strong>Landscape and Place:</strong> The land is never just background. Bogs, fields, and rural settings carry memory, symbolism, and national meaning.</li>
+            <li><strong>Family and Relationships:</strong> Heaney writes movingly about marriage, parents, and community, showing how ordinary relationships hold deep emotional power.</li>
+            <li><strong>Time, Memory, and Mortality:</strong> Small moments often become charged because Heaney knows they will not last. Memory preserves what time threatens to take away.</li>
+            <li><strong>Authority and Fear:</strong> Especially in childhood poems, everyday encounters with authority figures carry unease, tension, and political implication.</li>
+            <li><strong>History and National Consciousness:</strong> Heaney often presents Ireland as layered, preserved, and shaped by generations of experience.</li>
+            <li><strong>Myth and Allusion:</strong> Personal events are frequently enlarged through references to myth, legend, religion, and earlier literature.</li>
+          </ul>
+        </aside>
+
+        <article class="card split-12">
+          <span class="section-label">How to use this page</span>
+          <div class="pill-note">Use the tabs to switch sections, expand poem accordions, and tick each poem as studied.</div>
+          <p>The <strong>Poems</strong> tab contains every poem note from the source markdown with collapsible sections for focused study. The <strong>Themes</strong> tab groups major ideas across poems. The <strong>Exam Tips</strong> tab gathers comparative points, sample essay angles, and quick-reference quotations for fast revision.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="poems">
+      <div class="accordion-list">
+        <article class="accordion-item open" id="poem-the-forge">
+          <button class="accordion-trigger" aria-expanded="true">
+            <div class="accordion-head">
+              <h3>The Forge</h3>
+              <p class="accordion-subtitle">Craft, creativity, rural life, and the poet as maker.</p>
+            </div>
+            <div class="accordion-tools">
+              <label class="progress-label" data-stop-toggle>
+                <input type="checkbox" class="study-checkbox" data-key="the-forge" />
+                <span>Studied ✓</span>
+              </label>
+              <span class="chevron" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="accordion-panel" style="max-height: none;">
+            <div class="accordion-inner">
+              <section class="poem-section">
+                <h4>Summary</h4>
+                <p>Heaney describes a blacksmith's forge, but the poem quickly becomes more than a realistic sketch. The forge stands as a metaphor for the poet's imaginative world, and the blacksmith becomes an image of the artist at work. The poem celebrates craft, concentration, and the mystery of making something real out of darkness and uncertainty.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Key Themes</h4>
+                <div class="poem-tags">
+                  <span class="tag craft">Craft and artistry</span>
+                  <span class="tag craft">The poet as maker</span>
+                  <span class="tag history">Tradition and change</span>
+                  <span class="tag landscape">Rural life</span>
+                  <span class="tag identity">Identity through work</span>
+                  <span class="tag myth">Creativity and mystery</span>
+                </div>
+              </section>
+              <section class="poem-section">
+                <h4>Structure &amp; Form</h4>
+                <ul class="clean">
+                  <li>The poem begins with the unforgettable declaration <strong>“All I know is a door into the dark”</strong>, immediately pulling the reader into a mysterious creative space.</li>
+                  <li>Heaney structures the poem through a contrast between <strong>outside</strong> and <strong>inside</strong>: outside are rusting relics of the past, while inside is the living centre of creation.</li>
+                  <li>The forge becomes almost sacred as the poem progresses, with the anvil described as <strong>“an altar”</strong>.</li>
+                  <li>The poem moves from observation to allegory: what begins as a description of a smithy becomes a meditation on the poet's craft.</li>
+                  <li>The sonnet-like compactness gives the poem intensity and control, fitting its focus on skilled making.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Key Quotes &amp; Analysis</h4>
+                <div class="quote-card"><blockquote>“All I know is a door into the dark”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="craft">Craft</span>
+                  <span class="qtag" data-theme="myth">Creativity/Mystery</span>
+                </div>
+                <p class="quote-analysis">This opening is one of Heaney's clearest statements about creativity. The forge is literal, but the “door into the dark” also symbolises the imagination: the artist enters uncertainty, risk, and mystery in order to create.</p>
+                <div class="quote-card"><blockquote>“Outside, old axles and iron hoops rusting”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="history">Tradition/Change</span>
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                </div>
+                <p class="quote-analysis">The image of abandoned tools suggests obsolescence and change. Old rural ways are fading, yet the forge still survives as a place of authentic work.</p>
+                <div class="quote-card"><blockquote>“Inside, the hammered anvil's short-pitched ring”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="craft">Craft</span>
+                </div>
+                <p class="quote-analysis">The sound image is immediate and physical. Heaney uses onomatopoeia to make us hear the forge, emphasising that craft is active, noisy, and real.</p>
+                <div class="quote-card"><blockquote>“The unpredictable fantail of sparks”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="craft">Craft</span>
+                  <span class="qtag" data-theme="myth">Creativity/Mystery</span>
+                </div>
+                <p class="quote-analysis">This beautiful phrase captures the surprise of artistic creation. The sparks are visually dazzling, but “unpredictable” is especially important: true art cannot be fully controlled or planned.</p>
+                <div class="quote-card"><blockquote>“Or hiss when a new shoe toughens in water”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="craft">Craft</span>
+                </div>
+                <p class="quote-analysis">The hiss adds another sensory layer. Heaney immerses the reader in the forge so that the act of making feels alive and dynamic.</p>
+                <div class="quote-card"><blockquote>“The anvil must be somewhere in the centre, / Horned as a unicorn, at one end, square, / Set there immoveable: an altar”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="craft">Craft</span>
+                  <span class="qtag" data-theme="myth">Myth</span>
+                </div>
+                <p class="quote-analysis">The anvil is both practical and mythical. “Horned as a unicorn” gives it magical force, while “altar” makes the forge a sacred place where creation happens with ritual seriousness.</p>
+                <div class="quote-card"><blockquote>“Sometimes, leather-aproned, hairs in his nose, / He leans out on the jamb to eye old people / Catching the spring off the axle of a cart”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">Heaney grounds the poem in ordinary rural realism. The blacksmith is not romanticised into unreality; he is a working man observed in detail.</p>
+                <div class="quote-card"><blockquote>“He recalls a clatter of hoofs”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="memory">Memory</span>
+                  <span class="qtag" data-theme="history">Tradition/Change</span>
+                </div>
+                <p class="quote-analysis">This line suggests nostalgia for a world in which horses once needed the smith's work. The blacksmith belongs to an older tradition now threatened by modern traffic.</p>
+                <div class="quote-card"><blockquote>“Where traffic is flashing in rows”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="history">Tradition/Change</span>
+                </div>
+                <p class="quote-analysis">Modernity is present, but the poem does not glorify it. The flashing traffic seems impersonal beside the forge's rooted, handmade world.</p>
+                <div class="quote-card"><blockquote>“Then grunts and goes in, with a slam and flick / To beat real iron out, to work the bellows”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="craft">Craft</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">The ending is crucial. The smith ignores fashion and change and returns to the difficult, authentic act of making. This is Heaney's ideal image of the poet: committed to real craft.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Poetic Techniques</h4>
+                <ul class="clean technique-list">
+                  <li><strong>Extended metaphor / allegory:</strong> the forge represents the poet's imagination and the blacksmith represents the artist.</li>
+                  <li><strong>Onomatopoeia:</strong> <q>short-pitched ring</q> and <q>hiss</q> make the forge audible.</li>
+                  <li><strong>Visual imagery:</strong> <q>fantail of sparks</q> creates a vivid, almost magical image of creation.</li>
+                  <li><strong>Religious imagery:</strong> <q>altar</q> elevates craft into something sacred.</li>
+                  <li><strong>Mythic comparison:</strong> <q>horned as a unicorn</q> gives the anvil symbolic power.</li>
+                  <li><strong>Contrast:</strong> outside decay is contrasted with inner energy and purpose.</li>
+                  <li><strong>Alliteration and sound patterning:</strong> phrases like <q>slam and flick</q> reinforce force, rhythm, and physical labour.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Exam-Ready Points</h4>
+                <ul class="exam-checklist">
+                  <li>Heaney uses the blacksmith as a symbol for the poet, showing that poetry is a form of disciplined craft rather than effortless inspiration.</li>
+                  <li>The opening line, <q>All I know is a door into the dark,</q> suggests that creativity involves entering the unknown.</li>
+                  <li>The forge is both realistic and symbolic: it is a working rural space, but also a sacred centre of artistic creation.</li>
+                  <li>Heaney admires the craftsman who continues his work despite social change, which reflects his own commitment to authentic poetry.</li>
+                  <li>The imagery of sparks, ringing metal, and bellows makes creation feel energetic, physical, and unpredictable.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item" id="poem-the-underground">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-head">
+              <h3>The Underground</h3>
+              <p class="accordion-subtitle">Marriage, memory, myth, movement, and symbolic reunion.</p>
+            </div>
+            <div class="accordion-tools">
+              <label class="progress-label" data-stop-toggle>
+                <input type="checkbox" class="study-checkbox" data-key="the-underground" />
+                <span>Studied ✓</span>
+              </label>
+              <span class="chevron" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="accordion-panel">
+            <div class="accordion-inner">
+              <section class="poem-section">
+                <h4>Summary</h4>
+                <p>This poem recalls Heaney and his wife running through the London Underground on their honeymoon, but the memory is deepened by mythological and literary allusions. The journey underground becomes a meditation on love, marriage, memory, and the poet's instinct to connect personal experience with larger stories. Revisiting the scene years later, Heaney reshapes the memory and symbolically overcomes the threat of loss.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Key Themes</h4>
+                <div class="poem-tags">
+                  <span class="tag family">Marriage and love</span>
+                  <span class="tag memory">Memory and time</span>
+                  <span class="tag myth">Myth and narrative allusion</span>
+                  <span class="tag landscape">Journey and movement</span>
+                  <span class="tag identity">Identity as poet</span>
+                  <span class="tag fear">Vulnerability and reunion</span>
+                </div>
+              </section>
+              <section class="poem-section">
+                <h4>Structure &amp; Form</h4>
+                <ul class="clean">
+                  <li>The poem is structured around movement through tunnels and corridors, mirroring both physical journey and emotional memory.</li>
+                  <li>It shifts between <strong>past and present</strong>, showing how memory is revisited and reinterpreted over time.</li>
+                  <li>The early section is energetic and cinematic, capturing the rush of the honeymoon scene.</li>
+                  <li>The later section becomes more reflective as the speaker returns to the place years later.</li>
+                  <li>The poem gains depth through layered allusions, especially to <strong>Orpheus and Eurydice</strong> and to fairy tale imagery such as <strong>Hansel and Gretel</strong>.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Key Quotes &amp; Analysis</h4>
+                <div class="quote-card"><blockquote>“There we were in the vaulted tunnel running”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">The opening is immediate and dramatic. “Vaulted” suggests both the architecture of the Underground and the grandeur of a mythic underworld.</p>
+                <div class="quote-card"><blockquote>“You in your going-away coat speeding ahead”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">The wife is vividly present in the scene, but the fact that she is ahead of him introduces a subtle anxiety about separation and losing sight of the beloved.</p>
+                <div class="quote-card"><blockquote>“Our echoes die in that corridor”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">Echoes suggest memory, distance, and the fading of a moment even as it happens. The underground setting amplifies both sound and emotional tension.</p>
+                <div class="quote-card"><blockquote>Orpheus and Eurydice allusion</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="myth">Myth</span>
+                </div>
+                <p class="quote-analysis">Heaney draws on the myth of the husband descending underground to retrieve his wife. This makes a modern train station moment feel charged with love, danger, and the fear of loss.</p>
+                <div class="quote-card"><blockquote>“I was Hansel without a trail / Through a damp wood”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="myth">Myth</span>
+                </div>
+                <p class="quote-analysis">This fairy-tale allusion presents the speaker as lost and vulnerable. It also shows Heaney's habit of layering stories onto personal experience.</p>
+                <div class="quote-card"><blockquote>The coat buttons as a breadcrumb trail</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="memory">Memory</span>
+                  <span class="qtag" data-theme="family">Family</span>
+                </div>
+                <p class="quote-analysis">The image turns the wife's physical presence into a clue or guide. Love becomes something that leads him through uncertainty.</p>
+                <div class="quote-card"><blockquote>“Then I'm released into a place of arrival”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="memory">Memory</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">Emerging from underground suggests rebirth, recovery, and emotional release. The moment becomes symbolic as well as literal.</p>
+                <div class="quote-card"><blockquote>“I re-emerge in that same corridor and feel no wind from the door”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="memory">Memory</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">When Heaney revisits the place, the memory has changed. The physical setting remains, but time has altered its emotional charge.</p>
+                <div class="quote-card"><blockquote>“I re-enter that tunnel of white tiles”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="memory">Memory</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">The revisiting of the tunnel shows how memory is an act of return. The poet goes back into the underworld of the past through language.</p>
+                <div class="quote-card"><blockquote>“and walk you beyond it”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="myth">Myth</span>
+                  <span class="qtag" data-theme="family">Family</span>
+                </div>
+                <p class="quote-analysis">This is one of the poem's most important gestures. In the Orpheus myth, looking back leads to loss; here Heaney symbolically leads his wife onward, reversing the old tragic pattern.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Poetic Techniques</h4>
+                <ul class="clean technique-list">
+                  <li><strong>Mythological allusion:</strong> Orpheus and Eurydice deepen a personal memory into a meditation on love and loss.</li>
+                  <li><strong>Fairy-tale allusion:</strong> Hansel expands the sense of disorientation and dependence.</li>
+                  <li><strong>Narrative voice:</strong> the poem feels lived and remembered, combining story with reflection.</li>
+                  <li><strong>Alliteration:</strong> phrases like <q>vaulted tunnel</q> create musical texture.</li>
+                  <li><strong>Journey imagery:</strong> corridors, tunnels, doors, and emergence symbolise relationship, time, and emotional movement.</li>
+                  <li><strong>Temporal shift:</strong> movement from honeymoon memory to later revisiting gives the poem emotional complexity.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Exam-Ready Points</h4>
+                <ul class="exam-checklist">
+                  <li>Heaney transforms an ordinary memory from married life into a mythic love poem through classical and fairy-tale allusion.</li>
+                  <li>The underground setting works symbolically as an underworld, allowing the poem to engage with the Orpheus myth.</li>
+                  <li>The poem is about marriage not as sentimentality but as shared journey, vulnerability, and recovery.</li>
+                  <li>By revisiting the corridor years later, Heaney shows how memory is active and creative rather than fixed.</li>
+                  <li>The poem reflects Heaney's identity as a literary craftsman who constantly connects lived experience with older stories.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item" id="poem-a-call">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-head">
+              <h3>A Call</h3>
+              <p class="accordion-subtitle">Family tenderness, waiting, memory, and quiet mortality.</p>
+            </div>
+            <div class="accordion-tools">
+              <label class="progress-label" data-stop-toggle>
+                <input type="checkbox" class="study-checkbox" data-key="a-call" />
+                <span>Studied ✓</span>
+              </label>
+              <span class="chevron" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="accordion-panel">
+            <div class="accordion-inner">
+              <section class="poem-section">
+                <h4>Summary</h4>
+                <p>In this quiet, deeply moving poem, Heaney phones home. His father answers and says he will go and get the speaker's mother. While he waits, the poet imagines or “sees” his father crossing the yard. The scene is ordinary and domestic, yet it becomes charged with tenderness, mortality, and the fear of eventual loss.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Key Themes</h4>
+                <div class="poem-tags">
+                  <span class="tag family">Family</span>
+                  <span class="tag family">Parent-child relationship</span>
+                  <span class="tag memory">Mortality and time</span>
+                  <span class="tag memory">Memory</span>
+                  <span class="tag identity">The value of ordinary moments</span>
+                  <span class="tag family">Love expressed through the everyday</span>
+                </div>
+              </section>
+              <section class="poem-section">
+                <h4>Structure &amp; Form</h4>
+                <ul class="clean">
+                  <li>The poem is made up of <strong>three short stanzas</strong>, matching the brevity and simplicity of the phone call.</li>
+                  <li>Heaney uses <strong>direct speech</strong> at the opening to hook the reader instantly and place us inside a real moment.</li>
+                  <li>The poem moves from conversation to inward vision, showing how an ordinary event becomes emotionally profound.</li>
+                  <li>Its compactness is central to its power: the poem captures a tiny instant and reveals its larger emotional significance.</li>
+                  <li>The final image and phrase bring a subtle but devastating awareness of mortality into the scene.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Key Quotes &amp; Analysis</h4>
+                <div class="quote-card"><blockquote>“‘Hold on,’ he said, ‘I'll just run out and get her’”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                </div>
+                <p class="quote-analysis">The poem begins with direct dialogue, giving it immediacy and naturalness. The phrase is ordinary, but Heaney's genius lies in discovering emotional depth in exactly such everyday speech.</p>
+                <div class="quote-card"><blockquote>“so I had to wait”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                  <span class="qtag" data-theme="memory">Memory/Mortality</span>
+                </div>
+                <p class="quote-analysis">The waiting creates the poem's reflective space. Because the speaker cannot act, he listens and imagines, and the ordinary moment becomes contemplative.</p>
+                <div class="quote-card"><blockquote>“A whitewashed kitchen hung in the web / Of telephone wires”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">Domestic space is linked to distance and connection. The home feels both physically real and suspended in memory.</p>
+                <div class="quote-card"><blockquote>“I could hear him through the quiet”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">Sound becomes the medium of intimacy. Even without seeing his father directly, the speaker feels his presence vividly.</p>
+                <div class="quote-card"><blockquote>“A gate slammed”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">The small sound detail grounds the poem in rural realism. Like much of Heaney's work, it shows how sound can trigger emotion and memory.</p>
+                <div class="quote-card"><blockquote>“then he was back”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">The return is simple, but because the poem dwells on the interval, it carries emotional weight.</p>
+                <div class="quote-card"><blockquote>“Next thing he was speaking into the phone”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">The everyday resumes, yet the poet has been altered by the pause and what it made him realise.</p>
+                <div class="quote-card"><blockquote>“I'd a line of turnings in the yard” / “crossing the yard in broad daylight”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">The ordinary act of moving through the yard becomes vivid because the poet sees it as precious and temporary.</p>
+                <div class="quote-card"><blockquote>“the sun stood in the lintel”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                  <span class="qtag" data-theme="memory">Memory</span>
+                </div>
+                <p class="quote-analysis">Light sanctifies the domestic scene. The image turns an ordinary yard into something almost iconic.</p>
+                <div class="quote-card"><blockquote>“the phone's played out, / the ancient pulse of his voice”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="family">Family</span>
+                  <span class="qtag" data-theme="memory">Memory/Mortality</span>
+                </div>
+                <p class="quote-analysis">The phrase <strong>“played out”</strong> suggests both the literal phone cord and the idea of something nearing its end. It subtly introduces age, decline, and mortality.</p>
+                <div class="quote-card"><blockquote>“and a heart sinking”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="memory">Memory/Mortality</span>
+                  <span class="qtag" data-theme="family">Family</span>
+                </div>
+                <p class="quote-analysis">This closing emotional note reveals the poem's true subject. Beneath the phone call lies the painful awareness that such moments cannot last forever.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Poetic Techniques</h4>
+                <ul class="clean technique-list">
+                  <li><strong>Dialogue as hook:</strong> the opening speech immediately creates realism and intimacy.</li>
+                  <li><strong>Economy:</strong> the poem says very little on the surface, but implies a great deal emotionally.</li>
+                  <li><strong>Sound imagery:</strong> footsteps, quiet, and the slammed gate make the scene vivid.</li>
+                  <li><strong>Symbolism:</strong> the phone line and rope-like connection suggest both attachment and fragility.</li>
+                  <li><strong>Light imagery:</strong> sunlight in the yard elevates the ordinary moment.</li>
+                  <li><strong>Understatement:</strong> Heaney avoids melodrama, which makes the emotional impact stronger.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Exam-Ready Points</h4>
+                <ul class="exam-checklist">
+                  <li>Heaney shows that an ordinary family moment can contain profound emotional truth.</li>
+                  <li>The poem is moving because it captures love indirectly, through voice, waiting, and remembered detail rather than explicit declaration.</li>
+                  <li>The brief structure reflects the short phone call, while the emotional resonance extends far beyond it.</li>
+                  <li><q>Played out</q> is a key phrase because it hints at exhaustion, age, and the coming end of life.</li>
+                  <li>The poem reveals Heaney's gift for turning the domestic and familiar into something universal and elegiac.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item" id="poem-bogland">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-head">
+              <h3>Bogland</h3>
+              <p class="accordion-subtitle">Landscape, national identity, preservation, and the depth of Irishness.</p>
+            </div>
+            <div class="accordion-tools">
+              <label class="progress-label" data-stop-toggle>
+                <input type="checkbox" class="study-checkbox" data-key="bogland" />
+                <span>Studied ✓</span>
+              </label>
+              <span class="chevron" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="accordion-panel">
+            <div class="accordion-inner">
+              <section class="poem-section">
+                <h4>Summary</h4>
+                <p>In this important poem of national identity, Heaney defines Ireland through the image of the bog. Instead of vast frontiers like America, Ireland is presented as deep, layered, wet, and bottomless. The bog preserves history, memory, and the traces of earlier generations, becoming a powerful symbol for the complexity and depth of Irish identity.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Key Themes</h4>
+                <div class="poem-tags">
+                  <span class="tag identity">National identity</span>
+                  <span class="tag history">History and memory</span>
+                  <span class="tag landscape">Landscape and place</span>
+                  <span class="tag history">Depth and preservation</span>
+                  <span class="tag identity">Irishness</span>
+                  <span class="tag landscape">The relationship between land and culture</span>
+                </div>
+              </section>
+              <section class="poem-section">
+                <h4>Structure &amp; Form</h4>
+                <ul class="clean">
+                  <li>The poem is built around an extended comparison between <strong>America's prairies</strong> and <strong>Ireland's bogland</strong>.</li>
+                  <li>It moves from surface description to increasingly symbolic meaning.</li>
+                  <li>Each stanza deepens the sense of the bog as a repository of history and identity.</li>
+                  <li>Repetition of the word <strong>“bottomless”</strong> is structurally important, reinforcing the idea that Irish history cannot be exhausted.</li>
+                  <li>The poem ends not with closure but with depth, fitting its vision of identity as ongoing and layered.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Key Quotes &amp; Analysis</h4>
+                <div class="quote-card"><blockquote>“We have no prairies / To slice a big sun at evening”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="identity">Identity</span>
+                  <span class="qtag" data-theme="history">History</span>
+                </div>
+                <p class="quote-analysis">Heaney begins by defining Ireland against America. The prairie suggests openness, expansion, and frontier confidence; Ireland, by contrast, will be associated with inwardness and depth.</p>
+                <div class="quote-card"><blockquote>“Our unfenced country / Is bog”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="identity">Identity</span>
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                </div>
+                <p class="quote-analysis">This is one of the poem's defining statements. The bog becomes a national symbol: it is not just part of Ireland, but a way of understanding Ireland itself.</p>
+                <div class="quote-card"><blockquote>“The horizon encroached / Further than the eye could see”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">Even space in the poem feels unusual. The bog resists simple mapping and suggests something mysterious and indefinite.</p>
+                <div class="quote-card"><blockquote>“They've taken the skeleton / Of the Great Irish Elk / Out of the peat”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="history">History</span>
+                </div>
+                <p class="quote-analysis">The bog preserves the past. The image of the elk connects modern Ireland to ancient, almost mythic time.</p>
+                <div class="quote-card"><blockquote>“Butter sunk under / More than a hundred years / Was recovered salty and white”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="history">History</span>
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                </div>
+                <p class="quote-analysis">This detail is memorable because it shows the bog's preserving power so vividly. What is buried is not lost: the land stores memory.</p>
+                <div class="quote-card"><blockquote>“The ground itself is kind, black butter”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                </div>
+                <p class="quote-analysis">The bog is personified as nurturing and generous. “Black butter” is a striking metaphor: rich, strange, fertile, and distinctly Irish.</p>
+                <div class="quote-card"><blockquote>“Missing its last definition / By millions of years”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="identity">Identity</span>
+                  <span class="qtag" data-theme="history">History</span>
+                </div>
+                <p class="quote-analysis">The bog seems beyond final explanation. Heaney presents Irish identity as something still unfolding and impossible to reduce.</p>
+                <div class="quote-card"><blockquote>“They'll never dig coal here”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="history">History</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">The bog is not valuable in an industrial sense. Its richness is cultural, historical, and symbolic rather than commercial.</p>
+                <div class="quote-card"><blockquote>“Only the waterlogged trunks / Of great firs, soft as pulp”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                  <span class="qtag" data-theme="history">History</span>
+                </div>
+                <p class="quote-analysis">Even what the bog contains has been transformed. The land absorbs history and remakes it.</p>
+                <div class="quote-card"><blockquote>“Every layer they strip / Seems camped on before”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="history">History</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">This is central to the poem. Each layer represents previous lives and generations, suggesting that Irish history is cumulative and inhabited.</p>
+                <div class="quote-card"><blockquote>“The bogholes might be Atlantic seepage”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="landscape">Landscape</span>
+                  <span class="qtag" data-theme="history">History</span>
+                </div>
+                <p class="quote-analysis">The imagery enlarges the bog until it seems connected to the ocean itself, making Ireland's land feel primal and immense.</p>
+                <div class="quote-card"><blockquote>“The wet centre is bottomless”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="identity">Identity</span>
+                  <span class="qtag" data-theme="history">History</span>
+                </div>
+                <p class="quote-analysis">The final line is the poem's great statement of national depth. Irish identity, history, and memory cannot be fully measured or exhausted.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Poetic Techniques</h4>
+                <ul class="clean technique-list">
+                  <li><strong>Extended metaphor:</strong> the bog stands for Ireland's identity, history, and consciousness.</li>
+                  <li><strong>Contrast:</strong> prairie versus bog establishes Ireland through opposition.</li>
+                  <li><strong>Personification:</strong> <q>The ground itself is kind</q> makes the land seem alive and nurturing.</li>
+                  <li><strong>Repetition:</strong> <q>bottomless</q> reinforces limitless depth.</li>
+                  <li><strong>Archaeological imagery:</strong> elk skeletons, butter, fir trunks show the bog as a repository of time.</li>
+                  <li><strong>Rich sensory imagery:</strong> <q>black butter</q> gives the bog texture, colour, and symbolic force.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Exam-Ready Points</h4>
+                <ul class="exam-checklist">
+                  <li>In <em>Bogland</em>, Heaney uses landscape to define Irish national identity.</li>
+                  <li>The contrast with America's prairies is crucial: America expands outward, while Ireland goes inward and downward into history.</li>
+                  <li>The bog symbolises preservation, storing the traces of previous generations.</li>
+                  <li>The repeated idea of bottomlessness suggests that Irish identity is layered, complex, and inexhaustible.</li>
+                  <li>Heaney turns an ordinary feature of the Irish landscape into a powerful cultural and political symbol.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item" id="poem-constable-calls">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-head">
+              <h3>Constable Calls</h3>
+              <p class="accordion-subtitle">Childhood fear, authority, surveillance, politics, and domestic unease.</p>
+            </div>
+            <div class="accordion-tools">
+              <label class="progress-label" data-stop-toggle>
+                <input type="checkbox" class="study-checkbox" data-key="constable-calls" />
+                <span>Studied ✓</span>
+              </label>
+              <span class="chevron" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="accordion-panel">
+            <div class="accordion-inner">
+              <section class="poem-section">
+                <h4>Summary</h4>
+                <p>This poem recalls a visit by a constable to the Heaney family farm. On the surface, the policeman is carrying out routine census work, but from the child's perspective the encounter feels threatening and oppressive. Through precise detail and restrained narration, Heaney reveals how authority, fear, and political tension can exist inside an apparently ordinary domestic moment.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Key Themes</h4>
+                <div class="poem-tags">
+                  <span class="tag fear">Childhood fear</span>
+                  <span class="tag fear">Authority and surveillance</span>
+                  <span class="tag history">Political tension</span>
+                  <span class="tag identity">Identity in Northern Ireland</span>
+                  <span class="tag family">The domestic and the political</span>
+                  <span class="tag memory">Memory and unease</span>
+                </div>
+              </section>
+              <section class="poem-section">
+                <h4>Structure &amp; Form</h4>
+                <ul class="clean">
+                  <li>The poem is narrated through a child's perspective, which makes physical details feel unusually sharp and emotionally charged.</li>
+                  <li>Heaney builds tension through observation rather than dramatic action.</li>
+                  <li>The constable's presence dominates the house, and the poem's structure mirrors that growing unease.</li>
+                  <li>The poem never explicitly names the Troubles, yet the political meaning is unmistakable beneath the domestic scene.</li>
+                  <li>The ending brings relief, showing how unsafe the home felt while authority was present.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Key Quotes &amp; Analysis</h4>
+                <div class="quote-card"><blockquote>“His bicycle stood at the window-sill”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">The bicycle is the first sign of the constable's arrival. Its presence at the window creates an image of intrusion: authority has entered the family's private space.</p>
+                <div class="quote-card"><blockquote>“The rubber cowl of a mud-splasher / Skirted the front mudguard”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">The precise, almost obsessive description reflects a child's anxious attention to objects. Fear sharpens observation.</p>
+                <div class="quote-card"><blockquote>“His cap was upturned on the floor”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">The constable's ordinary possessions feel ominous because of the child's perspective. Even a cap becomes part of the threatening atmosphere.</p>
+                <div class="quote-card"><blockquote>“His boot pushed off / And I looked at his unsocked feet”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">This detail is intimate and uncomfortable. The child notices what should be insignificant, but in doing so reveals his unease.</p>
+                <div class="quote-card"><blockquote>“Arithmetic and fear”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">This is one of the poem's key phrases. The counting of crops or livestock is not neutral; numbers become connected with anxiety, guilt, and danger.</p>
+                <div class="quote-card"><blockquote>“A shadow bobbed in the window”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                </div>
+                <p class="quote-analysis">The shadow is menacing and unstable. Authority is experienced not as reassurance but as threat.</p>
+                <div class="quote-card"><blockquote>“The pedal treads / Left all the room in pedal treads”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">The physical object leaves a mental mark. The constable's bicycle becomes a symbol of lingering intimidation.</p>
+                <div class="quote-card"><blockquote>“The pedal pained me at the ankle”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">This is a powerful example of transferred discomfort. The child's fear becomes almost physical, showing how psychological anxiety invades the body.</p>
+                <div class="quote-card"><blockquote>“Any more light would have been dangerous”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">The line is brilliantly ambiguous. Literally, it may refer to evening light; politically, it suggests that exposure, scrutiny, or visibility itself is threatening.</p>
+                <div class="quote-card"><blockquote>“His boot pushed off and the bicycle ticked”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="identity">Identity</span>
+                </div>
+                <p class="quote-analysis">Even after he prepares to leave, the constable's presence is felt through tense, mechanical detail.</p>
+                <div class="quote-card"><blockquote>“And the house grew safe again”</blockquote></div>
+                <div class="quote-themes">
+                  <span class="qtag" data-theme="fear">Fear</span>
+                  <span class="qtag" data-theme="family">Family</span>
+                </div>
+                <p class="quote-analysis">The final relief is telling. The home had ceased to feel safe while the constable was inside, revealing the depth of unease beneath the routine visit.</p>
+              </section>
+              <section class="poem-section">
+                <h4>Poetic Techniques</h4>
+                <ul class="clean technique-list">
+                  <li><strong>Child's perspective:</strong> ordinary objects become threatening because we experience them through fear.</li>
+                  <li><strong>Precise sensory detail:</strong> bicycle parts, boots, shadows, and physical discomfort create realism and tension.</li>
+                  <li><strong>Symbolism:</strong> the bicycle and census-taking represent surveillance and state authority.</li>
+                  <li><strong>Transferred sensation:</strong> <q>The pedal pained me at the ankle</q> shows fear becoming bodily.</li>
+                  <li><strong>Ambiguity:</strong> <q>Any more light would have been dangerous</q> works both literally and politically.</li>
+                  <li><strong>Understatement:</strong> Heaney never overstates the politics, which makes the poem more powerful.</li>
+                </ul>
+              </section>
+              <section class="poem-section">
+                <h4>Exam-Ready Points</h4>
+                <ul class="exam-checklist">
+                  <li>Heaney shows how a routine visit from authority can feel deeply threatening in the context of Northern Ireland.</li>
+                  <li>The poem is powerful because it presents politics through a child's fear rather than through direct argument.</li>
+                  <li><q>Arithmetic and fear</q> captures the central idea that even counting and paperwork can feel oppressive.</li>
+                  <li>The constable is not described as openly violent, but the atmosphere of the poem makes his authority feel invasive and unsafe.</li>
+                  <li>Heaney's precise observation of objects reflects how fear works: the anxious mind fixates on detail.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="tab-panel" id="themes">
+      <div class="card" style="margin-bottom:18px;">
+        <span class="section-label">Cross-Poem Themes</span>
+        <h2>How Heaney's major ideas connect</h2>
+        <p>These themes are drawn from the full notes and linked across the poems so you can move from single-poem detail to comparative discussion quickly.</p>
+      </div>
+      <div class="theme-grid">
+        <article class="theme-card" data-theme-id="craft">
+          <h3>Craft and Artistry</h3>
+          <p>Heaney is “always about craft.” He is fascinated by making, skill, labour, and the link between physical work and poetic creation. <em>The Forge</em> is the clearest expression of this, with the blacksmith standing as a symbol for the poet and the forge becoming a sacred place of making.</p>
+          <div class="theme-quotes">
+            <button class="theme-quotes-toggle">View Quotes ▾</button>
+            <div class="theme-quotes-list" style="display:none;">
+              <div class="mini-quote"><span class="quote-source">The Forge</span><blockquote>“All I know is a door into the dark”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Forge</span><blockquote>“Inside, the hammered anvil's short-pitched ring”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Forge</span><blockquote>“The unpredictable fantail of sparks”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Forge</span><blockquote>“Then grunts and goes in, with a slam and flick / To beat real iron out, to work the bellows”</blockquote></div>
+            </div>
+          </div>
+        </article>
+        <article class="theme-card" data-theme-id="identity">
+          <h3>Identity</h3>
+          <p>His poetry explores who he is as an individual shaped by childhood, family, and place, but also as an Irish writer formed by Northern Ireland's history. <em>Bogland</em> turns Irish identity into landscape, while <em>Constable Calls</em> shows how identity in Northern Ireland is shaped by political power.</p>
+          <div class="theme-quotes">
+            <button class="theme-quotes-toggle">View Quotes ▾</button>
+            <div class="theme-quotes-list" style="display:none;">
+              <div class="mini-quote"><span class="quote-source">Bogland</span><blockquote>“Our unfenced country / Is bog”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Bogland</span><blockquote>“The wet centre is bottomless”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Forge</span><blockquote>“Then grunts and goes in, with a slam and flick / To beat real iron out, to work the bellows”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Constable Calls</span><blockquote>“Arithmetic and fear”</blockquote></div>
+            </div>
+          </div>
+        </article>
+        <article class="theme-card" data-theme-id="landscape">
+          <h3>Landscape and Place</h3>
+          <p>The land is never just background. Bogs, fields, farmyards, roads, tunnels, and ordinary rural settings carry memory, symbolism, and national meaning. <em>Bogland</em> uses the bog as a national metaphor, <em>A Call</em> turns the yard into an emotionally charged space, and <em>The Underground</em> makes corridors and tunnels symbolic.</p>
+          <div class="theme-quotes">
+            <button class="theme-quotes-toggle">View Quotes ▾</button>
+            <div class="theme-quotes-list" style="display:none;">
+              <div class="mini-quote"><span class="quote-source">The Forge</span><blockquote>“Outside, old axles and iron hoops rusting”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">A Call</span><blockquote>“the sun stood in the lintel”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Bogland</span><blockquote>“Our unfenced country / Is bog”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Bogland</span><blockquote>“The ground itself is kind, black butter”</blockquote></div>
+            </div>
+          </div>
+        </article>
+        <article class="theme-card" data-theme-id="family">
+          <h3>Family and Relationships</h3>
+          <p>Heaney writes movingly about marriage, parents, and community, showing how ordinary relationships hold deep emotional power. <em>A Call</em> is a tender parent-child poem, while <em>The Underground</em> presents marriage as shared journey, vulnerability, and recovery rather than sentimentality.</p>
+          <div class="theme-quotes">
+            <button class="theme-quotes-toggle">View Quotes ▾</button>
+            <div class="theme-quotes-list" style="display:none;">
+              <div class="mini-quote"><span class="quote-source">The Underground</span><blockquote>“You in your going-away coat speeding ahead”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Underground</span><blockquote>The coat buttons as a breadcrumb trail</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">A Call</span><blockquote>“‘Hold on,’ he said, ‘I'll just run out and get her’”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Constable Calls</span><blockquote>“And the house grew safe again”</blockquote></div>
+            </div>
+          </div>
+        </article>
+        <article class="theme-card" data-theme-id="memory">
+          <h3>Time, Memory, and Mortality</h3>
+          <p>Small moments often become charged because Heaney knows they will not last. Memory preserves what time threatens to take away. <em>A Call</em> turns a brief pause on the phone into an awareness of eventual loss, while <em>The Underground</em> revisits an old memory and reshapes it through time.</p>
+          <div class="theme-quotes">
+            <button class="theme-quotes-toggle">View Quotes ▾</button>
+            <div class="theme-quotes-list" style="display:none;">
+              <div class="mini-quote"><span class="quote-source">The Forge</span><blockquote>“He recalls a clatter of hoofs”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Underground</span><blockquote>“Our echoes die in that corridor”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">A Call</span><blockquote>“the phone's played out, / the ancient pulse of his voice”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">A Call</span><blockquote>“and a heart sinking”</blockquote></div>
+            </div>
+          </div>
+        </article>
+        <article class="theme-card" data-theme-id="fear">
+          <h3>Authority and Fear</h3>
+          <p>Especially in childhood poems, everyday encounters with authority figures carry unease, tension, and political implication. <em>Constable Calls</em> is the strongest example, where a routine visit becomes oppressive through a child's perception and the phrase <q>Arithmetic and fear</q>.</p>
+          <div class="theme-quotes">
+            <button class="theme-quotes-toggle">View Quotes ▾</button>
+            <div class="theme-quotes-list" style="display:none;">
+              <div class="mini-quote"><span class="quote-source">Constable Calls</span><blockquote>“His bicycle stood at the window-sill”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Constable Calls</span><blockquote>“Arithmetic and fear”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Constable Calls</span><blockquote>“A shadow bobbed in the window”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Constable Calls</span><blockquote>“And the house grew safe again”</blockquote></div>
+            </div>
+          </div>
+        </article>
+        <article class="theme-card" data-theme-id="history">
+          <h3>History and National Consciousness</h3>
+          <p>Heaney often presents Ireland as layered, preserved, and shaped by generations of experience. <em>Bogland</em> shows each layer as something already <q>camped on before</q>, storing elk skeletons, butter, trunks, and memory in the wet, bottomless ground.</p>
+          <div class="theme-quotes">
+            <button class="theme-quotes-toggle">View Quotes ▾</button>
+            <div class="theme-quotes-list" style="display:none;">
+              <div class="mini-quote"><span class="quote-source">Bogland</span><blockquote>“We have no prairies / To slice a big sun at evening”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Bogland</span><blockquote>“They've taken the skeleton / Of the Great Irish Elk / Out of the peat”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Bogland</span><blockquote>“Butter sunk under / More than a hundred years / Was recovered salty and white”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">Bogland</span><blockquote>“Every layer they strip / Seems camped on before”</blockquote></div>
+            </div>
+          </div>
+        </article>
+        <article class="theme-card" data-theme-id="myth">
+          <h3>Myth and Allusion</h3>
+          <p>Personal events are frequently enlarged through references to myth, legend, religion, and earlier literature. <em>The Underground</em> uses Orpheus, Eurydice, Hansel, and breadcrumb-like coat buttons; <em>The Forge</em> uses religious and mythic imagery such as <q>altar</q> and <q>horned as a unicorn</q>.</p>
+          <div class="theme-quotes">
+            <button class="theme-quotes-toggle">View Quotes ▾</button>
+            <div class="theme-quotes-list" style="display:none;">
+              <div class="mini-quote"><span class="quote-source">The Forge</span><blockquote>“The anvil must be somewhere in the centre, / Horned as a unicorn, at one end, square, / Set there immoveable: an altar”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Underground</span><blockquote>Orpheus and Eurydice allusion</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Underground</span><blockquote>“I was Hansel without a trail / Through a damp wood”</blockquote></div>
+              <div class="mini-quote"><span class="quote-source">The Underground</span><blockquote>“and walk you beyond it”</blockquote></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="exam-tips">
+      <div class="grid">
+        <article class="card split-6">
+          <span class="section-label">Comparative Points</span>
+          <h2>Cross-text comparisons</h2>
+          <ul class="clean quick-list">
+            <li>Like many poets on the course, Heaney turns ordinary subjects into vehicles for larger meaning, but he is especially distinctive in how often he connects <strong>manual labour</strong> and <strong>poetic craft</strong>.</li>
+            <li>Compared with poets who are more openly confessional, Heaney is often more grounded in <strong>landscape, place, and object</strong>, allowing physical detail to carry emotional meaning.</li>
+            <li>His work can be compared with poets who explore <strong>childhood memory</strong>, but Heaney often links those memories to wider cultural or political tensions.</li>
+            <li>Unlike poets whose nationalism may be abstract or rhetorical, Heaney roots national identity in <strong>specific places</strong> such as bogs, fields, and farmyards.</li>
+            <li>Heaney's use of <strong>myth and allusion</strong> makes him comparable to poets who layer texts and traditions, yet his allusions always remain connected to lived experience.</li>
+            <li>In love and family poems, he avoids sentimentality by focusing on concrete detail, much like other careful observational poets, but his voice is especially warm, tactile, and reflective.</li>
+          </ul>
+        </article>
+
+        <article class="card split-6">
+          <span class="section-label">Sample Essay Angles</span>
+          <h2>Essay starters</h2>
+          <ul class="clean essay-list">
+            <li><strong>Heaney as a poet of craft:</strong> discuss how poems such as <em>The Forge</em> present the poet as a maker and celebrate disciplined artistry.</li>
+            <li><strong>The importance of place in Heaney's poetry:</strong> explore how bogs, yards, tunnels, and farm spaces shape meaning and identity.</li>
+            <li><strong>Personal and national identity:</strong> show how Heaney moves from private experience to questions of Irish history and Northern Irish tension.</li>
+            <li><strong>The ordinary made profound:</strong> examine how Heaney transforms everyday moments in poems like <em>A Call</em> and <em>Constable Calls</em>.</li>
+            <li><strong>Relationships in Heaney's work:</strong> analyse marriage, parent-child bonds, and community ties.</li>
+            <li><strong>Fear and tension beneath the domestic:</strong> discuss how Heaney reveals unease and political strain without direct polemic.</li>
+            <li><strong>The role of allusion:</strong> explain how myth, fairy tale, and cultural echoes enrich poems such as <em>The Underground</em>.</li>
+            <li><strong>Landscape as symbol:</strong> analyse how Heaney uses the natural world not just descriptively but as a source of identity, memory, and meaning.</li>
+          </ul>
+        </article>
+
+        <article class="card split-12">
+          <span class="section-label">Quick-Reference Quotes</span>
+          <h2>High-value quotations for revision</h2>
+          <div class="quote-grid">
+            <article class="mini-quote-card">
+              <h3>The Forge</h3>
+              <blockquote>“All I know is a door into the dark”</blockquote>
+              <p class="muted">Creativity as uncertainty, mystery, and deliberate craft.</p>
+              <blockquote>“The unpredictable fantail of sparks”</blockquote>
+              <p class="muted">Creation is visually dazzling and cannot be fully controlled.</p>
+            </article>
+            <article class="mini-quote-card">
+              <h3>The Underground</h3>
+              <blockquote>“There we were in the vaulted tunnel running”</blockquote>
+              <p class="muted">Ordinary experience gains underworld and mythic resonance.</p>
+              <blockquote>“and walk you beyond it”</blockquote>
+              <p class="muted">Heaney rewrites the tragic Orpheus pattern into reunion.</p>
+            </article>
+            <article class="mini-quote-card">
+              <h3>A Call</h3>
+              <blockquote>“the phone's played out, / the ancient pulse of his voice”</blockquote>
+              <p class="muted">Voice, age, tenderness, and the awareness of mortality.</p>
+              <blockquote>“and a heart sinking”</blockquote>
+              <p class="muted">A brief domestic moment opens into grief and fear of loss.</p>
+            </article>
+            <article class="mini-quote-card">
+              <h3>Bogland</h3>
+              <blockquote>“Our unfenced country / Is bog”</blockquote>
+              <p class="muted">Landscape becomes a statement of national identity.</p>
+              <blockquote>“The wet centre is bottomless”</blockquote>
+              <p class="muted">Irish history and memory remain layered and inexhaustible.</p>
+            </article>
+            <article class="mini-quote-card">
+              <h3>Constable Calls</h3>
+              <blockquote>“Arithmetic and fear”</blockquote>
+              <p class="muted">Authority and ordinary counting become psychologically oppressive.</p>
+              <blockquote>“And the house grew safe again”</blockquote>
+              <p class="muted">The final relief reveals how invasive authority has felt.</p>
+            </article>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    const savedTab = localStorage.getItem('seamus-heaney-active-tab');
+
+    function activateTab(tabId) {
+      tabButtons.forEach(button => {
+        const isActive = button.dataset.tab === tabId;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', String(isActive));
+      });
+      tabPanels.forEach(panel => panel.classList.toggle('active', panel.id === tabId));
+      localStorage.setItem('seamus-heaney-active-tab', tabId);
+    }
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => activateTab(button.dataset.tab));
+    });
+
+    if (savedTab && document.getElementById(savedTab)) {
+      activateTab(savedTab);
+    }
+
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    function setAccordionState(item, open) {
+      const panel = item.querySelector('.accordion-panel');
+      const trigger = item.querySelector('.accordion-trigger');
+      item.classList.toggle('open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+      if (open) {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      } else {
+        panel.style.maxHeight = '0px';
+      }
+    }
+
+    accordionItems.forEach(item => {
+      const trigger = item.querySelector('.accordion-trigger');
+      const panel = item.querySelector('.accordion-panel');
+      const initiallyOpen = item.classList.contains('open');
+      if (!initiallyOpen) {
+        panel.style.maxHeight = '0px';
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+
+      trigger.addEventListener('click', (event) => {
+        if (event.target.closest('[data-stop-toggle]')) return;
+        const open = !item.classList.contains('open');
+        setAccordionState(item, open);
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      accordionItems.forEach(item => {
+        if (item.classList.contains('open')) {
+          const panel = item.querySelector('.accordion-panel');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+
+    const checkboxes = document.querySelectorAll('.study-checkbox');
+
+    checkboxes.forEach(checkbox => {
+      const key = 'seamus-heaney-studied-' + checkbox.dataset.key;
+      checkbox.checked = localStorage.getItem(key) === 'true';
+      checkbox.addEventListener('click', event => event.stopPropagation());
+      checkbox.addEventListener('change', () => {
+        localStorage.setItem(key, String(checkbox.checked));
+      });
+    });
+
+    document.querySelectorAll('.theme-quotes-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const list = btn.nextElementSibling;
+        const isHidden = list.style.display === 'none';
+        list.style.display = isHidden ? 'grid' : 'none';
+        btn.textContent = isHidden ? 'Hide Quotes ▴' : 'View Quotes ▾';
+      });
+    });
+
+    document.querySelectorAll('.qtag').forEach(tag => {
+      tag.addEventListener('click', event => {
+        event.stopPropagation();
+        const theme = tag.dataset.theme;
+        activateTab('themes');
+        const themeCard = document.querySelector(`[data-theme-id="${theme}"]`);
+        if (themeCard) {
+          themeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          themeCard.style.boxShadow = '0 0 0 3px rgba(138, 70, 206, 0.3)';
+          setTimeout(() => { themeCard.style.boxShadow = ''; }, 2000);
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-stop-toggle]').forEach(label => {
+      label.addEventListener('click', event => event.stopPropagation());
+    });
+  </script>
+</body>
+</html>

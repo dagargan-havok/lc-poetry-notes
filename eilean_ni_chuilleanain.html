@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eiléan Ní Chuilleanáin Study Page</title>
+    <style>
+        :root {
+            --bg: #FAF9F5;
+            --fg: #1F1E1D;
+            --accent: #1C6BBB;
+            --emphasis: #C96442;
+            --keywords: #D73A83;
+            --headings: #8A46CE;
+            --interactive: #1F6FE4;
+            --constants: #2D8F8F;
+            --parameters: #B56613;
+            --strings: #26831A;
+            --gray: #6F6F78;
+            --border: #E8E6E1;
+            --card: #FFFFFF;
+            --shadow: 0 2px 8px rgba(0,0,0,0.06);
+            --ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --transition: 0.25s ease;
+            --tag-bg: rgba(138, 70, 206, 0.08);
+            --heading: #8A46CE;
+            --quote-bg: rgba(201, 100, 66, 0.06);
+            --quote: #C96442;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.7 Georgia, 'Times New Roman', serif; }
+        a { color: var(--accent); }
+        .ui-font, button, input, .tag, .theme-chip, .tab-btn, .qtag { font-family: var(--ui-font); }
+        .page-shell { max-width: 1180px; margin: 0 auto; padding: 24px 18px 64px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; text-decoration: none; font-family: var(--ui-font); font-weight: 600; transition: transform var(--transition), color var(--transition); }
+        .back-link:hover { transform: translateX(-3px); }
+        .hero { background: linear-gradient(135deg, rgba(138,70,206,0.08), rgba(28,107,187,0.08), rgba(201,100,66,0.08)); border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow); padding: 28px; margin-bottom: 22px; }
+        .hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; align-items: start; }
+        .eyebrow { display: inline-block; color: var(--headings); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; font-weight: 700; margin-bottom: 10px; }
+        h1, h2, h3 { color: var(--headings); margin: 0 0 12px; line-height: 1.2; }
+        h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+        h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+        h3 { font-size: 1.2rem; }
+        .hero p { margin: 0; }
+        .hero-meta { margin: 10px 0 0; color: var(--gray); font-family: var(--ui-font); font-weight: 600; }
+        .hero-tags, .tag-row { display: flex; flex-wrap: wrap; gap: 10px; }
+        .progress-card, .overview-card, .content-card, .theme-card, .exam-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); }
+        .progress-card { padding: 20px; }
+        .progress-card h2 { margin-bottom: 8px; font-size: 1.15rem; }
+        .progress-track { width: 100%; height: 12px; background: #f0ede6; border-radius: 999px; overflow: hidden; margin: 14px 0 10px; }
+        .progress-fill { height: 100%; width: 0%; border-radius: inherit; background: linear-gradient(90deg, var(--interactive), var(--headings)); transition: width 0.35s ease; }
+        .progress-caption { color: var(--gray); margin: 0; }
+        .tag { display: inline-flex; align-items: center; border-radius: 999px; padding: 7px 12px; font-size: 0.84rem; font-weight: 700; border: 1px solid transparent; transition: transform var(--transition), box-shadow var(--transition); }
+        .tag:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+        .tag-purple { background: rgba(138,70,206,0.12); color: var(--headings); border-color: rgba(138,70,206,0.25); }
+        .tag-blue { background: rgba(28,107,187,0.12); color: var(--accent); border-color: rgba(28,107,187,0.25); }
+        .tag-cyan { background: rgba(45,143,143,0.12); color: var(--constants); border-color: rgba(45,143,143,0.25); }
+        .tag-orange { background: rgba(181,102,19,0.12); color: var(--parameters); border-color: rgba(181,102,19,0.25); }
+        .tag-pink { background: rgba(215,58,131,0.12); color: var(--keywords); border-color: rgba(215,58,131,0.25); }
+        .tag-gray { background: rgba(111,111,120,0.1); color: var(--gray); border-color: rgba(111,111,120,0.22); }
+        .tabs { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: 10px; background: rgba(250,249,245,0.92); backdrop-filter: blur(10px); padding: 12px 0 16px; margin-bottom: 18px; }
+        .tab-button { appearance: none; border: 1px solid var(--border); background: var(--card); color: var(--gray); border-radius: 999px; padding: 11px 16px; font-weight: 700; cursor: pointer; transition: all var(--transition); box-shadow: var(--shadow); }
+        .tab-button:hover { color: var(--accent); transform: translateY(-1px); }
+        .tab-button.active, .tab-btn.active { background: var(--interactive); color: white; border-color: transparent; }
+        .tab-panel { animation: fadeIn 0.28s ease; }
+        .tab-panel.active { display: block; }
+        .tab-panel[hidden] { display: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .panel-stack { display: grid; gap: 18px; }
+        .overview-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; align-items: start; }
+        .overview-cards { display: grid; gap: 14px; }
+        .overview-card, .exam-card, .theme-card { padding: 22px; }
+        .theme-summary-list, .detail-list { margin: 0; padding-left: 20px; }
+        .detail-list li, .theme-summary-list li { margin-bottom: 10px; }
+        .theme-grid, .exam-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+        .theme-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+        .theme-chip { font-size: 0.78rem; }
+        .theme-sub { color: var(--gray); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; display: inline-block; margin-bottom: 10px; }
+        .theme-card { transition: box-shadow var(--transition), transform var(--transition); }
+        .theme-card:target, .theme-card:hover { transform: translateY(-2px); }
+        .accordion-list { display: grid; gap: 16px; }
+        .accordion-item { background: var(--card); border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow); overflow: hidden; transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition); }
+        .accordion-item:hover { transform: translateY(-2px); border-color: rgba(28,107,187,0.25); }
+        .accordion-item.open { border-color: rgba(138,70,206,0.3); }
+        .accordion-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 10px 12px 10px 18px; align-items: center; }
+        .accordion-trigger { width: 100%; text-align: left; background: transparent; border: 0; padding: 12px 0; color: inherit; cursor: pointer; display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+        .accordion-kicker { display: block; color: var(--gray); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+        .accordion-title { display: block; color: var(--headings); font-size: 1.3rem; font-weight: 800; }
+        .accordion-icon { color: var(--interactive); font-size: 1.25rem; transition: transform 0.3s ease; }
+        .accordion-item.open .accordion-icon { transform: rotate(180deg); }
+        .study-toggle { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; font-weight: 700; color: var(--gray); border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; transition: background var(--transition), color var(--transition), border-color var(--transition); }
+        .study-toggle:has(input:checked) { background: rgba(38,131,26,0.1); color: var(--strings); border-color: rgba(38,131,26,0.25); }
+        .study-checkbox { accent-color: var(--strings); width: 18px; height: 18px; }
+        .accordion-panel { max-height: 0; overflow: hidden; transition: max-height 0.38s ease; }
+        .accordion-content { padding: 0 18px 18px; display: grid; gap: 16px; }
+        .content-card { padding: 20px; }
+        .content-card p:last-child, .theme-card p:last-child, .exam-card p:last-child { margin-bottom: 0; }
+        .quotes-grid { display: grid; gap: 14px; }
+        .quote-card { border: 1px solid rgba(201,100,66,0.18); border-radius: 18px; background: rgba(201,100,66,0.06); padding: 16px 18px; transition: transform var(--transition), box-shadow var(--transition); }
+        .quote-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .quote-label { color: var(--emphasis); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; margin-bottom: 8px; }
+        blockquote { margin: 0 0 10px; padding: 0 0 0 16px; border-left: 4px solid var(--emphasis); color: var(--fg); font-size: 1.04rem; }
+        .quote-themes { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+        .qtag { display: inline-block; padding: 2px 10px; border-radius: 12px; font: 600 0.72rem var(--ui-font); text-transform: uppercase; letter-spacing: 0.04em; background: var(--tag-bg); color: var(--heading); border: 1px solid var(--border); cursor: pointer; transition: background var(--transition), transform var(--transition); }
+        .qtag:hover { background: rgba(138, 70, 206, 0.12); transform: translateY(-1px); }
+        .theme-quotes { margin-top: 12px; }
+        .theme-quotes-toggle { background: none; border: 1px solid var(--border); border-radius: 10px; padding: 6px 14px; font: 600 0.82rem var(--ui-font); color: var(--accent); cursor: pointer; transition: background var(--transition); }
+        .theme-quotes-toggle:hover { background: rgba(28, 107, 187, 0.06); }
+        .theme-quotes-list { margin-top: 10px; display: none; gap: 8px; }
+        .mini-quote { padding: 10px 14px; background: var(--quote-bg); border-left: 3px solid var(--quote); border-radius: 8px; }
+        .mini-quote .quote-source { display: block; font: 700 0.75rem var(--ui-font); color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+        .mini-quote blockquote { margin: 0; padding-left: 12px; font-style: italic; color: var(--quote); font-size: 0.92rem; }
+        .techniques-list li::marker { color: var(--interactive); }
+        .exam-list li::marker { color: var(--strings); }
+        .exam-card h3 { margin-bottom: 12px; }
+        .quick-quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .quick-quote { text-decoration: none; color: inherit; background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 16px; box-shadow: var(--shadow); transition: transform var(--transition), border-color var(--transition); }
+        .quick-quote:hover { transform: translateY(-2px); border-color: rgba(28,107,187,0.25); }
+        .quick-quote-poem { display: inline-block; margin-bottom: 10px; font-weight: 800; color: var(--accent); }
+        .quick-quote blockquote { font-size: 0.98rem; margin-bottom: 0; }
+        .helper-text { color: var(--gray); margin-top: -4px; }
+        @media (max-width: 900px) { .hero-grid, .overview-grid, .theme-grid, .exam-grid, .quick-quotes { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .page-shell { padding: 18px 14px 48px; } .hero { padding: 22px; border-radius: 20px; } .accordion-top { grid-template-columns: 1fr; } .study-toggle { justify-content: center; } .tab-button { width: 100%; justify-content: center; } }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <a class="back-link" href="index.html">← Back to Index</a>
+        <header class="hero">
+            <div class="hero-grid">
+                <div>
+                    <span class="eyebrow ui-font">Leaving Cert Poetry Notes</span>
+                    <h1>Eiléan Ní Chuilleanáin</h1>
+                    <p class="hero-meta">Eiléan Ní Chuilleanáin Leaving Cert Poetry Notes</p>
+                    <p class="hero-meta">1942–present · Irish poet, scholar, and translator</p>
+                    <p style="margin-top: 12px;">Eiléan Ní Chuilleanáin is a major contemporary Irish poet whose work often feels more mysterious and abstract than that of other Leaving Cert poets. Rather than telling clear, linear stories, she prefers fragments, sudden shifts, unexplained images, and moments of uncertainty.</p>
+                    <div class="hero-tags" style="margin-top: 18px;"><span class="tag tag-purple">Death and mortality</span><span class="tag tag-blue">Liminality and transition</span><span class="tag tag-cyan">Memory</span><span class="tag tag-orange">Secrecy and concealment</span><span class="tag tag-pink">Fragmentation and ambiguity</span><span class="tag tag-purple">Female experience</span><span class="tag tag-blue">Religious imagery and institutions</span><span class="tag tag-cyan">Potential and flux</span><span class="tag tag-orange">Landscape and place</span></div>
+                </div>
+                <aside class="progress-card">
+                    <h2 class="ui-font">Revision Progress</h2>
+                    <p class="helper-text">Track each poem as you study it. Your progress is saved in this browser.</p>
+                    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+                    <p class="ui-font" id="progressText">0/5 poems studied</p>
+                    <p class="progress-caption">Open poems, review quotes and techniques, then tick each section when complete.</p>
+                </aside>
+            </div>
+        </header>
+        <nav class="tabs" aria-label="Study page sections">
+            <button class="tab-button tab-btn ui-font active" type="button" data-tab="overview">Overview</button>
+            <button class="tab-button tab-btn ui-font" type="button" data-tab="poems">Poems</button>
+            <button class="tab-button tab-btn ui-font" type="button" data-tab="themes">Themes</button>
+            <button class="tab-button tab-btn ui-font" type="button" data-tab="exam">Exam Tips</button>
+        </nav>
+        <main class="panel-stack">
+            <section class="tab-panel active" id="overview">
+                <div class="overview-grid">
+                    <div class="overview-cards">
+                        <div class="exam-card">
+                            <h2>Poet Overview</h2>
+                            <div class="overview-cards"><article class="overview-card"><p>Eiléan Ní Chuilleanáin is a major contemporary Irish poet whose work often feels more mysterious and abstract than that of other Leaving Cert poets. Rather than telling clear, linear stories, she prefers fragments, sudden shifts, unexplained images, and moments of uncertainty.</p></article><article class="overview-card"><p>Her poetry is deeply interested in states of transition: thresholds, corridors, bends, windows, roads, and journeys. These are not just physical places but symbolic spaces where change, danger, revelation, or loss may occur.</p></article><article class="overview-card"><p>Death is one of her strongest preoccupations. However, she rarely writes about death in a direct sentimental way. Instead, she examines how mortality haunts memory, place, and ordinary experience.</p></article><article class="overview-card"><p>Ní Chuilleanáin is also fascinated by secrecy, concealment, and what lies behind walls or beyond sight. Her poems often suggest that what matters most is partly hidden from the reader.</p></article><article class="overview-card"><p>Female experience is central to her work, especially women in religious or institutional settings. Nuns, convent spaces, hidden labour, and enclosed lives recur throughout her poetry.</p></article><article class="overview-card"><p>Her style is strategically ambiguous. She does not “give easy answers”; instead, she forces the reader to work, interpret, and dwell in uncertainty. That difficulty is part of the power of her poetry.</p></article></div>
+                        </div>
+                    </div>
+                    <aside class="exam-card">
+                        <h2>Key Themes at a Glance</h2>
+                        <div class="tag-row" style="margin-bottom: 16px;"><span class="tag tag-purple">Death and mortality</span><span class="tag tag-blue">Liminality and transition</span><span class="tag tag-cyan">Memory</span><span class="tag tag-orange">Secrecy and concealment</span><span class="tag tag-pink">Fragmentation and ambiguity</span><span class="tag tag-purple">Female experience</span><span class="tag tag-blue">Religious imagery and institutions</span><span class="tag tag-cyan">Potential and flux</span><span class="tag tag-orange">Landscape and place</span></div>
+                        <ul class="theme-summary-list"><li><strong>Death and mortality:</strong> Many poems explore sudden death, remembered death, near-death, or the persistent presence of mortality in everyday life. </li><li><strong>Liminality and transition:</strong> Ní Chuilleanáin is drawn to edges, thresholds, windows, bends, roads, corridors, and states of being “between” one thing and another. </li><li><strong>Memory:</strong> The present is constantly shaped by the past. Places, journeys, and encounters are transformed by remembered experience. </li><li><strong>Secrecy and concealment:</strong> Hidden rooms, covered bodies, withheld explanations, and obscured meanings are central to her work. </li><li><strong>Fragmentation and ambiguity:</strong> Her poems often refuse clear narrative order. Meaning is created through gaps, jumps, and what is left unsaid. </li><li><strong>Female experience:</strong> Women, especially religious women, appear as powerful but often hidden figures whose labour or identity has been concealed. </li><li><strong>Religious imagery and institutions:</strong> Convents, habits, keys, walls, corridors, and ritualised spaces recur, often linked with both protection and oppression. </li><li><strong>Potential and flux:</strong> She is interested in what could happen, what almost happened, and in unstable states where meaning is still shifting. </li><li><strong>Landscape and place:</strong> Roads, rivers, streets, and buildings are not neutral settings; they absorb memory and emotional significance. </li></ul>
+                    </aside>
+                </div>
+            </section>
+            <section class="tab-panel" id="poems" hidden>
+                <div class="exam-card" style="margin-bottom: 16px;">
+                    <h2>Poems</h2>
+                    <p class="helper-text">Click each title to expand full notes on summary, structure, techniques, quotes, and exam points.</p>
+                </div>
+                <div class="accordion-list">
+        <article class="accordion-item open" id="poem-0">
+            <div class="accordion-top">
+                <button class="accordion-trigger ui-font" type="button" aria-expanded="true" aria-controls="poem-0-panel">
+                    <span>
+                        <span class="accordion-kicker">Poem 1</span>
+                        <span class="accordion-title">Street</span>
+                    </span>
+                    <span class="accordion-icon" aria-hidden="true">▾</span>
+                </button>
+                <label class="study-toggle ui-font" for="study-poem-0">
+                    <input type="checkbox" id="study-poem-0" class="study-checkbox" data-poem="Street">
+                    <span>Studied ✓</span>
+                </label>
+            </div>
+            <div class="accordion-panel" id="poem-0-panel">
+                <div class="accordion-content">
+                    <section class="content-card">
+                        <h3>Summary</h3>
+                        <p>The poem begins with a shocking event: a man falls from a first-floor window and survives. Instead of developing this dramatic story directly, Ní Chuilleanáin turns away from the expected narrative and focuses on a nun who reaches out to pull him in. The poem becomes less about the public accident itself and more about hidden action, female power, and the retreat of the miraculous back into secrecy.</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Themes</h3>
+                        <div class="tag-row"><span class="tag tag-purple">Concealment and revelation</span><span class="tag tag-blue">female experience</span><span class="tag tag-cyan">religious imagery</span><span class="tag tag-orange">ambiguity</span><span class="tag tag-pink">the extraordinary within the ordinary</span><span class="tag tag-purple">public versus private space</span></div>
+                        <p class="helper-text">Concealment and revelation, female experience, religious imagery, ambiguity, the extraordinary within the ordinary, public versus private space</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Structure &amp; Form</h3>
+                        <ul class="detail-list"><li>The opening is abrupt and dramatic, immediately catching the reader’s attention.</li><li>Instead of following a logical narrative, the poem digresses and withholds explanation.</li><li>This fragmented structure reflects Ní Chuilleanáin’s refusal to tell stories in a simple A-to-B way.</li><li>The poem moves from public spectacle to private hiddenness, from the visible street to the concealed interior.</li><li>Free verse and plain diction make the strange events feel disturbingly matter-of-fact.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Quotes &amp; Analysis</h3>
+                        <div class="quotes-grid"><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“He fell from a first-floor window and was not killed”</blockquote><div class="quote-themes"><span class="qtag" data-theme="liminality">Liminality</span><span class="qtag" data-theme="concealment">Concealment</span></div><p>This opening is striking because of its blunt, report-like tone. The event is dramatic, but the language is calm and matter-of-fact. The survival of the man immediately creates a sense of the unexpected, while the poet’s refusal to dramatise it adds to the eerie, detached quality.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“He fell”</blockquote><div class="quote-themes"><span class="qtag" data-theme="fragmentation">Fragmentation</span><span class="qtag" data-theme="concealment">Concealment</span></div><p>The simplicity of the phrase matters. Ní Chuilleanáin gives us the fact but not the explanation. We do not know who he is, why he fell, or what follows. This strategic withholding forces the reader into uncertainty from the outset.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“She stretched out her hand / And her arm from the window to pull him in”</blockquote><div class="quote-themes"><span class="qtag" data-theme="female-experience">Female-Experience</span><span class="qtag" data-theme="religion">Religion</span><span class="qtag" data-theme="liminality">Liminality</span></div><p>The nun’s action is decisive, physical, and quietly heroic. The image of the outstretched arm suggests rescue, grace, and even a miraculous intervention. Yet the poet does not sentimentalise the moment; she simply records it.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“Then she moved through rooms and corridors / Keeping her arms close to her body”</blockquote><div class="quote-themes"><span class="qtag" data-theme="concealment">Concealment</span><span class="qtag" data-theme="female-experience">Female-Experience</span><span class="qtag" data-theme="religion">Religion</span></div><p>After the extraordinary act, the nun retreats back into concealment. The contrast between the extended arm of rescue and the withdrawn posture afterwards is deeply revealing. Her power is real, but it is quickly hidden again.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“rooms and corridors”</blockquote><div class="quote-themes"><span class="qtag" data-theme="concealment">Concealment</span><span class="qtag" data-theme="religion">Religion</span></div><p>These interior spaces matter symbolically. They suggest enclosure, institution, and secrecy. The poem shifts away from the open street into a hidden world behind walls.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“Keeping her arms close to her body”</blockquote><div class="quote-themes"><span class="qtag" data-theme="female-experience">Female-Experience</span><span class="qtag" data-theme="concealment">Concealment</span><span class="qtag" data-theme="religion">Religion</span></div><p>This image reflects modesty, control, and concealment. The nun’s body, like her action, is covered and contained. Ní Chuilleanáin is interested in women whose strength exists within systems that hide them.</p></div><div class="quote-card"><div class="quote-label ui-font">Title</div><blockquote>The title, “Street”</blockquote><div class="quote-themes"><span class="qtag" data-theme="concealment">Concealment</span><span class="qtag" data-theme="liminality">Liminality</span></div><p>A street is a public place, associated with visibility and exposure. Yet the poem is more interested in what happens beyond public sight. The title therefore creates an ironic contrast between apparent openness and actual hiddenness.</p></div></div>
+                    </section>
+                    <section class="content-card">
+                        <h3>Poetic Techniques</h3>
+                        <ul class="detail-list techniques-list"><li><strong>Matter-of-fact tone:</strong> “He fell from a first-floor window and was not killed” makes the extraordinary feel oddly ordinary, increasing the poem’s mystery.</li><li><strong>Strategic ambiguity:</strong> Ní Chuilleanáin withholds explanation, forcing the reader to assemble meaning.</li><li><strong>Contrast:</strong> The public “street” is set against the private world of “rooms and corridors.”</li><li><strong>Religious imagery:</strong> The nun becomes a figure of hidden grace, power, and restraint.</li><li><strong>Symbolism:</strong> The outstretched arm symbolises rescue and revelation; the withdrawn body symbolises concealment.</li><li><strong>Fragmented narrative:</strong> The poem refuses the expected dramatic storyline and instead shifts focus in a surprising direction.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Exam-Ready Points</h3>
+                        <ul class="detail-list exam-list"><li>Ní Chuilleanáin’s abstract style is clear here: she begins with a dramatic event but deliberately avoids a neat, explanatory narrative.</li><li>The poem explores the tension between public visibility and private hiddenness.</li><li>The nun is a powerful example of how Ní Chuilleanáin presents female figures whose strength is concealed by religious and institutional structures.</li><li>The matter-of-fact tone makes the near-miraculous rescue feel even stranger and more memorable.</li><li>“Street” shows the poet’s fascination with what is withheld from the reader rather than what is fully explained.</li><li>The poem suggests that extraordinary acts can occur within lives that appear obscure, enclosed, or ordinary.</li></ul>
+                    </section>
+                </div>
+            </div>
+        </article>
+        
+        <article class="accordion-item " id="poem-1">
+            <div class="accordion-top">
+                <button class="accordion-trigger ui-font" type="button" aria-expanded="false" aria-controls="poem-1-panel">
+                    <span>
+                        <span class="accordion-kicker">Poem 2</span>
+                        <span class="accordion-title">Deaths and Engines</span>
+                    </span>
+                    <span class="accordion-icon" aria-hidden="true">▾</span>
+                </button>
+                <label class="study-toggle ui-font" for="study-poem-1">
+                    <input type="checkbox" id="study-poem-1" class="study-checkbox" data-poem="Deaths and Engines">
+                    <span>Studied ✓</span>
+                </label>
+            </div>
+            <div class="accordion-panel" id="poem-1-panel">
+                <div class="accordion-content">
+                    <section class="content-card">
+                        <h3>Summary</h3>
+                        <p>The poem links modern machinery, physical danger, and mortality through a fragmented series of scenes. An aircraft descent, unexplained figures, public images, and abrupt references to death are placed beside each other without clear transition. The poem becomes a meditation on the fragility of life, the randomness of death, and the unsettling machinery of the modern world.</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Themes</h3>
+                        <div class="tag-row"><span class="tag tag-purple">Death and mortality</span><span class="tag tag-blue">mechanical modernity</span><span class="tag tag-cyan">fragmentation</span><span class="tag tag-orange">flux and potential</span><span class="tag tag-pink">danger</span><span class="tag tag-purple">liminality</span><span class="tag tag-blue">randomness</span></div>
+                        <p class="helper-text">Death and mortality, mechanical modernity, fragmentation, flux and potential, danger, liminality, randomness</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Structure &amp; Form</h3>
+                        <ul class="detail-list"><li>The poem is highly fragmented, made up of disconnected or loosely connected scenes.</li><li>Ní Chuilleanáin uses juxtaposition rather than explanation; meaning emerges through absence and gap.</li><li>The poem’s structure mirrors instability, as if the reader is moving through fragments of memory or perception.</li><li>There is no comforting narrative progression or resolution.</li><li>The poem’s shifts create a sense of danger and uncertainty, fitting its concern with mortality.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Quotes &amp; Analysis</h3>
+                        <div class="quotes-grid"><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“We came down above the houses / In a stiff circuit, / Holding our seats tight”</blockquote><div class="quote-themes"><span class="qtag" data-theme="liminality">Liminality</span><span class="qtag" data-theme="death">Death</span></div><p>The opening captures the physical intensity of landing. The phrase “holding our seats tight” conveys fear and bodily tension, suggesting that technology offers no real security. Even in a machine designed for control, people remain vulnerable.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“came down above the houses”</blockquote><div class="quote-themes"><span class="qtag" data-theme="liminality">Liminality</span></div><p>This image places the speakers in a liminal space: neither safely on land nor fully abstracted into the sky. They are suspended between states, which suits Ní Chuilleanáin’s fascination with thresholds and in-between moments.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“In a stiff circuit”</blockquote><div class="quote-themes"><span class="qtag" data-theme="fragmentation">Fragmentation</span><span class="qtag" data-theme="potential-flux">Potential/Flux</span></div><p>The adjective “stiff” makes the movement feel unnatural, mechanical, and uneasy. It suggests strain, inflexibility, and the possibility of failure.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“Not the one / Who rises in a white jersey and appears / In the newspapers every week”</blockquote><div class="quote-themes"><span class="qtag" data-theme="fragmentation">Fragmentation</span><span class="qtag" data-theme="potential-flux">Potential/Flux</span></div><p>This striking fragment rejects the public glamour of the sports hero. Ní Chuilleanáin contrasts celebrated, visible figures with private or unrecorded encounters with danger and death.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“appears / In the newspapers every week”</blockquote><div class="quote-themes"><span class="qtag" data-theme="fragmentation">Fragmentation</span></div><p>The line points to public spectacle and repetition, but the poem itself is interested in deaths and near-deaths that are less visible, less easily packaged, and more unsettling.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“A woman stepped out of a white limousine”</blockquote><div class="quote-themes"><span class="qtag" data-theme="fragmentation">Fragmentation</span><span class="qtag" data-theme="potential-flux">Potential/Flux</span></div><p>This unexplained image adds to the poem’s dreamlike fragmentation. The reader is not told how it connects, which is precisely the point: the poem mimics how memory and mortality arrive in disconnected flashes.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“He died in the war”</blockquote><div class="quote-themes"><span class="qtag" data-theme="death">Death</span></div><p>The stark directness of this line is deeply effective. Ní Chuilleanáin offers no emotional commentary. The lack of context or elaboration gives the statement extra force, showing how death can enter a poem abruptly and irrevocably.</p></div><div class="quote-card"><div class="quote-label ui-font">Title</div><blockquote>The title, “Deaths and Engines”</blockquote><div class="quote-themes"><span class="qtag" data-theme="death">Death</span><span class="qtag" data-theme="potential-flux">Potential/Flux</span><span class="qtag" data-theme="fragmentation">Fragmentation</span></div><p>The plural “Deaths” suggests repeated encounters with mortality rather than one isolated event. “Engines” points to literal machines, especially aircraft, but also to systems, mechanisms, and impersonal forces that carry human beings toward danger.</p></div></div>
+                    </section>
+                    <section class="content-card">
+                        <h3>Poetic Techniques</h3>
+                        <ul class="detail-list techniques-list"><li><strong>Fragmented narrative:</strong> Disconnected scenes reflect instability, memory, and the randomness of mortality.</li><li><strong>Juxtaposition:</strong> Unrelated-seeming images gain meaning through being placed together without explanation.</li><li><strong>Understatement:</strong> “He died in the war” is powerful because it is delivered so plainly.</li><li><strong>Mechanical imagery:</strong> “Engines” symbolise modernity, force, vulnerability, and the machinery of fate.</li><li><strong>Liminal imagery:</strong> The descent of the aircraft creates a sense of being between safety and disaster.</li><li><strong>Absence and gap:</strong> What is not said is central to how the poem works.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Exam-Ready Points</h3>
+                        <ul class="detail-list exam-list"><li>Ní Chuilleanáin presents death as random, abrupt, and woven into modern life rather than as a neat, singular event.</li><li>The poem’s fragmented structure is essential: it reflects the instability and disjointedness of human experience.</li><li>“Engines” operates both literally and metaphorically, suggesting machines and the larger forces that drive human fate.</li><li>The aircraft scene captures one of Ní Chuilleanáin’s favourite states: being suspended in uncertainty between one condition and another.</li><li>The poem creates meaning through what it leaves out, showing her confidence in ambiguity and strategic withholding.</li><li>Death here is not romanticised; it is sudden, impersonal, and disturbingly matter-of-fact.</li></ul>
+                    </section>
+                </div>
+            </div>
+        </article>
+        
+        <article class="accordion-item " id="poem-2">
+            <div class="accordion-top">
+                <button class="accordion-trigger ui-font" type="button" aria-expanded="false" aria-controls="poem-2-panel">
+                    <span>
+                        <span class="accordion-kicker">Poem 3</span>
+                        <span class="accordion-title">All for You</span>
+                    </span>
+                    <span class="accordion-icon" aria-hidden="true">▾</span>
+                </button>
+                <label class="study-toggle ui-font" for="study-poem-2">
+                    <input type="checkbox" id="study-poem-2" class="study-checkbox" data-poem="All for You">
+                    <span>Studied ✓</span>
+                </label>
+            </div>
+            <div class="accordion-panel" id="poem-2-panel">
+                <div class="accordion-content">
+                    <section class="content-card">
+                        <h3>Summary</h3>
+                        <p>Set in a religious or institutional space, the poem explores revelation, hidden labour, and secrecy. Although the title sounds generous and intimate, the poem itself is elusive and unsettling. It appears to offer access to hidden spaces and hidden histories, especially female ones, but what is revealed remains partly opaque. Ní Chuilleanáin suggests that opening doors does not necessarily produce clarity.</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Themes</h3>
+                        <div class="tag-row"><span class="tag tag-purple">Institutional secrecy</span><span class="tag tag-blue">female experience</span><span class="tag tag-cyan">religious imagery</span><span class="tag tag-orange">hidden labour</span><span class="tag tag-pink">revelation and concealment</span><span class="tag tag-purple">ambiguity</span><span class="tag tag-blue">bodily reality within spiritual settings</span></div>
+                        <p class="helper-text">Institutional secrecy, female experience, religious imagery, hidden labour, revelation and concealment, ambiguity, bodily reality within spiritual settings</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Structure &amp; Form</h3>
+                        <ul class="detail-list"><li>The poem unfolds through images rather than clear narrative explanation.</li><li>Ní Chuilleanáin uses suggestive details — keys, walls, wood, movement through space — to create an atmosphere of guarded revelation.</li><li>The title creates expectation, but the poem resists full disclosure.</li><li>Its abstract structure reflects the idea that access does not guarantee understanding.</li><li>Free verse allows the poem to move associatively, like a guided passage through hidden rooms and histories.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Quotes &amp; Analysis</h3>
+                        <div class="quotes-grid"><div class="quote-card"><div class="quote-label ui-font">Title</div><blockquote>The title, “All for You”</blockquote><div class="quote-themes"><span class="qtag" data-theme="concealment">Concealment</span><span class="qtag" data-theme="religion">Religion</span></div><p>The phrase sounds like a gift or an act of total offering. However, its tone is ironic. What is offered to the reader is not comfort or clarity, but a partial, difficult encounter with secrecy and hidden lives.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“The trees are made of the same kind of stuff as wood”</blockquote><div class="quote-themes"><span class="qtag" data-theme="religion">Religion</span><span class="qtag" data-theme="concealment">Concealment</span></div><p>At first this seems tautological, but it is more unsettling than simple. Ní Chuilleanáin draws attention to the difference between surface appearance and material reality. Trees become “wood,” suggesting transformation, reduction, and perhaps labour or institutional use.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“same kind of stuff”</blockquote><div class="quote-themes"><span class="qtag" data-theme="religion">Religion</span><span class="qtag" data-theme="female-experience">Female-Experience</span></div><p>The phrase sounds almost casual, yet it strips away romance. It reminds us that spiritual or symbolic spaces are built from physical matter, just as religious life is grounded in labour and bodily experience.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“She fitted a key in a wall, in a wicker wicket”</blockquote><div class="quote-themes"><span class="qtag" data-theme="concealment">Concealment</span><span class="qtag" data-theme="liminality">Liminality</span><span class="qtag" data-theme="religion">Religion</span></div><p>Keys, walls, and gates are classic Ní Chuilleanáin images. They suggest controlled access, secrecy, thresholds, and hidden knowledge. The act of opening is important, but it does not eliminate mystery.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“a key”</blockquote><div class="quote-themes"><span class="qtag" data-theme="concealment">Concealment</span><span class="qtag" data-theme="liminality">Liminality</span></div><p>A key usually symbolises understanding or entry. In this poem, however, access is partial. The key opens something, but it does not solve or explain what lies beyond.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“wall”</blockquote><div class="quote-themes"><span class="qtag" data-theme="concealment">Concealment</span><span class="qtag" data-theme="religion">Religion</span></div><p>The wall represents institutional power, enclosure, and the barrier between the visible and the concealed. Ní Chuilleanáin is interested in what has been literally and historically kept behind walls.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“Sweated wood”</blockquote><div class="quote-themes"><span class="qtag" data-theme="female-experience">Female-Experience</span><span class="qtag" data-theme="religion">Religion</span></div><p>This is a particularly vivid image because it brings the bodily into the religious. “Sweated” suggests labour, heat, physical effort, and human contact. It prevents the convent or institution from becoming ethereal or idealised.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>Religious female presence in the poem</blockquote><div class="quote-themes"><span class="qtag" data-theme="female-experience">Female-Experience</span><span class="qtag" data-theme="religion">Religion</span><span class="qtag" data-theme="concealment">Concealment</span></div><p>The woman moving through the space becomes a figure for hidden female labour. Ní Chuilleanáin often restores visibility to women whose work and histories were enclosed, ignored, or suppressed.</p></div></div>
+                    </section>
+                    <section class="content-card">
+                        <h3>Poetic Techniques</h3>
+                        <ul class="detail-list techniques-list"><li><strong>Irony:</strong> The title promises generosity and clarity, yet the poem remains elusive and difficult.</li><li><strong>Strategic ambiguity:</strong> The reader is shown details but denied full explanatory certainty.</li><li><strong>Symbolism:</strong> Keys, walls, gates, and wood all symbolise access, secrecy, labour, and enclosure.</li><li><strong>Tautological phrasing:</strong> “The trees are made of the same kind of stuff as wood” unsettles the reader and forces closer attention.</li><li><strong>Sensory detail:</strong> “Sweated wood” grounds the poem in physicality.</li><li><strong>Religious imagery:</strong> The institutional setting deepens themes of female hiddenness, ritual, and control.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Exam-Ready Points</h3>
+                        <ul class="detail-list exam-list"><li>“All for You” is a strong example of Ní Chuilleanáin’s ability to reveal and conceal at the same time.</li><li>The poem suggests that institutional spaces, especially religious ones, hide histories of female labour and confinement.</li><li>The ironic title is important because it makes the reader question what is actually being given or disclosed.</li><li>Ní Chuilleanáin refuses to separate spiritual life from physical reality, as shown in tactile details like “sweated wood.”</li><li>Keys and walls symbolise her recurring interest in thresholds and guarded access.</li><li>The poem is powerful because revelation here does not equal understanding; mystery remains intact.</li></ul>
+                    </section>
+                </div>
+            </div>
+        </article>
+        
+        <article class="accordion-item " id="poem-3">
+            <div class="accordion-top">
+                <button class="accordion-trigger ui-font" type="button" aria-expanded="false" aria-controls="poem-3-panel">
+                    <span>
+                        <span class="accordion-kicker">Poem 4</span>
+                        <span class="accordion-title">Following</span>
+                    </span>
+                    <span class="accordion-icon" aria-hidden="true">▾</span>
+                </button>
+                <label class="study-toggle ui-font" for="study-poem-3">
+                    <input type="checkbox" id="study-poem-3" class="study-checkbox" data-poem="Following">
+                    <span>Studied ✓</span>
+                </label>
+            </div>
+            <div class="accordion-panel" id="poem-3-panel">
+                <div class="accordion-content">
+                    <section class="content-card">
+                        <h3>Summary</h3>
+                        <p>The poem explores pursuit, memory, and the desire to understand someone who remains just out of reach. As the speaker moves through roads, tracks, rivers, and landscape, “following” becomes both literal and metaphorical. The poem is about tracing paths through memory and experience while recognising that another person — perhaps a woman, perhaps a past self, perhaps a tradition — can never be fully recovered or known.</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Themes</h3>
+                        <div class="tag-row"><span class="tag tag-purple">Memory</span><span class="tag tag-blue">pursuit of understanding</span><span class="tag tag-cyan">absence</span><span class="tag tag-orange">liminality</span><span class="tag tag-pink">landscape</span><span class="tag tag-purple">ambiguity</span><span class="tag tag-blue">female presence</span><span class="tag tag-cyan">spiritual or familial inheritance</span></div>
+                        <p class="helper-text">Memory, pursuit of understanding, absence, liminality, landscape, ambiguity, female presence, spiritual or familial inheritance</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Structure &amp; Form</h3>
+                        <ul class="detail-list"><li>The poem is built around movement rather than arrival.</li><li>Ní Chuilleanáin uses repeated path imagery to create continuity while keeping the destination uncertain.</li><li>The title itself generates ambiguity: to follow can mean to walk behind, to understand, to imitate, or to obey.</li><li>The poem’s structure reinforces incompletion: the speaker remains in process, never fully reaching the object of pursuit.</li><li>Landscape functions as both external setting and internal map of memory.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Quotes &amp; Analysis</h3>
+                        <div class="quotes-grid"><div class="quote-card"><div class="quote-label ui-font">Title</div><blockquote>The title, “Following”</blockquote><div class="quote-themes"><span class="qtag" data-theme="liminality">Liminality</span><span class="qtag" data-theme="memory">Memory</span></div><p>The word is rich in ambiguity. It can suggest physical pursuit, intellectual understanding, spiritual discipleship, obedience, or emotional attachment. This single word captures Ní Chuilleanáin’s interest in meanings that remain unstable and open.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“the road, … the track, … the river”</blockquote><div class="quote-themes"><span class="qtag" data-theme="landscape">Landscape</span><span class="qtag" data-theme="memory">Memory</span><span class="qtag" data-theme="liminality">Liminality</span></div><p>These images of pathways are central. Each route suggests motion and continuity, but none guarantees arrival. The road and track are man-made or worn; the river is natural and flowing. Together they suggest different ways of tracing what has gone before.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>Landscape imagery throughout the poem</blockquote><div class="quote-themes"><span class="qtag" data-theme="landscape">Landscape</span><span class="qtag" data-theme="memory">Memory</span></div><p>Ní Chuilleanáin uses place not as decorative background but as a medium of memory. The external world becomes a way of thinking through loss, pursuit, and inheritance.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“She was always ahead”</blockquote><div class="quote-themes"><span class="qtag" data-theme="female-experience">Female-Experience</span><span class="qtag" data-theme="memory">Memory</span></div><p>This is one of the poem’s most resonant lines. The female figure remains present yet unreachable. She may represent a mother, an earlier generation, a spiritual calling, or a memory that cannot be fully retrieved.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“always ahead”</blockquote><div class="quote-themes"><span class="qtag" data-theme="female-experience">Female-Experience</span><span class="qtag" data-theme="liminality">Liminality</span></div><p>The phrase suggests both admiration and frustration. The pursued figure remains in motion and inaccessibility define the relationship. The speaker follows, but never catches up.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>The act of following as understanding</blockquote><div class="quote-themes"><span class="qtag" data-theme="memory">Memory</span><span class="qtag" data-theme="liminality">Liminality</span></div><p>The poem implies that to “follow” someone’s path is also to try to follow their logic, faith, or choices. Ní Chuilleanáin turns physical movement into a metaphor for interpretation itself.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>Memory in the poem</blockquote><div class="quote-themes"><span class="qtag" data-theme="memory">Memory</span></div><p>The speaker seems to be retracing rather than discovering. This gives the poem an elegiac quality: what is followed may already be gone.</p></div></div>
+                    </section>
+                    <section class="content-card">
+                        <h3>Poetic Techniques</h3>
+                        <ul class="detail-list techniques-list"><li><strong>Ambiguity:</strong> “Following” carries multiple meanings at once.</li><li><strong>Extended path imagery:</strong> Roads, tracks, and rivers symbolise movement, memory, inheritance, and incomplete pursuit.</li><li><strong>Female figure as symbol:</strong> “She” becomes a mysterious presence who is personal and symbolic at the same time.</li><li><strong>Landscape symbolism:</strong> Place becomes a map of emotional and intellectual searching.</li><li><strong>Liminality:</strong> The speaker is constantly in transition, defined by movement rather than completion.</li><li><strong>Understatement:</strong> Ní Chuilleanáin avoids overt emotional declaration, allowing loss and distance to emerge indirectly.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Exam-Ready Points</h3>
+                        <ul class="detail-list exam-list"><li>The poem shows Ní Chuilleanáin’s fascination with process rather than conclusion; the speaker is always in pursuit, never in possession.</li><li>“Following” is a superb example of her layered ambiguity, since the title itself holds physical, emotional, intellectual, and spiritual meanings.</li><li>The female figure ahead of the speaker reflects her recurring interest in women as powerful but partially inaccessible presences.</li><li>Landscape is used symbolically to express memory and the attempt to retrace another life.</li><li>The poem suggests that understanding another person is always partial and incomplete.</li><li>Ní Chuilleanáin turns movement through place into a meditation on inheritance, memory, and loss.</li></ul>
+                    </section>
+                </div>
+            </div>
+        </article>
+        
+        <article class="accordion-item " id="poem-4">
+            <div class="accordion-top">
+                <button class="accordion-trigger ui-font" type="button" aria-expanded="false" aria-controls="poem-4-panel">
+                    <span>
+                        <span class="accordion-kicker">Poem 5</span>
+                        <span class="accordion-title">The Bend in the Road</span>
+                    </span>
+                    <span class="accordion-icon" aria-hidden="true">▾</span>
+                </button>
+                <label class="study-toggle ui-font" for="study-poem-4">
+                    <input type="checkbox" id="study-poem-4" class="study-checkbox" data-poem="The Bend in the Road">
+                    <span>Studied ✓</span>
+                </label>
+            </div>
+            <div class="accordion-panel" id="poem-4-panel">
+                <div class="accordion-content">
+                    <section class="content-card">
+                        <h3>Summary</h3>
+                        <p>The poem begins with the blunt statement that a woman was killed at a bend in the road. Rather than focusing on the event itself, Ní Chuilleanáin explores how the place is transformed by memory. The bend becomes charged with absence, association, and the unseen. The poem reflects on how death changes not only lives but landscapes, making ordinary places permanently haunted by what happened there.</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Themes</h3>
+                        <div class="tag-row"><span class="tag tag-purple">Death and mortality</span><span class="tag tag-blue">memory</span><span class="tag tag-cyan">landscape</span><span class="tag tag-orange">liminality</span><span class="tag tag-pink">hidden futures</span><span class="tag tag-purple">haunting presence</span><span class="tag tag-blue">the effect of loss on the living</span></div>
+                        <p class="helper-text">Death and mortality, memory, landscape, liminality, hidden futures, haunting presence, the effect of loss on the living</p>
+                    </section>
+                    <section class="content-card">
+                        <h3>Structure &amp; Form</h3>
+                        <ul class="detail-list"><li>The poem begins with a sudden factual statement, immediately confronting the reader with death.</li><li>Instead of narrating the accident, Ní Chuilleanáin shifts to the afterlife of memory in the minds of the living.</li><li>The bend itself becomes the organising symbol of the poem.</li><li>The structure reflects her preference for indirect treatment: death is stated, but its emotional consequences are explored through place and atmosphere.</li><li>The poem moves from fact to haunting association, showing how memory reshapes perception.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Key Quotes &amp; Analysis</h3>
+                        <div class="quotes-grid"><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“The bend in the road / Where she was killed”</blockquote><div class="quote-themes"><span class="qtag" data-theme="death">Death</span><span class="qtag" data-theme="landscape">Landscape</span><span class="qtag" data-theme="memory">Memory</span></div><p>This opening is startling in its simplicity. The bluntness of “was killed” gives the line enormous force. Ní Chuilleanáin does not dramatise the event, which makes the emotional impact stronger.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“The bend in the road”</blockquote><div class="quote-themes"><span class="qtag" data-theme="liminality">Liminality</span><span class="qtag" data-theme="landscape">Landscape</span></div><p>The bend is both literal and symbolic. Literally, it is a dangerous point where vision is obstructed. Symbolically, it represents uncertainty, the unseen future, and the point beyond which someone disappears.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“Where she was killed”</blockquote><div class="quote-themes"><span class="qtag" data-theme="death">Death</span><span class="qtag" data-theme="memory">Memory</span><span class="qtag" data-theme="landscape">Landscape</span></div><p>By attaching the death to a place, the poet shows how memory becomes embedded in landscape. The location can no longer be neutral.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“Something of her is still there”</blockquote><div class="quote-themes"><span class="qtag" data-theme="memory">Memory</span><span class="qtag" data-theme="death">Death</span></div><p>This line expresses the poem’s haunting quality. Ní Chuilleanáin does not necessarily mean a ghost in a literal sense; rather, memory leaves a residue in the physical world.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“Something of her”</blockquote><div class="quote-themes"><span class="qtag" data-theme="memory">Memory</span></div><p>The vagueness is significant. What remains cannot be fully named or defined, but it is felt. This is characteristic of the poet’s abstract style: the emotional truth is real even if it is imprecise.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>“The air is different”</blockquote><div class="quote-themes"><span class="qtag" data-theme="landscape">Landscape</span><span class="qtag" data-theme="memory">Memory</span><span class="qtag" data-theme="death">Death</span></div><p>This is a powerful synaesthetic suggestion that death alters atmosphere itself. The place feels changed, not because its physical structure has altered, but because memory has infused it with emotional meaning.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>The bend as concealment</blockquote><div class="quote-themes"><span class="qtag" data-theme="liminality">Liminality</span><span class="qtag" data-theme="landscape">Landscape</span><span class="qtag" data-theme="death">Death</span></div><p>Because one cannot see around a bend, it becomes a perfect Ní Chuilleanáin image. It embodies hiddenness, danger, and the impossibility of knowing what lies ahead.</p></div><div class="quote-card"><div class="quote-label ui-font">Quote</div><blockquote>The living remembering</blockquote><div class="quote-themes"><span class="qtag" data-theme="memory">Memory</span><span class="qtag" data-theme="landscape">Landscape</span></div><p>The poem is ultimately less about the dead person than about those who continue to pass the place and remember. Ní Chuilleanáin shows how grief persists through repeated encounters with ordinary geography.</p></div></div>
+                    </section>
+                    <section class="content-card">
+                        <h3>Poetic Techniques</h3>
+                        <ul class="detail-list techniques-list"><li><strong>Matter-of-fact statement:</strong> “Where she was killed” is powerful because of its blunt simplicity.</li><li><strong>Symbolism:</strong> The bend symbolises liminality, death, obstruction, and the unseen future.</li><li><strong>Personification / atmospheric transformation:</strong> “The air is different” suggests that place itself has absorbed loss.</li><li><strong>Ambiguity:</strong> “Something of her is still there” leaves the nature of presence deliberately undefined.</li><li><strong>Landscape as memory:</strong> The physical setting becomes a repository of grief and remembrance.</li><li><strong>Understatement:</strong> Ní Chuilleanáin avoids melodrama, which makes the emotional effect more haunting.</li></ul>
+                    </section>
+                    <section class="content-card">
+                        <h3>Exam-Ready Points</h3>
+                        <ul class="detail-list exam-list"><li>Ní Chuilleanáin uses a simple rural image — a bend in the road — to explore death, memory, and the unseen.</li><li>The poem is powerful because it focuses less on the accident and more on how the living continue to experience the place afterwards.</li><li>The bend is a classic Ní Chuilleanáin symbol: a threshold between what is visible and what is hidden.</li><li>Memory transforms landscape, showing that grief is not confined to the mind but can reshape our experience of place.</li><li>The vague but haunting phrase “Something of her is still there” captures the poet’s gift for emotional suggestion rather than explicit statement.</li><li>The poem reflects her broader concern with mortality, liminality, and the residue left by the dead.</li></ul>
+                    </section>
+                </div>
+            </div>
+        </article>
+        </div>
+            </section>
+            <section class="tab-panel" id="themes" hidden>
+                <div class="exam-card" style="margin-bottom: 16px;">
+                    <h2>Themes</h2>
+                    <p class="helper-text">Use these detailed themes to connect poems in comparative essays and oral revision.</p>
+                </div>
+                <div class="theme-grid">
+        <article class="theme-card" data-theme-id="death">
+            <div class="theme-head">
+                <h3>Death and mortality</h3>
+                <span class="theme-chip ui-font tag-purple">Key Theme</span>
+            </div>
+            <p>Many poems explore sudden death, remembered death, near-death, or the persistent presence of mortality in everyday life.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Deaths and Engines</span><span class="tag tag-blue">The Bend in the Road</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Street</span><blockquote>“He fell from a first-floor window and was not killed”</blockquote></div><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>“He died in the war”</blockquote></div><div class="mini-quote"><span class="quote-source">The Bend in the Road</span><blockquote>“The bend in the road / Where she was killed”</blockquote></div></div></div>
+        </article>
+        
+        <article class="theme-card" data-theme-id="liminality">
+            <div class="theme-head">
+                <h3>Liminality and transition</h3>
+                <span class="theme-chip ui-font tag-blue">Key Theme</span>
+            </div>
+            <p>Ní Chuilleanáin is drawn to edges, thresholds, windows, bends, roads, corridors, and states of being “between” one thing and another.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Street</span><span class="tag tag-blue">Deaths and Engines</span><span class="tag tag-cyan">All for You</span><span class="tag tag-orange">Following</span><span class="tag tag-pink">The Bend in the Road</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Street</span><blockquote>“She stretched out her hand / And her arm from the window to pull him in”</blockquote></div><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>“came down above the houses”</blockquote></div><div class="mini-quote"><span class="quote-source">Following</span><blockquote>“the road, … the track, … the river”</blockquote></div><div class="mini-quote"><span class="quote-source">The Bend in the Road</span><blockquote>“The bend in the road”</blockquote></div></div></div>
+        </article>
+        
+        <article class="theme-card" data-theme-id="memory">
+            <div class="theme-head">
+                <h3>Memory</h3>
+                <span class="theme-chip ui-font tag-cyan">Key Theme</span>
+            </div>
+            <p>The present is constantly shaped by the past. Places, journeys, and encounters are transformed by remembered experience.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Following</span><span class="tag tag-blue">The Bend in the Road</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Following</span><blockquote>“She was always ahead”</blockquote></div><div class="mini-quote"><span class="quote-source">Following</span><blockquote>Memory in the poem</blockquote></div><div class="mini-quote"><span class="quote-source">The Bend in the Road</span><blockquote>“Something of her is still there”</blockquote></div><div class="mini-quote"><span class="quote-source">The Bend in the Road</span><blockquote>“The air is different”</blockquote></div></div></div>
+        </article>
+        
+        <article class="theme-card" data-theme-id="concealment">
+            <div class="theme-head">
+                <h3>Secrecy and concealment</h3>
+                <span class="theme-chip ui-font tag-orange">Key Theme</span>
+            </div>
+            <p>Hidden rooms, covered bodies, withheld explanations, and obscured meanings are central to her work.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Street</span><span class="tag tag-blue">All for You</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Street</span><blockquote>“Then she moved through rooms and corridors / Keeping her arms close to her body”</blockquote></div><div class="mini-quote"><span class="quote-source">Street</span><blockquote>“rooms and corridors”</blockquote></div><div class="mini-quote"><span class="quote-source">All for You</span><blockquote>“She fitted a key in a wall, in a wicker wicket”</blockquote></div><div class="mini-quote"><span class="quote-source">All for You</span><blockquote>“wall”</blockquote></div></div></div>
+        </article>
+        
+        <article class="theme-card" data-theme-id="fragmentation">
+            <div class="theme-head">
+                <h3>Fragmentation and ambiguity</h3>
+                <span class="theme-chip ui-font tag-pink">Key Theme</span>
+            </div>
+            <p>Her poems often refuse clear narrative order. Meaning is created through gaps, jumps, and what is left unsaid.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Street</span><span class="tag tag-blue">Deaths and Engines</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>“In a stiff circuit”</blockquote></div><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>“A woman stepped out of a white limousine”</blockquote></div><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>The title, “Deaths and Engines”</blockquote></div></div></div>
+        </article>
+        
+        <article class="theme-card" data-theme-id="female-experience">
+            <div class="theme-head">
+                <h3>Female experience</h3>
+                <span class="theme-chip ui-font tag-purple">Key Theme</span>
+            </div>
+            <p>Women, especially religious women, appear as powerful but often hidden figures whose labour or identity has been concealed.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Street</span><span class="tag tag-blue">All for You</span><span class="tag tag-cyan">Following</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Street</span><blockquote>“She stretched out her hand / And her arm from the window to pull him in”</blockquote></div><div class="mini-quote"><span class="quote-source">Street</span><blockquote>“Keeping her arms close to her body”</blockquote></div><div class="mini-quote"><span class="quote-source">All for You</span><blockquote>“Sweated wood”</blockquote></div><div class="mini-quote"><span class="quote-source">Following</span><blockquote>“She was always ahead”</blockquote></div></div></div>
+        </article>
+        
+        <article class="theme-card" data-theme-id="religion">
+            <div class="theme-head">
+                <h3>Religious imagery and institutions</h3>
+                <span class="theme-chip ui-font tag-blue">Key Theme</span>
+            </div>
+            <p>Convents, habits, keys, walls, corridors, and ritualised spaces recur, often linked with both protection and oppression.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Street</span><span class="tag tag-blue">All for You</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Street</span><blockquote>“She stretched out her hand / And her arm from the window to pull him in”</blockquote></div><div class="mini-quote"><span class="quote-source">Street</span><blockquote>“Keeping her arms close to her body”</blockquote></div><div class="mini-quote"><span class="quote-source">All for You</span><blockquote>“She fitted a key in a wall, in a wicker wicket”</blockquote></div><div class="mini-quote"><span class="quote-source">All for You</span><blockquote>“Sweated wood”</blockquote></div></div></div>
+        </article>
+        
+        <article class="theme-card" data-theme-id="potential-flux">
+            <div class="theme-head">
+                <h3>Potential and flux</h3>
+                <span class="theme-chip ui-font tag-cyan">Key Theme</span>
+            </div>
+            <p>She is interested in what could happen, what almost happened, and in unstable states where meaning is still shifting.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Deaths and Engines</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>“We came down above the houses / In a stiff circuit, / Holding our seats tight”</blockquote></div><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>“In a stiff circuit”</blockquote></div><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>“A woman stepped out of a white limousine”</blockquote></div><div class="mini-quote"><span class="quote-source">Deaths and Engines</span><blockquote>The title, “Deaths and Engines”</blockquote></div></div></div>
+        </article>
+        
+        <article class="theme-card" data-theme-id="landscape">
+            <div class="theme-head">
+                <h3>Landscape and place</h3>
+                <span class="theme-chip ui-font tag-orange">Key Theme</span>
+            </div>
+            <p>Roads, rivers, streets, and buildings are not neutral settings; they absorb memory and emotional significance.</p>
+            <div class="theme-examples">
+                <span class="theme-sub ui-font">Cross-poem examples</span>
+                <div class="tag-row"><span class="tag tag-purple">Following</span><span class="tag tag-blue">The Bend in the Road</span></div>
+            </div>
+            <div class="theme-quotes"><button class="theme-quotes-toggle ui-font" type="button">View Quotes ▾</button><div class="theme-quotes-list"><div class="mini-quote"><span class="quote-source">Following</span><blockquote>“the road, … the track, … the river”</blockquote></div><div class="mini-quote"><span class="quote-source">Following</span><blockquote>Landscape imagery throughout the poem</blockquote></div><div class="mini-quote"><span class="quote-source">The Bend in the Road</span><blockquote>“The bend in the road / Where she was killed”</blockquote></div><div class="mini-quote"><span class="quote-source">The Bend in the Road</span><blockquote>“The air is different”</blockquote></div></div></div>
+        </article>
+        </div>
+            </section>
+            <section class="tab-panel" id="exam" hidden>
+                <div class="exam-grid">
+                    <article class="exam-card">
+                        <h3>Comparative Points</h3>
+                        <ul class="detail-list"><li>Compared with <strong>Seamus Heaney</strong>, Ní Chuilleanáin is generally more abstract and elusive. Both poets connect memory to landscape, but Heaney is often more rooted in concrete rural detail, whereas Ní Chuilleanáin tends to fragment narrative and leave meanings unresolved.</li><li>Compared with <strong>Elizabeth Bishop</strong>, Ní Chuilleanáin is less observationally clear and more strategically ambiguous. Bishop often moves from precise description toward insight; Ní Chuilleanáin often begins in mystery and deepens it.</li><li>Compared with <strong>WB Yeats</strong>, Ní Chuilleanáin is less rhetorical and less formally musical, but both poets are interested in mortality, spiritual suggestion, and the relationship between visible reality and deeper meaning.</li><li>Ní Chuilleanáin stands out on the course because she demands more interpretive effort from the reader. Her poems are often less about certainty than about dwelling in uncertainty.</li><li>Her treatment of <strong>female religious experience</strong> also distinguishes her sharply from many other poets on the course.</li><li>Like other major Leaving Cert poets, she uses landscape symbolically, but her roads, windows, corridors, and convent spaces often feel more liminal and haunted than national or autobiographical.</li></ul>
+                    </article>
+                    <article class="exam-card">
+                        <h3>Sample Essay Angles</h3>
+                        <ul class="detail-list"><li><strong>Ní Chuilleanáin as an abstract poet:</strong> Discuss how her strategic ambiguity, fragmented narratives, and withholding of information make her poetry challenging but rewarding.</li><li><strong>The importance of death in her poetry:</strong> Explore how poems such as <em>Deaths and Engines</em> and <em>The Bend in the Road</em> present mortality as sudden, haunting, and woven into everyday life.</li><li><strong>Liminality and thresholds:</strong> Examine her fascination with windows, roads, bends, corridors, keys, and journeys as symbols of change and uncertainty.</li><li><strong>Concealment and revelation:</strong> Show how poems like <em>Street</em> and <em>All for You</em> focus on what is hidden behind walls, habits, institutions, and language itself.</li><li><strong>Female figures and hidden power:</strong> Analyse how nuns, women, and female presences are presented as powerful yet obscured within institutional or remembered spaces.</li><li><strong>Memory shaping the present:</strong> Discuss how Ní Chuilleanáin shows the past continuing to alter current perception, especially in <em>Following</em> and <em>The Bend in the Road</em>.</li><li><strong>Why her poetry rewards close reading:</strong> Argue that her difficulty is a strength because it forces the reader to participate actively in constructing meaning.</li></ul>
+                    </article>
+                </div>
+                <article class="exam-card" style="margin-top: 18px;">
+                    <h2>Quick-Reference Quotes</h2>
+                    <p class="helper-text">Tap any quote to jump straight to the matching poem section.</p>
+                    <div class="quick-quotes">
+            <a class="quick-quote" href="#poems" data-open-poem="poem-0">
+                <span class="quick-quote-poem ui-font">Street</span>
+                <blockquote>“He fell from a first-floor window and was not killed”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-0">
+                <span class="quick-quote-poem ui-font">Street</span>
+                <blockquote>“He fell”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-0">
+                <span class="quick-quote-poem ui-font">Street</span>
+                <blockquote>“She stretched out her hand / And her arm from the window to pull him in”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-0">
+                <span class="quick-quote-poem ui-font">Street</span>
+                <blockquote>“Then she moved through rooms and corridors / Keeping her arms close to her body”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-0">
+                <span class="quick-quote-poem ui-font">Street</span>
+                <blockquote>“rooms and corridors”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-0">
+                <span class="quick-quote-poem ui-font">Street</span>
+                <blockquote>“Keeping her arms close to her body”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-0">
+                <span class="quick-quote-poem ui-font">Street</span>
+                <blockquote>The title, “Street”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-1">
+                <span class="quick-quote-poem ui-font">Deaths and Engines</span>
+                <blockquote>“We came down above the houses / In a stiff circuit, / Holding our seats tight”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-1">
+                <span class="quick-quote-poem ui-font">Deaths and Engines</span>
+                <blockquote>“came down above the houses”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-1">
+                <span class="quick-quote-poem ui-font">Deaths and Engines</span>
+                <blockquote>“In a stiff circuit”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-1">
+                <span class="quick-quote-poem ui-font">Deaths and Engines</span>
+                <blockquote>“Not the one / Who rises in a white jersey and appears / In the newspapers every week”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-1">
+                <span class="quick-quote-poem ui-font">Deaths and Engines</span>
+                <blockquote>“appears / In the newspapers every week”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-1">
+                <span class="quick-quote-poem ui-font">Deaths and Engines</span>
+                <blockquote>“A woman stepped out of a white limousine”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-1">
+                <span class="quick-quote-poem ui-font">Deaths and Engines</span>
+                <blockquote>“He died in the war”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-1">
+                <span class="quick-quote-poem ui-font">Deaths and Engines</span>
+                <blockquote>The title, “Deaths and Engines”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-2">
+                <span class="quick-quote-poem ui-font">All for You</span>
+                <blockquote>The title, “All for You”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-2">
+                <span class="quick-quote-poem ui-font">All for You</span>
+                <blockquote>“The trees are made of the same kind of stuff as wood”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-2">
+                <span class="quick-quote-poem ui-font">All for You</span>
+                <blockquote>“same kind of stuff”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-2">
+                <span class="quick-quote-poem ui-font">All for You</span>
+                <blockquote>“She fitted a key in a wall, in a wicker wicket”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-2">
+                <span class="quick-quote-poem ui-font">All for You</span>
+                <blockquote>“a key”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-2">
+                <span class="quick-quote-poem ui-font">All for You</span>
+                <blockquote>“wall”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-2">
+                <span class="quick-quote-poem ui-font">All for You</span>
+                <blockquote>“Sweated wood”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-2">
+                <span class="quick-quote-poem ui-font">All for You</span>
+                <blockquote>Religious female presence in the poem</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-3">
+                <span class="quick-quote-poem ui-font">Following</span>
+                <blockquote>The title, “Following”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-3">
+                <span class="quick-quote-poem ui-font">Following</span>
+                <blockquote>“the road, … the track, … the river”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-3">
+                <span class="quick-quote-poem ui-font">Following</span>
+                <blockquote>Landscape imagery throughout the poem</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-3">
+                <span class="quick-quote-poem ui-font">Following</span>
+                <blockquote>“She was always ahead”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-3">
+                <span class="quick-quote-poem ui-font">Following</span>
+                <blockquote>“always ahead”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-3">
+                <span class="quick-quote-poem ui-font">Following</span>
+                <blockquote>The act of following as understanding</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-3">
+                <span class="quick-quote-poem ui-font">Following</span>
+                <blockquote>Memory in the poem</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-4">
+                <span class="quick-quote-poem ui-font">The Bend in the Road</span>
+                <blockquote>“The bend in the road / Where she was killed”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-4">
+                <span class="quick-quote-poem ui-font">The Bend in the Road</span>
+                <blockquote>“The bend in the road”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-4">
+                <span class="quick-quote-poem ui-font">The Bend in the Road</span>
+                <blockquote>“Where she was killed”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-4">
+                <span class="quick-quote-poem ui-font">The Bend in the Road</span>
+                <blockquote>“Something of her is still there”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-4">
+                <span class="quick-quote-poem ui-font">The Bend in the Road</span>
+                <blockquote>“Something of her”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-4">
+                <span class="quick-quote-poem ui-font">The Bend in the Road</span>
+                <blockquote>“The air is different”</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-4">
+                <span class="quick-quote-poem ui-font">The Bend in the Road</span>
+                <blockquote>The bend as concealment</blockquote>
+            </a>
+            
+            <a class="quick-quote" href="#poems" data-open-poem="poem-4">
+                <span class="quick-quote-poem ui-font">The Bend in the Road</span>
+                <blockquote>The living remembering</blockquote>
+            </a>
+            </div>
+                </article>
+            </section>
+        </main>
+    </div>
+    <script>
+        const storageKey = 'eilean-ni-chuilleanain-progress';
+        const tabKey = 'eilean-ni-chuilleanain-active-tab';
+        const tabButtons = [...document.querySelectorAll('.tab-btn')];
+        const tabPanels = [...document.querySelectorAll('.tab-panel')];
+        const accordionItems = [...document.querySelectorAll('.accordion-item')];
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+
+        function showTab(tabId) {
+            tabButtons.forEach((button) => {
+                const isActive = button.dataset.tab === tabId;
+                button.classList.toggle('active', isActive);
+                button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+            tabPanels.forEach((panel) => {
+                const isActive = panel.id === tabId;
+                panel.hidden = !isActive;
+                panel.classList.toggle('active', isActive);
+            });
+            localStorage.setItem(tabKey, tabId);
+            requestAnimationFrame(refreshOpenPanels);
+        }
+
+        function setAccordion(item, shouldOpen) {
+            const trigger = item.querySelector('.accordion-trigger');
+            const panel = item.querySelector('.accordion-panel');
+            item.classList.toggle('open', shouldOpen);
+            trigger.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+            panel.style.maxHeight = shouldOpen ? panel.scrollHeight + 'px' : '0px';
+        }
+
+        function refreshOpenPanels() {
+            accordionItems.forEach((item) => {
+                if (item.classList.contains('open')) {
+                    const panel = item.querySelector('.accordion-panel');
+                    panel.style.maxHeight = panel.scrollHeight + 'px';
+                }
+            });
+        }
+
+        function updateProgress() {
+            const checkboxes = [...document.querySelectorAll('.study-checkbox')];
+            const studied = checkboxes.filter((checkbox) => checkbox.checked).length;
+            const total = checkboxes.length;
+            progressText.textContent = `${studied}/${total} poems studied`;
+            progressFill.style.width = `${total ? (studied / total) * 100 : 0}%`;
+        }
+
+        tabButtons.forEach((button) => {
+            button.addEventListener('click', () => showTab(button.dataset.tab));
+        });
+
+        accordionItems.forEach((item) => {
+            const trigger = item.querySelector('.accordion-trigger');
+            trigger.addEventListener('click', () => {
+                setAccordion(item, !item.classList.contains('open'));
+            });
+        });
+
+        const savedState = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        document.querySelectorAll('.study-checkbox').forEach((checkbox) => {
+            checkbox.checked = Boolean(savedState[checkbox.dataset.poem]);
+            checkbox.addEventListener('change', () => {
+                savedState[checkbox.dataset.poem] = checkbox.checked;
+                localStorage.setItem(storageKey, JSON.stringify(savedState));
+                updateProgress();
+            });
+            checkbox.addEventListener('click', (event) => event.stopPropagation());
+        });
+
+        document.querySelectorAll('[data-open-poem]').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const poemId = link.dataset.openPoem;
+                showTab('poems');
+                const item = document.getElementById(poemId);
+                if (!item) return;
+                setAccordion(item, true);
+                requestAnimationFrame(() => {
+                    refreshOpenPanels();
+                    item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        });
+
+        document.querySelectorAll('.theme-quotes-toggle').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const list = btn.nextElementSibling;
+                const isHidden = list.style.display === 'none' || list.style.display === '';
+                list.style.display = isHidden ? 'grid' : 'none';
+                btn.textContent = isHidden ? 'Hide Quotes ▴' : 'View Quotes ▾';
+            });
+        });
+
+        document.querySelectorAll('.qtag').forEach((tag) => {
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const theme = tag.dataset.theme;
+                showTab('themes');
+                const themeCard = document.querySelector(`[data-theme-id="${theme}"]`);
+                if (themeCard) {
+                    themeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    themeCard.style.boxShadow = '0 0 0 3px rgba(138, 70, 206, 0.3)';
+                    const toggle = themeCard.querySelector('.theme-quotes-toggle');
+                    const list = themeCard.querySelector('.theme-quotes-list');
+                    if (toggle && list && (list.style.display === 'none' || list.style.display === '')) {
+                        list.style.display = 'grid';
+                        toggle.textContent = 'Hide Quotes ▴';
+                    }
+                    setTimeout(() => { themeCard.style.boxShadow = ''; }, 2000);
+                }
+            });
+        });
+
+        window.addEventListener('resize', refreshOpenPanels);
+        accordionItems.forEach((item, index) => setAccordion(item, index === 0));
+        updateProgress();
+        showTab(localStorage.getItem(tabKey) || 'overview');
+        requestAnimationFrame(refreshOpenPanels);
+    </script>
+</body>
+</html>
