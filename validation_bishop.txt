@@ -1,0 +1,229 @@
+Validation report: Elizabeth Bishop notes vs lecture transcript
+Transcript read in full: D:\code\lc_poetry\transcripts\MicrosoftTeams-video (2).txt
+Notes checked: D:\code\lc_poetry\notes\elizabeth_bishop.md
+
+Method: extremely conservative. I only marked something VERIFIED when the lecturer clearly read it, paraphrased it closely, or explicitly made the same analytical point. Generic exam headings were only treated as verified where the lecturer actually said them.
+
+=== The Filling Station ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "Oh, but it is dirty!" — found in transcript at approximately: "Oh, but it is dirty... it also begins with an interjection, O" [00:03:50-00:04:21]
+- "oil-soaked, oil-permeated" — found in transcript at approximately: "oil soaked, oil permeated... The repetition of the word oil there just doubles down" [00:05:36-00:05:54]
+- "Be careful with that match!" — found in transcript at approximately: "Be careful with that match... it's an imperative sentence... it's a command" [00:07:08-00:07:26]
+- "Father wears a dirty, / oil-soaked monkey suit" — found in transcript at approximately: "Father wears a dirty oil soaked monkey suit" [00:07:51-00:08:03]
+- "all quite thoroughly dirty" — found in transcript at approximately: "it's a family filling station all quite thoroughly dirty" [00:09:49-00:09:57]
+- "Do they live in the station?" — found in transcript at approximately: "do they live in the station... question comes off a little bit as potentially a bit snobby" [00:10:18-00:10:44]
+- "a big dim doily" — found in transcript at approximately: "a big dim doily draping a tabaret" [00:11:24-00:11:33]
+- "Why the extraneous plant? / Why the taboret? / Why, oh why, the doily?" — found approximately in transcript as: "why the extraneous plant why the tabaret why why the doily" [00:11:58-00:12:08]
+- "Somebody embroidered the doily" — found in transcript at approximately: "somebody embroidered the doily" [00:12:50-00:12:59; repeated again at 00:14:22-00:14:29]
+- "Somebody waters the plant" — found in transcript at approximately: "somebody waters the plant or oils it maybe" [00:12:50-00:12:59]
+- "Somebody loves us all" — found in transcript at approximately: "somebody loves us all" [00:13:06-00:13:14]
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- "There are cans of motor oil, / and after them, some pegs, / some shirts" — ISSUE: Cannot find this line, or a close spoken version of it, in the transcript. The lecturer discusses domestic items and rows of cans, but does not appear to read/reference this quoted line.
+
+VERIFIED CLAIMS (lecturer says this):
+- The poem opens abruptly and in medias res. — lecturer says: "It's like you're halfway into a conversation before you start... You're put straight into the middle" [00:04:45-00:04:58]
+- The opening interjection is high-impact. — lecturer says: "a very high impact kind of... doubling down on it with the interjection" [00:04:21-00:04:40]
+- Repetition of "oil" exaggerates the grease and filth. — lecturer says: "The repetition of the word oil there just doubles down... There's so much oil that we need to say it twice" [00:05:46-00:06:15]
+- "Be careful with that match" is an imperative and conveys danger. — lecturer says: "it's an imperative sentence... If you were to maybe have a stray spark... everything could go up" [00:07:17-00:07:45]
+- The speaker initially recoils from the station and seems superior/snobby. — lecturer says: "She's very much recoiling from this place" and later "the speaker is absolutely sure that she is in a position of superiority" [00:06:40-00:07:00; 00:10:12-00:10:30]
+- "Do they live in the station?" sounds snobbish. — lecturer says: "question comes off a little bit as potentially a bit snobby" [00:10:30-00:10:44]
+- Domestic items shift the poem from disgust to curiosity. — lecturer says: "the speaker is beginning to lose some of this negative fixation" and "she seeks to get an explanation of why they're these... domestic items" [00:11:51-00:12:24]
+- Gender dynamics matter here. — lecturer says: "you've got some gender dynamics" [00:17:47-00:17:55]
+- The ending's "somebody" suggests an absent mother/feminine touch. — lecturer says: "the absent one... the mother" and "more of a feminine touch" [00:13:14-00:13:34; 00:14:16-00:14:35]
+- The speaker is complex and develops, but may remain flawed. — lecturer says: "a speaker who is a bit complex and undergoes some development" and questions whether she "remains a little bit difficult" [00:17:47-00:18:01; 00:16:37-00:16:47]
+- The speaker may not simply equal Bishop. — lecturer says: "I'm not sure if... the poet and the speaker 100 percent align" [00:18:01-00:18:31]
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- The poem clearly moves from "contempt to curiosity to insight." — ISSUE: Curiosity is supported, but the lecturer does not clearly endorse a final, clean "insight"; he explicitly questions whether the speaker remains compromised.
+- The poem ends as a universal statement about love and belonging. — ISSUE: The lecturer does not make this point. He reads "somebody" primarily as the absent mother/feminine presence.
+- "Monkey suit" is mocking/dismissive and reduces the father to his clothes. — ISSUE: The lecturer explains the garment as work overalls, but does not make the stronger claim about mockery or identity reduction.
+- The doily/plant/taboret are presented as proof of hidden love in a broad universal sense. — ISSUE: The lecturer discusses domesticity and a feminine touch, not a universal hidden-love thesis.
+- The ending widens beyond the family to a general truth about love. — ISSUE: Not stated in the transcript.
+- The free-verse form being conversational but carefully controlled is a lecture point. — ISSUE: The lecturer does not discuss free verse/form in this specific way.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- "Somebody loves us all" — The notes use this as a universal revelation about humanity. In the transcript, the lecturer instead pushes a much narrower reading: "the absent one... the mother" and "the female speaker yearning towards and connecting with... the absent mother" [00:13:14-00:14:35].
+- The notes present the speaker's development as more redemptive than the lecture does. The lecturer explicitly wonders whether the speaker never fully overcomes her gendered dismissal of the men [00:15:54-00:16:23].
+
+=== The Prodigal ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "self-righteous eyes" — found in transcript at approximately: "self-righteous and the self-righteous eyes" [00:23:53-00:23:56]
+- "burning puddles" — found in transcript at approximately: "the idea of the burning puddles" [00:24:21-00:24:25]
+- "forked lightning" — found in transcript at approximately: "we've got forked lightning" [00:25:14-00:25:21]
+- "in his shuddering insights" — found in transcript at approximately: "in his shuddering insights... he finally realizes that it's time to go home" [00:25:27-00:25:44]
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- "The brown enormous odor he lived by / was too close" — ISSUE: The lecturer does mention "the brown enormous odor," but not the full quoted line. This looks like a partial reference rather than a clear transcript match.
+- "lives of the dawn / and the dust" — ISSUE: Cannot find this quoted wording in the transcript.
+- "among the trash" — ISSUE: Cannot find this quoted wording in the transcript.
+- "the pigsties" — ISSUE: The lecturer discusses the pig pen/pigsty generally, but does not appear to read this quoted phrase.
+- "but it took him a long time / finally to make his mind up to go home" — ISSUE: The lecturer paraphrases the idea that the prodigal realizes it is time to go home, but does not read/reference this line closely.
+
+VERIFIED CLAIMS (lecturer says this):
+- The title refers to the biblical Prodigal Son and works as a comparison/foil. — lecturer says: "title refers... to the biblical story of the prodigal son" and later "something we are supposed to read against... almost like a story foil" [00:19:01-00:20:46; 00:25:44-00:26:09]
+- Bishop does not directly retell the biblical story. — lecturer says: "she doesn't mention that story" [00:20:38-00:20:57]
+- The poem uses unpleasant sensory detail to force the reader to confront degradation. — lecturer says Bishop is "shoving literally the shit and the stink and the piss and the vomit... in your face so that you cannot look away" [00:21:22-00:21:48]
+- The prodigal is read as an alcoholic, possibly a hired hand/migratory worker, struggling with shame. — lecturer says: "an alcoholic... hired hand possibly a seasonal or migratory worker" and "struggles with alcoholism and shame" [00:21:48-00:22:32]
+- The poem blurs the pig and the man, but the man remains the outsider. — lecturer says: "sometimes you can't tell is it the pig... or is it the man" and "he is still the outsider" [00:22:59-00:23:44]
+- The "self-righteous eyes" can suggest the pig judging the man. — lecturer says: "if we think of it as the pig being self-righteously looking at the man... you don't belong here" [00:23:53-00:24:06]
+- "Burning puddles" create hellish imagery. — lecturer says: "almost some hellish kind of imagery... almost lakes of fire" [00:24:26-00:24:42]
+- The poem contains apocalyptic/biblical imagery including forked lightning and Noah's ark. — lecturer says: "almost apocalyptic... we've got forked lightning... we've got the ark, Noah's ark" [00:25:07-00:25:26]
+- The ending involves a realization that it is time to go home. — lecturer says: "the prodigal finally realizes that it's time to go home" [00:25:27-00:25:44]
+- The sow eating her young symbolizes addiction sacrificing the future to feed present appetite. — lecturer says: "just like the sow who eats her own young sacrifice the future... in order to feed today's appetite... it's a metaphor for the addict" [00:26:45-00:27:13]
+- The poem has a social conscience and asks the reader to face the addict's reality. — lecturer says readers "have to enter into the actual reality of the disgust" and calls the poem socially conscious [00:27:21-00:30:31]
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- "lives of the dawn / and the dust" is analysed as suggesting exhaustion, poverty, and repetitive existence. — ISSUE: The lecturer never discusses this quoted phrase.
+- "among the trash" is said to symbolize social, moral, and spiritual fall. — ISSUE: The lecturer does not make this specific point.
+- The Noah's ark allusion introduces "judgement, survival, and renewal." — ISSUE: Noah's ark is mentioned, but the lecturer does not unpack it in these terms.
+- "in his shuddering insights" is explicitly analysed as physically violent self-knowledge. — ISSUE: The lecturer says the insight is "beyond his control," but does not develop the stronger claim about violent self-knowledge.
+- The ending is understated, avoids easy redemption, and stresses that recovery is slow/difficult. — ISSUE: This is not the lecturer's line. He instead suggests the biblical foil may make the ending "uplifting" and linked to reintegration.
+- The final movement toward home is "hard-won rather than sentimental." — ISSUE: Not stated in the transcript.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The notes use the final quoted line to argue against easy redemption. In the transcript, the lecturer moves the other way: he says the prodigal-son foil may make the ending "an uplifting ending" in which the prodigal "will return home and reintegrate in a positive way" [00:26:09-00:26:20].
+
+=== The Armadillo ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "This is the time of year / when almost every night / the frail, illegal fire balloons appear" — found in transcript at approximately: "This is the time of year when almost every night the frail, illegal fire balloons appear" [00:31:49-00:31:55]
+- "Climbing the mountain height, / rising toward a saint" — found in transcript at approximately: "climbing the mountain height rising toward a saint" [00:32:50-00:32:58]
+- "Once up against the sky it's hard / to tell them from the stars" — found in transcript at approximately: "once up against the sky it's hard to tell them from the stars" [00:35:01-00:35:11]
+- "Flush and fill with light / that comes and goes, like hearts" — found approximately in transcript as: "flush and fill with light that comes and goes like hearts" [00:34:09-00:34:26]
+- "receding, dwindling" — found in transcript at approximately: "receding dwindling solemnly and steadily" [00:37:32-00:37:43]
+- "forsaking us" — found in transcript at approximately: "receding dwindling solemnly and steadily forsaking us" [00:37:32-00:37:43]
+- "suddenly turning dangerous" — found in transcript at approximately: "suddenly turning dangerous" [00:38:38-00:38:43]
+- "Last night another big one fell" — found in transcript at approximately: "last night another big one fell" [00:38:57-00:39:05]
+- "splattered like an egg of fire against the cliff" — found in transcript at approximately: "it splattered like an egg of fire against the cliff" [00:39:20-00:39:27]
+- "the owls who nest there / shrieked up out of sight" — found approximately in transcript as: "the pair of owls who nest there... until they shrieked up out of sight" [00:39:47-00:40:07]
+- "rose-flecked, head down, tail down" — found in transcript at approximately: "armadillo left the scene rose flecked head down tail down" [00:41:14-00:41:21]
+- "a baby rabbit, dead in the road, / a handful of intangible ash / with fixed, ignited eyes" — found only approximately/partially in transcript as: "a baby rabbit... a handful of intangible ash with fixed ignited eyes" [00:41:21-00:41:37]
+- "Too pretty, dreamlike mimicry!" — found in transcript at approximately: "too pretty dreamlike mimicry" [00:43:11-00:43:21]
+- "O falling fire and piercing cry / and panic" — found in transcript at approximately: "oh falling fire and piercing cry and panic" [00:43:21-00:43:29]
+- "a weak mailed fist / clenched ignorant against the sky" — found in transcript at approximately: "a weak mailed fist clenched ignorant against the sky" [00:43:21-00:43:29]
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- None clearly absent, but the baby-rabbit quotation is only partial in the transcript and may be affected by speech-to-text errors.
+
+VERIFIED CLAIMS (lecturer says this):
+- The poem is structured around a turn from beauty to danger/disaster. — lecturer says the poem "turns about on its head" after the earlier "majesty and grandeur" [00:38:43-00:39:05]
+- The balloons are part of an annual tradition. — lecturer says: "We've got a sense of tradition... something that happens every single year" [00:32:01-00:32:14]
+- The tradition is illegal but persists because tradition keeps it going. — lecturer says: "it's not actually a socially sanctioned event, but it's something which tradition dictates continues to happen" [00:32:22-00:32:37]
+- The practice is religiously inspired. — lecturer says: "it's rising towards a saint so it is a religiously inspired tradition" [00:33:41-00:33:49]
+- Early imagery is majestic/beautiful. — lecturer says the language is "quite majestic" and "grandiose" [00:35:01-00:35:31]
+- The simile "like hearts" is important. — lecturer explicitly identifies and explains the simile [00:34:19-00:35:01]
+- Present participles create energy and movement. — lecturer says the "ing ending" is "the most active and most energetic form of the verb" and cites "receding, dwindling... forsaking... turning" [00:37:43-00:38:25]
+- "Another" matters because it shows repetition. — lecturer says: "another meaning... it's not the first" [00:39:05-00:39:20]
+- Rhyme/sound help create the energy of the scene. — lecturer says rhyme "creates the energy and creates the rhythm" in a very energetic scene [00:40:25-00:40:55]
+- "Ignited" works as a pun/play on words. — lecturer says: "You've got a bit of a pun on the word ignited" [00:41:37-00:42:31]
+- The poem is symbolic and not really about the literal armadillo/fire balloons alone. — lecturer says: "This poem... is not about an armadillo... it's what these symbolize" [00:43:29-00:44:04]
+- The poem critiques harmful traditions that continue to injure people/creatures. — lecturer says it is about "tradition... continuously practiced" even though it repeatedly causes hurt and trauma [00:44:24-00:46:03]
+- The poem has a social conscience. — lecturer says it is "quite socially conscious" [00:45:24-00:46:51]
+- "Too pretty, dreamlike mimicry" refers to an artificial beautiful copy of stars/planets, not the real thing. — lecturer says the fire balloons were compared to planets/stars, but the "dreamlike mimicry... wasn't real" [00:47:07-00:47:48]
+- The final "weak mailed fist" suggests powerless frustrated protest. — lecturer explains it as the gesture of clenching a fist at something harmful when you have no real power beyond frustration [00:48:40-00:50:02]
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- "rose-flecked, head down, tail down" is explicitly analysed as fear, exhaustion, and defeat. — ISSUE: The lecturer reads the line but does not give this interpretation.
+- "forsaking us" is analysed as personification giving the balloons agency. — ISSUE: The lecturer does not make the personification point.
+- The balloons are said to seem "alive, pulsing like beating hearts," adding emotional richness. — ISSUE: The lecturer explains the simile generally, but not this fuller interpretation.
+- The poem is mainly about "human carelessness." — ISSUE: The lecturer's emphasis is more specifically on inherited/blindly followed tradition than on general carelessness.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The notes are broadly in line with the lecture here. The main caution is that the lecturer's argument is more specifically about destructive tradition than about a generic beauty-versus-violence theme.
+
+=== The Fish ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "I caught a tremendous fish" — found in transcript at approximately: "I caught a tremendous fish" [00:51:27-00:51:29]
+- "He didn't fight. / He hadn't fought at all" — found in transcript at approximately: "he didn't fight / he hadn't fought at all" [00:51:35-00:51:38]
+- "venerable" — found in transcript at approximately: "battered and venerable and homely" [00:52:11-00:52:14]
+- "homely" — found in transcript at approximately: "battered and venerable and homely" [00:52:11-00:52:14]
+- "His brown skin hung in strips / like ancient wallpaper" — found in transcript at approximately: "his brown skin hung in strips / like ancient wallpaper" [00:52:29-00:52:33]
+- "shapes like full-blown roses / stained and lost through age" — found in transcript at approximately: "shapes like full-blown roses / stained and lost through age" [00:53:13-00:53:19]
+- "while his gills were breathing in / the terrible oxygen" — found in transcript at approximately: "while his gills were breathing in the terrible oxygen" [00:54:46-00:54:54]
+- "I looked into his eyes" — found in transcript at approximately: "I looked into his eyes" [00:56:08-00:56:13]
+- "far larger than mine / but shallower" — found in transcript at approximately: "which were far larger than mine but shallower" [00:56:08-00:56:20]
+- "from his lower lip / if you could call it a lip" — found in transcript at approximately: "from his lower lip if you could call it a lip" [00:57:09-00:57:15]
+- "five old pieces of fish-line" — found in transcript at approximately: "hung five old pieces of fish line" [00:57:15-00:57:22]
+- "Like medals with their ribbons / frayed and wavering" — found in transcript at approximately: "like medals with their ribbons frayed and wavering" [00:59:19-00:59:27]
+- "a five-haired beard of wisdom" — found in transcript at approximately: "a five-haired beard of wisdom" [00:59:19-00:59:27]
+- "trailing from his aching jaw" — found in transcript at approximately: "trailing from his aching jaw" [00:59:27-00:59:33]
+- "victory filled up / the little rented boat" — found in transcript at approximately: "Victory filled up the little rented boat" [01:01:19-01:01:26]
+- "rainbow, rainbow, rainbow!" — found in transcript at approximately: "everything was rainbow rainbow rainbow" [01:02:13-01:02:18]
+- "And I let the fish go" — found in transcript at approximately: "and I let the fish go" [01:02:13-01:02:18]
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- None. The quoted lines are all read or very closely referenced.
+
+VERIFIED CLAIMS (lecturer says this):
+- The poem uses a first-person, experiential, story-like narrative voice. — lecturer says: "a first person... experiential narrative voice" and "very kind of clear storytelling" [00:51:38-00:51:47]
+- "Venerable" means old and respected. — lecturer says: "venerable means... old and kind of respected" [00:52:14-00:52:19]
+- The fish is treated like a veteran/survivor of life. — lecturer says: "he's kind of like a veteran of his life" [00:52:19-00:52:25]
+- The ancient-wallpaper simile conveys age/venerability. — lecturer says it "gives across this idea of venerability again" [00:52:46-00:53:04]
+- The poem's practical fishing detail suggests real direct experience. — lecturer says it makes him think Bishop "must have had quite a bit of direct experience with fishing" [00:54:01-00:54:17]
+- "Terrible oxygen" matters because air is terrible for the fish. — lecturer says: "terrible oxygen for him... the fish needs to have water pass through its gills" [00:54:46-00:55:16]
+- The description of the eyes shows fascination/wonder. — lecturer says it is "very intricate, fascinating and almost fantastical" and shows "the depth of fascination and interest" [00:56:20-00:56:54]
+- The hooks/lines reveal a history of survival. — lecturer says the fish has been "caught so many times before" and still survived [00:59:33-01:00:20]
+- "Like medals..." and "beard of wisdom" turn survival into honour/wisdom. — lecturer says the fish has "a sense of wisdom and vitality" and "deserves a lot of respect" [00:59:33-01:00:11]
+- The fish symbolizes reverence/respect for age and overcome experience. — lecturer says the symbol becomes "reverence for age" and respect for everything older beings have overcome [01:00:56-01:02:39]
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- The fish's passivity is explicitly analysed as exhaustion or stoic dignity. — ISSUE: The lecturer reads the line but does not make this interpretation.
+- "homely" is analysed as proof that Bishop respects unattractive physicality. — ISSUE: The lecturer does not discuss the word this way.
+- "shapes like full-blown roses" is analysed as beauty emerging from decay. — ISSUE: The lecturer instead speculates about the fish being a brown trout because of the spots.
+- "I looked into his eyes" is analysed as reciprocal intimacy or recognition. — ISSUE: The lecturer emphasizes fascination, not reciprocity.
+- "from his lower lip / if you could call it a lip" is analysed as self-correction about the gap between human and animal worlds. — ISSUE: Not stated in the transcript.
+- "trailing from his aching jaw" is analysed as pain that keeps the poem unsentimental. — ISSUE: Not stated in the transcript.
+- "victory filled up the little rented boat" is said not to mean domination but recognition/connection. — ISSUE: The lecturer does not make this distinction.
+- "rainbow, rainbow, rainbow!" is analysed as visionary/transcendent/almost spiritual. — ISSUE: The lecturer reads the line but does not give that interpretation.
+- The release is explicitly framed as moral awakening or mercy. — ISSUE: The lecturer's clear emphasis is reverence for age/experience, not a moral-mercy reading.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The notes push the ending toward transcendence and moral revelation. The lecturer's main emphasis is narrower: the fish symbolizes the reverence due to age, endurance, and overcome experience [01:00:56-01:02:39].
+
+=== First Death in Nova Scotia ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "In the cold, cold parlor" — found in transcript at approximately: "in the cold cold parlor" [01:02:53-01:03:04; repeated at 01:05:05-01:05:25]
+- "The chromographs of the royal family" — found approximately in transcript as: "beneath the chromographs... Edward Prince of Wales... King George with Queen Mary" [01:05:25-01:05:48]
+- "The stuffed loon beneath them" — found approximately in transcript as: "below them on the table stood a stuffed loon" [01:05:41-01:05:59]
+- "Since Uncle Arthur fired / a bullet into him, / he hadn't said a word" — found approximately in transcript as: "since Uncle Arthur fired a bullet into him he hadn't said a word" [01:07:16-01:07:29]
+- "His breast was deep and white, / cold and caressable" — found in transcript at approximately: "his breast was deep and white / cold and caressable" [01:07:41-01:07:51]
+- "his eyes were red glass, / much to be desired" — found in transcript at approximately: "his eyes were red glass much to be desired" [01:07:41-01:07:51]
+- "Arthur's coffin was / a little frosted cake" — found in transcript at approximately: "Arthur's coffin was a little frosted cake" [01:09:43-01:09:46]
+- "Jack Frost had started to paint him" — found in transcript at approximately: "Jack Frost had started to paint him" [01:11:06-01:11:11]
+- "He had just begun on his hair, / a few red strokes" — found in transcript at approximately: "He had just begun on his hair a few red strokes" [01:11:30-01:11:34]
+- "and then Jack Frost had dropped the brush / and left him white, forever" — found in transcript at approximately: "and then Jack Frost had dropped the brush and left him white forever" [01:11:34-01:11:38]
+- "invited Arthur to be / the smallest page at court" — found in transcript at approximately: "They invited Arthur to be the smallest page at court" [01:11:58-01:12:00]
+- "But how could Arthur go" — found in transcript at approximately: "but how could Arthur go" [01:12:01-01:12:05]
+- "with his eyes shut up so tight / and the roads deep in snow?" — found approximately in transcript as: "with his eyes shut up... and the roads deep in snow" [01:12:01-01:12:07] (speech-to-text appears to garble "so tight")
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- None clearly absent. Several lines are present with minor speech-to-text distortion.
+
+VERIFIED CLAIMS (lecturer says this):
+- The poem is about the young speaker/poet encountering the death of cousin Arthur. — lecturer says it "almost reads a tiny bit like Mid-Term Break" and is "the poet encountering the death of a young relative... in this it's cousin" [01:04:24-01:04:46]
+- The title means the first death the young speaker has experienced, not the first death in Nova Scotia generally. — lecturer says exactly this [01:04:46-01:05:05]
+- The repeated "cold" emphasizes coldness and death. — lecturer says: "it is cold. What else is cold? the dead person... the corpse" [01:05:05-01:05:25]
+- The dead loon creates a strange juxtaposition that intensifies the atmosphere of death. — lecturer says it is "a strange kind of juxtaposition" that is "adding to the feeling of death" [01:06:35-01:07:03]
+- The poem collapses/shifts perspective between the loon and Arthur. — lecturer says: "the almost collapsing of the perspective... the loon and the boy" [01:07:51-01:08:57]
+- "Arthur's coffin was a little frosted cake" is child perspective because the child cannot comprehend the reality. — lecturer says: "You've got childlike perspective here... The child cannot really comprehend what is going on" [01:09:43-01:10:07]
+- The similes and Jack Frost imagery are childlike ways of understanding death. — lecturer says: "Like a doll, again, childlike comparative simile" and explains Jack Frost as a tale children would be told [01:11:00-01:11:25]
+- The poem is centrally about childlike perspective struggling with something too grave/complex. — lecturer says: "an example of her interest in childlike perspectives" and of trying to understand something "too complex" [01:12:17-01:12:43]
+- The speaker's attention shifts around the room rather than fixing steadily on death. — lecturer says: "She's interested in the pictures... the body... the stuffed loon... It's quite a shifting kind of perspective" [01:12:43-01:13:03]
+- The child's limited understanding insulates her from the full force of grief. — lecturer says she is "insulated from feeling the full force" because of her "limited capacity to truly understand" [01:13:35-01:13:56]
+- The ending shows practical childhood incomprehension about how Arthur could "go." — lecturer says she is "not quite really understanding... how that would actually occur, considering that the roads are so deep in snow" [01:14:04-01:14:23]
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- The chromographs are analysed as symbols of order/social ritual contrasted with private grief. — ISSUE: The lecturer identifies the royal family pictures, but does not make this interpretation.
+- The line about Uncle Arthur firing the bullet is explicitly analysed as the child's matter-of-fact innocence about violence. — ISSUE: The lecture's general child-perspective reading points in that direction, but he does not make this exact claim.
+- "his eyes were red glass, much to be desired" is analysed as a child's attraction to bright surfaces and as a desire/death mixture. — ISSUE: Not stated in the transcript.
+- "He had just begun on his hair, a few red strokes" is analysed as the unfinished work of death. — ISSUE: The lecturer does not make this specific point.
+- "left him white, forever" is analysed as the moment when imagination can no longer soften reality. — ISSUE: The lecturer does not say this.
+- The royal images are said to create a ceremonial adult setting. — ISSUE: Not stated in the transcript.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The notes give the chromographs a fairly strong adult-ritual symbolism. In the lecture, they function more simply as part of the room the child is looking around and as part of the later fantasy about Arthur becoming "the smallest page at court."

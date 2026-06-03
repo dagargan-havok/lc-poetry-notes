@@ -1,253 +1,180 @@
-# WB Yeats — Leaving Cert Poetry Notes
+# WB Yeats - Leaving Cert Poetry Notes
 
-## Poet Overview
-- William Butler Yeats is one of Ireland’s greatest poets and a central figure on the Leaving Cert course. Born in 1865, he lived through major cultural and political change in Ireland, including the rise of nationalism, the struggle for independence, and the modern age.
-- His poetry often reflects his own life: his love of Ireland, his fascination with beauty and art, his disappointment with society, and his growing awareness of ageing and mortality.
-- Across these poems, Yeats is defined by contrast. He constantly sets one thing against another: ideal versus reality, youth versus age, nature versus art, public duty versus private longing, and past heroism versus present mediocrity.
-- His style is highly musical and formal. He frequently uses repetition, refrains, symbolism, carefully controlled rhyme, and memorable images. Even when his ideas are complex, his language often sounds graceful, lyrical, and deeply considered.
-- A key feature of Yeats’s work is idealisation. He tends to romanticise places, people, the past, art, and old forms of heroism. However, his later poetry becomes more conflicted and self-aware, showing that ideals are often challenged by time, loss, and human desire.
+## Overview
+- In these poems, Yeats returns again and again to identity, nature, politics, ageing, companionship, and art.
+- A key habit in his poetry is setting up grand contrasts: an ideal or heroic past against a disappointing present; nature against the city; youth against age; sensual life against enduring intellect or art.
+- He often idealises places or states of being. In the lecture, this idealisation is often used not just to praise something, but to criticise what falls short of it.
+- His voice can shift from dreamy and lyrical to scathing, political, or quietly wistful.
 
 ## Key Themes
-- **Contrast:** Yeats constantly compares opposites such as ideal/real, youth/age, body/soul, nature/art, and past/present.
-- **Ageing and mortality:** He is deeply conscious of getting older, losing physical vitality, and facing death.
-- **Nature:** In early poems, nature offers peace, beauty, and escape. In later poems, it can remind him of what he has lost.
-- **Idealism and escapism:** Yeats often imagines perfect places or perfect states of being, whether Innisfree or Byzantium.
-- **Politics and social criticism:** He attacks greed, materialism, and the betrayal of noble ideals in Irish society.
-- **Love and companionship:** Yeats frequently longs for emotional connection, intimacy, and shared feeling, but this is often absent or unattainable.
-- **Art and permanence:** He sees art as a possible way to overcome time, decay, and death.
-- **The tension between public and private life:** Even when politics seems important, personal desire can prove stronger.
-
-## Poems
+- Contrast
+- Nature and changing attitudes to nature
+- Escape and idealisation
+- Ageing and insecurity about ageing
+- Companionship and romantic longing
+- Politics and social commentary
+- Art, intellect, and what may last beyond the body
 
 ### The Lake Isle of Innisfree
 
-**Summary:** Yeats imagines leaving urban life behind and going to Innisfree, a peaceful island in Sligo. There he would live simply and self-sufficiently, surrounded by beautiful natural sounds and sights. The poem presents Innisfree not just as a real place, but as an ideal inner refuge that lives in his imagination.
+**Summary:** The speaker imagines going to Innisfree and living simply in a small cabin, growing food and listening to natural sounds. The lecture stresses that this is not something actually happening: it is a daydream or wish. The poem presents an idealised natural refuge in sharp contrast with the dull city.
 
-**Key Themes:** Nature, escapism, idealism, Irish identity, peace, contrast between urban life and retreat
+**Themes:** Nature; escape; peace; idealisation; self-sufficiency; contrast between the natural world and the city
 
-**Structure & Form:**
-- Three regular quatrains with a musical, lyrical flow
-- Strong rhythm and repetition create a chant-like quality
-- The poem moves from a declaration of intent, to a vivid vision of island life, to the revelation that this longing exists within the speaker’s “heart’s core”
-- Rich sound effects reinforce the soothing, dreamlike atmosphere
+**Quotes & Analysis:**
+- **"I will arise and go now"** - The opening is energetic and full of movement. The repetition of "go" shows how strongly he wants this. Because it is in the future tense, the lecture treats it as hypothetical: a wish rather than a real journey.
+- **"And a small cabin build there, of clay and wattles made"** - He does not want a grand house; he wants a simple hut-like dwelling. The lecturer sees this as a desire for primitivism or very simple living.
+- **"Nine bean-rows will I have there, a hive for the honey-bee"** - These details suggest self-sufficiency: he will farm the land and provide for himself.
+- **"And live alone in the bee-loud glade"** - He wants to be away from the city, but not because he wants absolute silence. Natural sound is welcome; it is man-made urban sound that seems undesirable.
+- **"And I shall have some peace there, for peace comes dropping slow"** - The repetition of "peace" makes its importance clear. The lecturer also points to the assonance in "comes dropping slow," which creates a calming, slowing effect.
+- **"Dropping from the veils of the morning to where the cricket sings"** - The assonance continues. The lecturer suggests that "veils of the morning" may be like morning mist, and notes that the cricket does not literally "sing": the line idealises and elevates nature.
+- **"There midnight's all a glimmer, and noon a purple glow / And evening full of the linnet's wings"** - The whole day is beautified. The lecturer notes the balancing effect of "glimmer" and "glow," helping to create a smooth, beautiful image.
+- **"I will arise and go now, for always night and day"** - The lecturer points to "always night and day" as deliberate: by joining both halves of the day, it stresses that the longing for Innisfree is constant and inescapable (a merism — using opposing terms to convey totality).
+- **"I hear lake water lapping with low sounds by the shore"** - The line is full of soft sound patterning. The lecturer highlights its assonance as calming and almost continuous, like the water itself.
+- **"While I stand on the roadway, or on the pavements grey"** - This is the clearest reference to the city. The lecturer notes how deliberately dull it is: the pavements are simply "grey."
+- **"I hear it in the deep heart's core"** - Innisfree is not only a place but an inward desire. The poem is very personal and inward-looking.
 
-**Key Quotes & Analysis:**
-- **“I will arise and go now”** — The opening is decisive and purposeful. It echoes biblical language, especially the prodigal son, giving the journey a spiritual seriousness. Yeats presents the retreat to Innisfree as something deeply necessary.
-- **“And a small cabin build there, of clay and wattles made”** — The imagined life is simple and humble. Yeats idealises a stripped-back existence close to nature, away from the complexity of modern life.
-- **“Nine bean-rows will I have there, a hive for the honey-bee”** — The detail suggests order, planning, and self-sufficiency. This is not a vague fantasy but a carefully imagined alternative life.
-- **“And live alone in the bee-loud glade”** — The phrase captures both solitude and vitality. He wants to be alone, but not lonely: nature itself becomes his companion.
-- **“And I shall have some peace there, for peace comes dropping slow”** — Peace is presented as natural, gradual, and almost physical. The line is beautifully tautological: peace “dropping slow” from the “veils of the morning” restates the same idea in musical form, showing Yeats’s delight in lyrical beauty.
-- **“Dropping from the veils of the morning to where the cricket sings”** — Morning is softened into a dreamy, almost mystical image. The world of Innisfree is gentle, harmonious, and idealised.
-- **“There midnight’s all a glimmer, and noon a purple glow / And evening full of the linnet’s wings”** — Yeats presents all times of day as beautiful. Nature is consistently positive here; there is no threat, decay, or conflict.
-- **“I hear lake water lapping with low sounds by the shore”** — The soft alliteration and liquid sounds mimic the motion of water. The line is musical and immersive, helping the reader experience the calm he longs for.
-- **“While I stand on the roadway, or on the pavements grey”** — The dull urban setting sharply contrasts with the living beauty of Innisfree. The city is colourless and spiritually empty.
-- **“I hear it in the deep heart’s core”** — Innisfree is revealed as an inner reality as much as a physical place. The final line suggests that the desire for peace, home, and harmony lives permanently within him.
+**Techniques:**
+- Repetition, especially of "go" and "peace"
+- Assonance in lines such as "peace comes dropping slow" and "lake water lapping with low sounds"
+- Alliteration, for example in "hive" and "honey"
+- Strong contrast between the idealised island and the dull city
+- Idealised and sometimes unrealistic natural imagery
 
-**Poetic Techniques:**
-- **Repetition:** “I will arise and go now” gives the poem a prayer-like insistence.
-- **Assonance and alliteration:** “lake water lapping with low sounds” recreates the soft movement of water.
-- **Imagery:** Visual and auditory images make Innisfree feel vivid and dreamlike.
-- **Symbolism:** Innisfree symbolises inner peace, spiritual refuge, and idealised Ireland.
-- **Contrast:** The living island is set against the “pavements grey” of city life.
-- **Tautology:** “peace comes dropping slow / Dropping from the veils of the morning” shows Yeats’s musical style and love of beautiful restatement.
-
-**Exam-Ready Points:**
-- Yeats presents nature as an ideal place of healing, peace, and spiritual renewal.
-- The poem shows his tendency to romanticise Ireland and create perfect imagined spaces.
-- Innisfree functions both as a real place in Sligo and as a symbol of inner longing.
-- The contrast between the grey city and the glowing island highlights modern alienation.
-- The musical language reflects the calm and harmony the speaker desires.
-- This is an early Yeats poem, so nature is uncomplicatedly positive; later poems make this relationship more complex.
-
----
+**Exam Points:**
+- The poem is a daydream or wish, not a literal action.
+- Yeats wants the island, but he also clearly wants escape from the city.
+- Nature here is intensely positive and idealised.
+- The poem values simplicity, self-sufficiency, and peace.
+- The city is kept deliberately colourless so the contrast with Innisfree is stronger.
 
 ### The Wild Swans at Coole
 
-**Summary:** Yeats reflects on seeing swans at Coole Park, a place he has returned to for nineteen years. While the swans remain energetic, beautiful, and companionable, he has changed. The poem becomes a meditation on ageing, lost vitality, loneliness, and the fear of future loss.
+**Summary:** Yeats looks at the swans at Coole after many years of returning there. The lecture presents the poem as showing a changed understanding of what nature now represents to him. The swans are still beautiful and energetic, but the sight now brings pain rather than reassurance.
 
-**Key Themes:** Ageing, change, nature, loss, companionship, contrast, mortality
+**Themes:** Change; ageing; companionship; beauty; loss; the changing meaning of nature; contrast
 
-**Structure & Form:**
-- Five sestets with a controlled, reflective pattern
-- The poem begins with stillness and observation, then shifts into personal reflection and emotional pain
-- Yeats balances description of the swans with meditations on his own ageing
-- The structure supports contrast between permanence in nature and change in the self
+**Quotes & Analysis:**
+- **"The trees are in their autumn beauty, / The woodland paths are dry"** - The poem opens with calm, lyrical scene-setting. The lecturer stresses the beauty of the description.
+- **"Under the October twilight the water / Mirrors a still sky"** - The water is compared to a mirror, making the opening scene seem very calm and flat.
+- **"Upon the brimming water among the stones / Are nine-and-fifty swans"** - The swans are part of this carefully observed setting.
+- **"The nineteenth autumn has come upon me / Since I first made my count"** - Time is central: nineteen years have passed since he first counted them.
+- **"All suddenly mount / And scatter wheeling in great broken rings / Upon their clamorous wings"** - The movement is sudden, energetic, and noisy. The lecturer highlights words like "scatter," "wheeling," and "clamorous."
+- **"I have looked upon those brilliant creatures, / And now my heart is sore"** - He still sees the swans as beautiful, but he no longer takes comfort from that beauty.
+- **"All's changed since I, hearing at twilight, / The first time on this shore"** - The real change is in him, not in the swans.
+- **"The bell-beat of their wings above my head / Trod with a lighter tread"** - The lecture suggests that he himself was lighter once, and no longer is.
+- **"Unwearied still, lover by lover, / They paddle in the cold / Companionable streams"** - The swans remain tireless and paired, which throws Yeats's weariness and lack of companionship into sharper focus.
+- **"Their hearts have not grown old. / Passion or conquest, wander where they will, / Attend upon them still"** - The swans still seem full of energy, desire, and movement.
+- **"Delight men's eyes, when I awake some day / To find they have flown away?"** - The ending is anxious and almost elegiac. Even these beautiful creatures may one day be gone.
 
-**Key Quotes & Analysis:**
-- **“The trees are in their autumn beauty, / The woodland paths are dry”** — Autumn is beautiful, but it also suggests decline and ageing. From the beginning, the season hints at mortality.
-- **“Upon the brimming water among the stones / Are nine-and-fifty swans”** — The precise number shows familiarity and repeated observation. Yeats knows this place intimately, suggesting a long relationship with it.
-- **“The nineteenth autumn has come upon me / Since I first made my count”** — Time is central. Nineteen years have passed, and the phrase “come upon me” suggests age as something almost oppressive.
-- **“All suddenly mount / And scatter wheeling in great broken rings / Upon their clamorous wings”** — The swans burst into movement and energy. Their freedom and vitality sharply contrast with Yeats’s reflective stillness.
-- **“I have looked upon those brilliant creatures, / And now my heart is sore”** — Nature no longer simply consoles him. The swans make him sad because they reveal what he lacks.
-- **“All’s changed since I, hearing at twilight, / The first time on this shore”** — This line marks the emotional centre of the poem. The real change is not in the swans but in Yeats himself.
-- **“The bell-beat of their wings above my head / Trod with a lighter tread”** — The swans’ wings once matched his own lighter, younger self. The contrast with his current heaviness is implied rather than directly stated, making it more poignant.
-- **“Unwearied still, lover by lover, / They paddle in the cold / Companionable streams”** — The swans are tireless and paired off. Yeats envies both their endurance and their companionship.
-- **“Their hearts have not grown old”** — This stark line captures the contrast perfectly. The swans seem untouched by time, whereas Yeats feels his own ageing acutely.
-- **“Delight men’s eyes, when I awake some day / To find they have flown away?”** — The ending introduces fear and uncertainty. Even these apparently permanent creatures may vanish, reminding Yeats that nothing can ultimately be held forever.
+**Techniques:**
+- Strong contrast between the speaker and the swans
+- Energetic diction and sound imagery in the flight scene
+- Lyrical visual description in the opening
+- Direct emotional statement in "my heart is sore"
+- An almost elegiac tone toward the end
 
-**Poetic Techniques:**
-- **Symbolism:** The swans symbolise beauty, vitality, permanence, and companionship.
-- **Contrast:** Yeats’s ageing is set against the swans’ apparent timelessness.
-- **Seasonal imagery:** Autumn suggests maturity, decline, and the passing of life.
-- **Sound imagery:** “clamorous wings” and “bell-beat” bring the swans vividly to life.
-- **Repetition of return and counting:** Emphasises habit, memory, and the passage of time.
-- **Emotive diction:** “heart is sore” conveys direct personal pain.
-
-**Exam-Ready Points:**
-- The poem shows a major change in Yeats’s treatment of nature: it now provokes jealousy and melancholy rather than peace.
-- Time is measured precisely, making the speaker’s awareness of ageing feel inescapable.
-- The swans symbolise everything the speaker feels he is losing: youth, energy, beauty, and companionship.
-- The poem is deeply personal, but its reflections on change and mortality are universal.
-- Yeats’s gift for contrast is central: the unwearied swans throw his own decline into sharp focus.
-- The ending shows that even what seems permanent may disappear, intensifying the poem’s sadness.
-
----
+**Exam Points:**
+- This poem is useful to compare with *Innisfree*: nature is no longer a simple refuge.
+- Time and ageing are central to the poem.
+- The swans suggest beauty, vitality, and companionship, but the ending reminds us that they may fly away.
+- Yeats feels weary where the swans remain "unwearied still."
+- The poem shows how a sight that once gave joy can later bring sadness.
 
 ### September 1913
 
-**Summary:** In this bitter political poem, Yeats attacks the Irish middle class for greed, narrow-mindedness, and spiritual poverty. He contrasts their petty materialism with the heroic sacrifices of earlier patriots, arguing that the noble spirit of “Romantic Ireland” has died.
+**Summary:** The lecture places this poem against the background of the Hugh Lane gallery controversy. Yeats attacks a miserly, commercialised, anti-cultural public mood and contrasts it with a more heroic and idealised Irish past. The poem is openly political and very scathing.
 
-**Key Themes:** Politics, social criticism, idealism, betrayal, nationalism, contrast between past and present
+**Themes:** Politics; social criticism; miserliness; anti-cultural values; contrast between past and present; heroism and sacrifice
 
-**Structure & Form:**
-- Four tight quatrains with a strong, regular rhyme scheme
-- Refrain gives the poem force, bitterness, and memorability
-- The rhythm can feel mechanical, fitting the poem’s attack on money-counting and routine piety
-- Each stanza deepens the contrast between heroic past and degraded present
+**Quotes & Analysis:**
+- **"What need you, being come to sense, / But fumble in a greasy till"** - The opening is contemptuous. Yeats presents the present as grubby money-counting.
+- **"And add the halfpence to the pence / And prayer to shivering prayer"** - The poem piles up images of petty thrift and pious smallness.
+- **"Till you have dried the marrow from the bone"** - The lecturer explains this as giving only scraps: the very last little bit.
+- **"For men were born to pray and save"** - This line helps sum up the narrow culture Yeats is attacking.
+- **"Romantic Ireland's dead and gone, / It's with O'Leary in the grave"** - The refrain contrasts the present with a more romantic and heroic Ireland of the past.
+- **"Yet they were of a different kind, / The names that stilled your childish play"** - Yeats elevates earlier figures as passionate and heroic examples.
+- **"Was it for this the wild geese spread / The grey wing upon every tide / For this that all that blood was shed"** - The repeated question is a sharp accusation against the disappointing present.
+- **"Some woman's yellow hair / Has maddened every mother's son"** - The lecturer tentatively reads this as Ireland imagined as a woman, tied to patriotism and nationalism.
+- **"They weighed so lightly what they gave"** - The older heroes treated sacrifice, even life itself, as a light price for a cause.
+- **"But let them be, they're dead and gone, / They're with O'Leary in the grave"** - The return to the refrain keeps loss and accusation in view.
 
-**Key Quotes & Analysis:**
-- **“What need you, being come to sense, / But fumble in a greasy till”** — Yeats opens with contempt. “Greasy till” reduces modern Ireland to grubby commerce. “Come to sense” is sarcastic: what society calls practicality is, to Yeats, spiritual decline.
-- **“And add the halfpence to the pence / And prayer to shivering prayer”** — Yeats links money and religion, suggesting both have become empty rituals. The repetition mimics petty accumulation and mechanical devotion.
-- **“Romantic Ireland’s dead and gone, / It’s with O’Leary in the grave”** — This refrain is the poem’s emotional core. John O’Leary represents an older, nobler nationalist spirit. The line is both elegiac and accusatory.
-- **“Was it for this the wild geese spread / The grey wing upon every tide”** — The “Wild Geese” evoke Irish soldiers who left Ireland after defeat. Yeats invokes historical sacrifice to shame the present generation.
-- **“For this that all that blood was shed”** — The bluntness of the question makes the accusation more powerful. Heroic sacrifice has, in Yeats’s view, led only to greed and mediocrity.
-- **“For men were born to pray and save”** — This is savage irony. Yeats mocks a society that has reduced life to piety and thrift.
-- **“Yet they were of a different kind, / The names that stilled your childish play”** — He elevates the revolutionary heroes into figures of myth and inspiration.
-- **“They weighed so lightly what they gave”** — The old heroes gave generously, even their lives, while modern Ireland clings to money.
-- **“But let them be, they’re dead and gone, / They’re with O’Leary in the grave”** — The variation on the refrain sounds resigned and bitterly final. Yeats suggests that heroic values now belong only to the dead.
-- **“Some woman’s yellow hair / Has maddened every mother’s son”** — Yeats imagines how modern cynics would dismiss revolutionary passion as mere romantic foolishness. This shows his anger at a society incapable of recognising idealism.
+**Techniques:**
+- Refrain that works almost like a chorus
+- Strong contrast between a heroic past and a mean present
+- Contemptuous diction such as "fumble" and "greasy"
+- Striking imagery of scraps in "dried the marrow from the bone"
+- Historical and political references such as O'Leary, Emmet, Tone, and Fitzgerald
+- Scathing, explicit social commentary
 
-**Poetic Techniques:**
-- **Refrain:** “Romantic Ireland’s dead and gone” drives home Yeats’s grief and frustration.
-- **Sarcasm and irony:** He mocks the values of thrift, respectability, and hollow religiosity.
-- **Historical allusion:** O’Leary, the Wild Geese, and patriotic sacrifice deepen the political resonance.
-- **Contrast:** The generous heroes of the past are set against the mercenary present.
-- **Regular form:** Tight quatrains and rhythmic control give the poem a forceful, almost marching energy.
-- **Diction of contempt:** Words like “fumble” and “greasy” show disgust.
-
-**Exam-Ready Points:**
-- Yeats presents himself as defender of an older, heroic Ireland against a materialistic modern society.
-- The poem is political, but it is also deeply emotional, driven by disappointment and anger.
-- The refrain creates a mournful sense that noble values have been buried.
-- Yeats idealises the past, especially revolutionary sacrifice, in order to criticise the present.
-- His attack on the middle class shows his hostility to greed, small-mindedness, and spiritual emptiness.
-- The regular form mirrors the repetitive, mechanical life he despises.
-
----
+**Exam Points:**
+- The Hugh Lane context is useful for understanding the poem's anger.
+- Yeats attacks a miserly, anti-cultural society.
+- He idealises an older heroic Ireland in order to criticise the present.
+- The poem is one of the clearest examples of Yeats's political and social criticism.
+- Handle **"some woman's yellow hair"** cautiously: the lecture's reading is tentative and symbolic, not dismissive.
+- The refrain is central to the poem's force.
 
 ### Sailing to Byzantium
 
-**Summary:** Yeats rejects the sensual world of youth and nature and imagines travelling to Byzantium, a symbolic city of art and spiritual permanence. Feeling trapped in an ageing body, he longs to transcend mortality and become part of an eternal artistic order.
+**Summary:** The lecture presents this as a poem about Yeats's insecurity about ageing. Byzantium is a real place, but in the poem it becomes more of a metaphor or symbol for artistic purity and almost ageless intellect. The poem sets the sensual, mortal world against art and intellect, which may last beyond the body.
 
-**Key Themes:** Ageing, mortality, art, transcendence, body versus soul, nature versus permanence, contrast
+**Themes:** Ageing; mortality; art; intellect; body versus soul; sensual life versus permanence; contrast; identity
 
-**Structure & Form:**
-- Four ottava rima stanzas give the poem dignity and formal control
-- The poem moves from rejection of the physical world, to self-description, to invocation of sages, to a vision of transformed existence
-- This progression reflects a spiritual journey from decay toward imagined permanence
-- Elevated diction and symbolic imagery create a grand, philosophical tone
+**Quotes & Analysis:**
+- **"That is no country for old men"** - The opening immediately sets up the speaker's exclusion from the world of youth.
+- **"The young / In one another's arms, birds in the trees"** - The lecturer notes how this combines human and natural companionship.
+- **"Those dying generations"** - Even youth belongs to a world where everything born will die.
+- **"Caught in that sensual music all neglect / Monuments of unageing intellect"** - The poem contrasts the vibrancy of sensual life with intellect and art, which Yeats presents as what may endure.
+- **"An aged man is but a paltry thing, / A tattered coat upon a stick"** - This is the poem's harshest image of bodily decay and decline.
+- **"Unless / Soul clap its hands and sing"** - The lecture reads the soul, singing, art, and intellect as what can continue beyond bodily decline.
+- **"And therefore I have sailed the seas and come / To the holy city of Byzantium"** - Byzantium is less a realistic destination than an imagined ideal.
+- **"O sages standing in God's holy fire / As in the gold mosaic of a wall"** and **"Be the singing-masters of my soul"** - The language is elevated here, and the lecture says the passage is almost like offering up a prayer. It also links art, religion, soul, and transcendence.
+- **"Consume my heart away; sick with desire / And fastened to a dying animal"** - The lecturer is clear that the "dying animal" is the mortal body, Yeats himself.
+- **"Gather me into the artifice of eternity"** - This phrase helps sum up the poem: created artifice is imagined as something that can last.
+- **"Once out of nature I shall never take / My bodily form from any natural thing"** - The poem rejects natural bodily existence as something tied to decay.
+- **"But such a form as Grecian goldsmiths make / Of hammered gold and gold enamelling"** - Yeats imagines survival through crafted art rather than through the body.
+- **"Of what is past, or passing, or to come"** - The lecture's wider point is that art can continue to speak across time.
 
-**Key Quotes & Analysis:**
-- **“That is no country for old men”** — The opening is blunt and memorable. The world of youth, sensuality, and physical life excludes the old.
-- **“The young / In one another’s arms, birds in the trees”** — Yeats fills the opening with images of fertility, passion, and life. Yet these are not comforting; they underline his exclusion.
-- **“Those dying generations”** — Even youth is temporary. The phrase shows Yeats’s ability to darken beauty with mortality.
-- **“Caught in that sensual music all neglect / Monuments of unageing intellect”** — The physical world is seductive but shallow. Yeats contrasts fleeting sensation with lasting artistic and intellectual achievement.
-- **“An aged man is but a paltry thing, / A tattered coat upon a stick”** — This harsh image reduces the body to a scarecrow-like husk. Yeats confronts ageing without sentimentality.
-- **“Unless / Soul clap its hands and sing”** — The only answer to bodily decay is spiritual and artistic energy. The soul must become active and expressive.
-- **“And therefore I have sailed the seas and come / To the holy city of Byzantium”** — Byzantium is not just a place but an ideal realm of order, art, and transcendence.
-- **“O sages standing in God’s holy fire / As in the gold mosaic of a wall”** — The sages are imagined as both spiritual beings and works of art. Yeats merges religion, art, and permanence.
-- **“Come from the holy fire, perne in a gyre, / And be the singing-masters of my soul”** — He asks for guidance in transforming himself. The language is mystical and ceremonial.
-- **“Consume my heart away; sick with desire / And fastened to a dying animal”** — The heart remains trapped in desire and in the body, which Yeats calls a “dying animal.” This is one of his starkest expressions of bodily revulsion.
-- **“Once out of nature I shall never take / My bodily form from any natural thing”** — This is the decisive rejection of nature. Unlike the Yeats of *Innisfree*, he now sees nature as bound to death and decay.
-- **“But such a form as Grecian goldsmiths make / Of hammered gold and gold enamelling”** — He wants to become an artificial artwork, crafted and permanent.
-- **“To keep a drowsy Emperor awake”** — Art has power, elegance, and purpose. The image also suggests refinement and elite culture.
-- **“Of what is past, or passing, or to come”** — Art transcends time. The triad, almost tautological in its fullness, suggests total temporal reach.
+**Techniques:**
+- Grand contrasts: youth and age, body and soul, nature and art, sensual life and intellect
+- Symbolism in the figure of Byzantium
+- Harsh metaphor in "a tattered coat upon a stick"
+- Elevated, contrived diction in the address to the sages
+- Religious and artistic imagery such as "holy fire" and "gold mosaic"
+- Heavy sibilance in the middle of the poem; the lecturer notices it but leaves its exact purpose open
 
-**Poetic Techniques:**
-- **Symbolism:** Byzantium symbolises eternal art, spiritual order, and permanence.
-- **Contrast:** Young/old, body/soul, nature/art, sensual/intellectual.
-- **Metaphor:** “A tattered coat upon a stick” vividly expresses physical decline.
-- **Religious and artistic imagery:** “holy fire,” “gold mosaic,” and “gold enamelling” elevate the poem’s vision.
-- **Formal verse:** The ornate structure reflects the poem’s admiration for crafted perfection.
-- **Tautological phrasing:** “past, or passing, or to come” broadens art’s scope across all time.
-
-**Exam-Ready Points:**
-- The poem is Yeats’s strongest rejection of the natural world as a place of decay.
-- Ageing is presented not just as physical decline, but as a crisis of identity and value.
-- Byzantium represents a dreamed-of escape into artistic and spiritual permanence.
-- Yeats contrasts transient sensual life with the enduring achievements of art and intellect.
-- The poem shows his idealising imagination at its most ambitious and philosophical.
-- It powerfully develops a pattern seen across his work: when reality disappoints him, he turns toward an ideal world.
-
----
+**Exam Points:**
+- The poem is centrally about insecurity about ageing.
+- Byzantium should be treated as a symbolic ideal rather than just a geographical place.
+- Yeats imagines art and intellect as what may outlast bodily decay.
+- Nature here is no longer a refuge; it is the realm of what is born and dies.
+- This is a strong example of Yeats setting up a grand contrast between reality and an ideal.
+- Keep readings measured: the lecture treats some parts of the poem as open to interpretation.
 
 ### Politics
 
-**Summary:** In this short late poem, Yeats acknowledges the importance of international politics but admits that personal desire matters more to him. Seeing a young girl, he finds his thoughts drawn away from war and public affairs toward longing for youth and physical love.
+**Summary:** Despite its title, this poem is less interested in politics than in immediate human desire. The lecturer praises it as economical, direct, and built around one clear point: how can the speaker focus on far-off public affairs when a girl is standing nearby? The ending carries only a slight, wistful regret about lost youth.
 
-**Key Themes:** Ageing, desire, politics versus personal life, love, contrast, human longing
+**Themes:** Politics versus personal desire; ageing; love and companionship; wistfulness; what matters most; contrast
 
-**Structure & Form:**
-- Short, direct lyric with simple language and a conversational tone
-- The brevity gives it the feeling of a final, honest admission
-- Its apparent simplicity masks a deep reversal of ideas from earlier poems like *Sailing to Byzantium*
-- The poem’s compact form suits its immediacy and emotional directness
+**Quotes & Analysis:**
+- **"How can I, that girl standing there, / My attention fix / On Roman or on Russian / Or on Spanish politics?"** - Far-off continental politics is pushed aside by the immediate presence of the girl.
+- **"That girl standing there"** - The phrase creates simplicity, closeness, and immediacy.
+- **"And maybe what they say is true / Of war and war's alarms"** - The speaker does not deny that politics may matter or may be true.
+- **"But oh that I were young again / And held her in my arms"** - The poem ends with longing for youth and intimacy. The lecturer stresses that this is only a tinge or hint of wistful regret, not something overbearing.
 
-**Key Quotes & Analysis:**
-- **“How can I, that girl standing there, / My attention fix / On Roman or on Russian / Or on Spanish politics?”** — The poem opens with a rhetorical question. Grand public issues are immediately displaced by the sight of a girl. Yeats places the personal above the political.
-- **“That girl standing there”** — The phrase is concrete, immediate, and physical. It undercuts abstract discussion and returns the poem to the living moment.
-- **“And maybe what they say is true / Of war and war’s alarms”** — Yeats does not deny that politics matters. He simply admits that intellectual agreement is weaker than emotional and physical desire.
-- **“But O that I were young again”** — This sudden exclamation brings ageing back to the centre of the poem. Beneath the light tone lies intense regret.
-- **“And held her in my arms”** — The ending is simple, intimate, and deeply human. The poem closes not on theory or ideology, but on bodily longing.
+**Techniques:**
+- Very economical, direct, to-the-point style
+- Clear contrast between public politics and private desire
+- Simplicity and immediacy in the image of the girl standing there
+- A light touch of social commentary, including a playful jab at public expertise and grand political talk
+- Wistful rather than heavy tone
 
-**Poetic Techniques:**
-- **Contrast:** Public politics is set against private desire.
-- **Direct address and rhetorical question:** These make the poem immediate and personal.
-- **Plain style:** The simplicity gives the poem honesty and emotional force.
-- **Irony:** Yeats had earlier sought to escape the body in *Sailing to Byzantium*, but here he longs to recover youthful physical experience.
-- **Understatement:** The poem seems casual, but it expresses deep truths about ageing and desire.
-
-**Exam-Ready Points:**
-- The poem shows Yeats’s honesty: despite all grand ideas, he remains subject to ordinary human longing.
-- It revisits his favourite theme of ageing, but in a lighter, more personal tone.
-- The contrast between politics and desire reflects his lifelong habit of setting opposites against each other.
-- The poem can be read as a late reversal of *Sailing to Byzantium*: instead of rejecting the body, he misses it.
-- Its plain language makes its emotional impact more striking.
-- Yeats suggests that private feeling may be more powerful than public ideology.
-
----
-
-## Comparative Points
-- **Yeats and contrast:** More than many poets, Yeats builds poems around oppositions — youth versus age, ideal versus reality, past versus present, and body versus soul.
-- **Nature:** In *The Lake Isle of Innisfree*, nature is wholly restorative and ideal. In *The Wild Swans at Coole*, it becomes a source of envy and sadness. In *Sailing to Byzantium*, nature is finally rejected as the realm of mortality.
-- **Ageing:** Few poets on the course are as persistently self-aware about ageing. In *Wild Swans*, ageing causes melancholy; in *Byzantium*, it drives a search for transcendence; in *Politics*, it produces longing for lost youth.
-- **Politics and society:** In *September 1913*, Yeats is openly political and critical, attacking greed and spiritual emptiness. In *Politics*, however, he admits that the personal may ultimately matter more than public events.
-- **Idealisation:** Yeats repeatedly idealises places, people, art, and the past. This makes him excellent for comparison with poets who are more realistic, grounded, or socially direct.
-- **Style:** His verse is often more formal, musical, and symbol-heavy than that of many modern poets. Refrains, repetition, controlled rhyme, and rich imagery are central to his voice.
-- **Emotional range:** Yeats can be dreamy (*Innisfree*), sorrowful (*Wild Swans*), bitter (*September 1913*), philosophical (*Sailing to Byzantium*), and intimate (*Politics*).
-
-## Sample Essay Angles
-- Yeats as a poet of contrast and opposition
-- The importance of ageing and mortality in Yeats’s poetry
-- Yeats’s changing attitude to nature across his career
-- Idealism and escapism in Yeats’s work
-- The relationship between personal feeling and public life in Yeats
-- Yeats as a political and social critic
-- The role of art and imagination in overcoming reality
-- Yeats’s musical style and memorable use of repetition and refrain
-- How Yeats romanticises the past, Ireland, and heroic values
-- The tension in Yeats between high philosophy and ordinary human desire
-
----
-
-These poems show why Yeats remains such an important Leaving Cert poet: he combines beautiful language with big human concerns. His work is rich in contrast, emotionally honest, and full of memorable images and quotations that can be used effectively in Paper 2 essays.
+**Exam Points:**
+- The title is slightly ironic: the poem finally cares more about desire than politics.
+- Yeats suggests that immediate human closeness can matter more than distant public issues.
+- The poem admits politics may be true or important, but it does not give it emotional priority.
+- The ending should be read as gently wistful, not intensely regretful.
+- Any self-admonishment here is only slight and implicit.
+- The poem's simplicity is part of its power.

@@ -1,0 +1,210 @@
+Validation note: transcript is speech-to-text, so matches below allow for minor wording/spelling drift. I have been conservative: where the lecture does not clearly support a quote or analytical point, I mark it unverified.
+
+Sample essay angles were treated as prompts rather than standalone factual claims unless they repeated a substantive claim made elsewhere in the notes.
+
+=== GENERAL OVERVIEW / CROSS-POEM CLAIMS ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- None (general section).
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- None (general section).
+
+VERIFIED CLAIMS (lecturer says this):
+- Heaney is strongly associated with craft / making / the poet as craftsman — lecturer says: "he's super into the crafting side of things" and, in The Forge, "the poet and the blacksmith are overlapping very much."
+- Heaney is interested in history, identity, and narrative/allusion — lecturer says: "he's interested in loads of history in identity in narrative often how all of those overlap."
+- National identity and Ireland recur as major concerns — lecturer says in Bogland: "Bogland could refer to Ireland... We is referring to the people of Ireland."
+- Personal relationships and family matter in some poems — lecturer says A Call is "more about personal relationships" and later mentions "identity as a member of the Heaney clan such as A Call."
+- Childhood fear / authority / the North recur — lecturer calls Constable Calls "more political, a little bit more North-specific" and later refers to "identity as a child in the north during the troubled time."
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- "Seamus Heaney was born in County Derry in Northern Ireland in 1939" — ISSUE: The lecturer does not give this biographical information.
+- "biblical echoes" as a recurring feature — ISSUE: Greek myth and Hansel/Gretel are discussed, but biblical echoes are not mentioned.
+- Comparative claims against "many poets," "more confessional poets," or poets with "abstract or rhetorical" nationalism — ISSUE: The lecture does not make these cross-poet comparisons.
+- Claims about Heaney's "voice" being "thoughtful, musical, and vivid" — ISSUE: vivid imagery is discussed, but this broader stylistic summary is not stated by the lecturer.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The overview is generally aligned with the lecture's broad themes, but several biographical/comparative statements go beyond what the lecturer actually says.
+
+=== The Forge ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "All I know is a door into the dark" — found in transcript at approximately: "okay all i know is a door into the dark..."
+- "Outside, old axles and iron hoops rusting" — found in transcript at approximately: "outside now facing away from the forge outside old axles and iron hoops rusting..."
+- "Inside, the hammered anvil's short-pitched ring" — found in transcript at approximately: "inside back towards the forge the hammered anvil's short pitched ring..."
+- "The unpredictable fantail of sparks" — found in transcript at approximately: "the unpredictable fan tale of sparks..."
+- "Or hiss when a new shoe toughens in water" — found in transcript at approximately: "or hiss when a new shoe toughens in water..."
+- "The anvil must be somewhere in the centre... Horned as a unicorn... Set there immoveable: an altar" — found approximately across the transcript as: "the anvil must be somewhere in the center... horned as a unicorn... set there immovable... an altar..."
+- "He recalls a clatter of hoofs" — found in transcript at approximately: "on the jam recalls a clatter of hoofs..."
+- "Where traffic is flashing in rows" — found in transcript at approximately: "where traffic is flashing in rows..."
+- "Then grunts and goes in... To beat real iron out, to work the bellows" — found approximately in transcript at: "slam and a flick to beat real iron out to work the bellows..."
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- "Sometimes, leather-aproned, hairs in his nose, / He leans out on the jamb to eye old people / Catching the spring off the axle of a cart" — ISSUE: The lecturer clearly references only the start of this passage ("sometimes leather apron hairs in his nose") plus later lines about hoofs/traffic. The "eye old people / Catching the spring..." portion does not appear in the transcript.
+
+VERIFIED CLAIMS (lecturer says this):
+- The poem is a sonnet / traditional form tied to craft — lecturer says: "the forge first of all it is a sonnet... it's a kind of a traditional form of poetry" and links this to "traditional crafting."
+- The blacksmith overlaps with the poet / poet's craft — lecturer says: "the poem... deals a lot with craft not only the blacksmith's craft but at the same time the craft of the poet" and later "the poet and the blacksmith are overlapping very much."
+- The poem contrasts outside and inside, with energy directed toward the forge — lecturer says: "outside... old axles..." has a calming assonant effect, while turning "back towards the forge" restores momentum.
+- "altar" gives the forge a sacred/religious dimension — lecturer says: "an altar makes you think of religious places... where the divine... and the human tend to..."
+- "horned as a unicorn" gives the anvil a mythic dimension — lecturer says it gives "an idea of kind of a mythical beast."
+- The ending introduces decline / reduced status of the crafts in modernity — lecturer says the craft is "not in demand as they once were" and the final movement is "not divinely inspired art anymore it's just work."
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- "This opening is one of Heaney's clearest statements about creativity... the imagination... uncertainty, risk, and mystery" — ISSUE: The lecturer talks about hook, energy, and being drawn into the workplace; he does not explicitly make this creativity/uncertainty reading.
+- "short-pitched ring" as onomatopoeia — ISSUE: The lecturer calls this "sprung rhythm," not onomatopoeia. He reserves onomatopoeia for "hiss."
+- "The unpredictable fantail of sparks" as proof that "true art cannot be fully controlled or planned" — ISSUE: The lecturer identifies visual imagery, but not this interpretive claim.
+- "The sonnet-like compactness gives the poem intensity and control" — ISSUE: The lecturer notes the sonnet form, but does not make this further claim.
+- "The ending... is Heaney's ideal image of the poet: committed to real craft" — ISSUE: The lecturer's reading goes the other way, toward demystification and possible decline.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The notes treat the ending as triumphant/authentic; the lecturer reads the ending more bleakly: the craft is less exalted, "not divinely inspired art anymore," and may have "had their day."
+- The notes quote the leather-apron passage as if the lecturer referenced the full three-line sequence; in the transcript he only clearly references the opening fragment plus the later hoofs/traffic lines.
+
+=== The Underground ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "There we were in the vaulted tunnel running" — found in transcript at approximately: "there we were in the vaulted tunnel running..."
+- "You in your going-away coat speeding ahead" — found in transcript at approximately: "you in your going away coat speeding..."
+- "Our echoes die in that corridor" — found in transcript at approximately: "our echoes die in that corridor..."
+- "button after button sprang off" — found in transcript at approximately: "button after button sprang off and fell in a trail..."
+- "damned if I look back" — found in transcript at approximately: "tension for your step following and damned if i look back..."
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- "I was Hansel without a trail / Through a damp wood" — ISSUE: The lecturer gives a different Hansel line: "and now I come as Hansel came on the moonlit stones retracing the path back..."
+- "Then I'm released into a place of arrival" — ISSUE: Cannot find this in the transcript.
+- "I re-emerge in that same corridor and feel no wind from the door" — ISSUE: Cannot find this in the transcript.
+- "I re-enter that tunnel of white tiles" — ISSUE: Cannot find this in the transcript.
+- "and walk you beyond it" — ISSUE: The lecturer gives a hopeful Orpheus reading, but does not quote this exact line.
+
+VERIFIED CLAIMS (lecturer says this):
+- The poem is more narrative than The Forge and has two levels: literal Tube journey and allusive underworld reading — lecturer says it is "a little bit more rooted in narrative" and there are "basically two narratives going on in this poem."
+- The opening is energetic and motion-filled — lecturer points to "running," "speeding," and "gaining" as repeated present participles creating energy.
+- Hansel and Gretel allusion is important — lecturer says the trail of buttons recalls Hansel and Gretel and explains the breadcrumb/stone trail idea.
+- Orpheus and Eurydice allusion is important — lecturer explicitly says "damned if i look back" refers to Orpheus/Eurydice and explains the myth.
+- The poem uses allusion to connect experiences across time — lecturer says Heaney is "using echoes of narrative... across time" and that narrative can "bring us together over time" and "collapse time."
+- The ending is hopeful because Heaney breaks from myth — lecturer says: "unlike orpheus... he breaks from myth to kind of carve out his own path... it's almost like a hopeful ending."
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- The poem is about revisiting the scene years later — ISSUE: The lecturer does not say this. He describes a return after the Proms, not a years-later revisit.
+- The poem "shifts between past and present" in a memory-revision structure — ISSUE: The lecturer instead emphasizes literal narrative plus mythic/allusive narrative.
+- "the wife is ahead... subtle anxiety about separation" — ISSUE: Not explicitly said.
+- "Our echoes die..." as a claim about fading memory — ISSUE: The lecturer notes a tonal shift, not this memory analysis.
+- "place of arrival" / rebirth / recovered union — ISSUE: This depends on a quote the transcript does not contain.
+- Alliteration of "vaulted tunnel" and symbolic doors/emergence as relationship/time imagery — ISSUE: Not explicitly discussed by the lecturer.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The lecturer's actual Hansel reference is "and now I come as Hansel came on the moonlit stones retracing the path back"; the notes present a different Hansel quotation.
+- The notes lean heavily on a years-later memory-return framework that the lecturer does not clearly use.
+
+=== A Call ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "Next thing he was speaking into the phone" — found approximately in transcript as: "Next thing he spoke, he being his father..." This is close, but not exact.
+- "grave-ticking" / "amplified grave-ticking of hall clocks" — found in transcript at approximately: "Then found myself listening to the amplified grave-ticking of hall clocks..."
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- "'Hold on,' he said, 'I'll just run out and get her'" — ISSUE: The transcript says the opposite: "She said, I'll just run out and get him."
+- "so I had to wait" — ISSUE: Cannot find this in the transcript.
+- "A whitewashed kitchen hung in the web / Of telephone wires" — ISSUE: Cannot find this in the transcript.
+- "I could hear him through the quiet" — ISSUE: Cannot find this in the transcript.
+- "A gate slammed" — ISSUE: Cannot find this in the transcript.
+- "then he was back" — ISSUE: Cannot find this in the transcript.
+- "I'd a line of turnings in the yard" — ISSUE: Cannot find this in the transcript.
+- "crossing the yard in broad daylight" — ISSUE: Cannot find this in the transcript.
+- "the sun stood in the lintel" — ISSUE: Cannot find this in the transcript.
+- "the phone's played out, / the ancient pulse of his voice" — ISSUE: Cannot find this in the transcript.
+- "and a heart sinking" — ISSUE: Cannot find this in the transcript.
+
+VERIFIED CLAIMS (lecturer says this):
+- The poem is experiential and focused on personal relationships/emotions rather than myth/history — lecturer says it is "very experiential" and "more about personal relationships... much more focused on emotions."
+- The opening dialogue acts as a hook and is conversational — lecturer says: "We have dialogue at the beginning... dialogue draws you in... it's conversational."
+- While waiting, the speaker imagines seeing his father in the garden — lecturer says: "I saw him. Not literally. This is in his mind's eye... down on his hands and knees beside the leak rig..."
+- The gardening description suggests a father-son connection through craft/manual work — lecturer explicitly links this to Digging and says the description is "reminiscent" of how Heaney thinks about poetic craft.
+- "grave-ticking" is a pun tied to death and dwindling time with the father — lecturer explains both senses of "grave" and says "time is ticking away until there's no more time for the father."
+- The end shows incomplete emotional connection / yearning — lecturer says: "nearly said, I loved him. Nearly. It is not completed" and calls it a "desire for connection."
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- The father answers the phone and goes to get the mother — ISSUE: In the lecture version, a woman answers and says she will get him.
+- The father is imagined "crossing the yard in broad daylight" — ISSUE: The lecturer describes him in the garden weeding, not crossing a yard.
+- The poem's three-stanza structure / compactness as key meaning-maker — ISSUE: The lecturer does not discuss stanza count or brevity as structure.
+- Sound imagery of gate/quiet/footsteps and light imagery in the yard — ISSUE: These details do not appear in the transcript.
+- "Played out" as a key mortality phrase — ISSUE: The phrase is not in the transcript.
+- Love being expressed through remembered yard-crossing details — ISSUE: The lecturer supports a desire for connection, but not these particular details.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The notes reverse the opening exchange: notes say "he said... get her"; transcript says "she said... get him."
+- A large portion of the note's quoted evidence does not match the lecture's wording and may come from another version/text rather than from the transcripted class discussion.
+
+=== Bogland ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "We have no prairies / To slice a big sun at evening" — found in transcript at approximately: "We have no prairies to slice a big sun at evening."
+- "Our unfenced country / Is bog" — found in transcript at approximately: "Our unfenced country is bog."
+- "They've taken the skeleton / Of the Great Irish Elk / Out of the peat" — found approximately in transcript as: "taken the skeleton of the great Irish elk out of the peat..."
+- "Butter sunk under / More than a hundred years / Was recovered salty and white" — found in transcript at approximately: "Butter sunk under more than a hundred years, was recovered salty and white."
+- "The ground itself is kind, black butter" — found across adjacent transcript lines as: "The ground itself is kind... Black butter melting and opening underfoot."
+- "Missing its last definition / By millions of years" — found in transcript at approximately: "Missing its last definition by millions of years."
+- "They'll never dig coal here" — found in transcript at approximately: "They'll never dig coal here."
+- "Only the waterlogged trunks / Of great firs, soft as pulp" — found approximately in transcript as: "Only the waterlogged trunks of great furs soft as pulp."
+- "Every layer they strip / Seems camped on before" — found in transcript at approximately: "Every layer they strip seems camped on before."
+- "The bogholes might be Atlantic seepage" — found in transcript at approximately: "The bog holes might be Atlantic seepage."
+- "The wet centre is bottomless" — found in transcript at approximately: "The wet center is bottomless."
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- "The horizon encroached / Further than the eye could see" — ISSUE: The lecturer quotes a different line: "Everywhere the eye concedes to encroaching horizon is wooed into the cyclops' eye of a tern."
+
+VERIFIED CLAIMS (lecturer says this):
+- The bog stands for Ireland / Irish identity — lecturer says "Bogland could refer to Ireland" and explains that "we" means the Irish.
+- The contrast with American prairies helps define Ireland by difference — lecturer explicitly discusses prairies vs bogland and says definition is aided by referring to "what it's not."
+- The bog preserves history/the past — lecturer discusses the Irish elk, ancient butter, and repeatedly says bog/peat has "a preserving nature."
+- Physical detail shows Heaney's intimate knowledge of bogland — lecturer says the drying/crusting details show "his intimate knowledge of these places" and "closeness to the subject matter."
+- "black butter" is vivid sensory/metaphoric language — lecturer says the turf really does look like "a chunk of black butter."
+- The final bottomlessness can suggest depth beyond the literal — lecturer says it has literal depth but can also suggest "intellectual depth" and meaning connected to "national identity" and "our place in history."
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- Repetition of "bottomless" as a structural feature — ISSUE: The lecturer does not discuss repetition here; the transcript only clearly references the final line once.
+- The Atlantic seepage line definitely means the bog is oceanic/primal — ISSUE: The lecturer explicitly says "not 100% sure what's going on with that one."
+- The bog's value is framed as "not industrial but cultural" — ISSUE: The lecturer does talk about identity/symbolism, but not in this exact commercial-vs-cultural formulation.
+- "The ground itself is kind" means nurturing/generous land — ISSUE: The lecturer says "preserving" and "positive"; the more expansive nurturing/generous reading goes beyond the transcript.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The notes replace the lecturer's actual horizon quotation with a simplified paraphrase.
+- The notes present the Atlantic seepage reading with much more certainty than the lecturer does.
+
+=== Constable Calls ===
+
+VERIFIED QUOTES (lecturer reads/references these):
+- "His bicycle stood at the window-sill" — found approximately in transcript as: "His bicycle stood at the windowsill."
+- "The rubber cowl of a mud-splasher / Skirted the front mudguard" — found approximately in transcript as: "the rubber cowl of a mud splasher skirting the front mud guard."
+- "His cap was upturned on the floor" — found approximately in transcript as: "His cap is upside down on the floor..."
+- "Arithmetic and fear" — found in transcript at approximately: "Arithmetic and fear."
+- "A shadow bobbed in the window" — found in transcript at approximately: "a shadow bobbed in the window..."
+- "His boot pushed off and the bicycle ticked" — found approximately in transcript as: "his boot pushed off and the bicycle ticked ticked ticked..."
+
+UNVERIFIED/SUSPECT QUOTES (NOT found in transcript):
+- "His boot pushed off / And I looked at his unsocked feet" — ISSUE: Cannot find this in the transcript.
+- "The pedal treads / Left all the room in pedal treads" — ISSUE: Cannot find this in the transcript.
+- "The pedal pained me at the ankle" — ISSUE: Cannot find this in the transcript.
+- "Any more light would have been dangerous" — ISSUE: Cannot find this in the transcript.
+- "And the house grew safe again" — ISSUE: Cannot find this in the transcript.
+
+VERIFIED CLAIMS (lecturer says this):
+- The poem is political / North-specific — lecturer says: "This is a bit more political, a little bit more North-specific."
+- Child perspective matters and explains the intense object-description — lecturer says this may be "the child Heaney" and suggests the child is averting his eyes / looking at objects instead of the man.
+- The constable's presence is felt before he is properly named in the body of the poem — lecturer says the pronoun appears before the noun and that "the shadow of the constable almost fills up the poem before he's named."
+- Bicycle, ledger, holster, baton case, cap etc. function as tools/symbols of law and threat — lecturer repeatedly calls them "tools of the law" and discusses their threatening connotations.
+- "Arithmetic and fear" links official counting/business to anxiety — lecturer says the child cannot face "this representative of the law" and that the poem finally comes out and says "fear."
+- The father's lie and the child's imagined punishment build guilt and fear — lecturer points to the line of turnips, calls it "a lie," and says the child imagines punishment in "the black hole in the barracks."
+- The ticking bicycle heightens tension and can evoke wider Northern violence — lecturer says "ticked ticked ticked tension each tick ups the tension" and links ticking to "bombs and violence."
+- The poem is useful for discussing social issues, childhood fear, tension, and guilt — lecturer says exactly that near the end of the discussion.
+
+UNVERIFIED/SUSPECT CLAIMS (not supported by transcript):
+- The constable is explicitly doing census work — ISSUE: The lecturer discusses returns, tillage, acres, roots/perches, and government tallying, but does not clearly name it as census work.
+- The home explicitly becoming safe again at the end — ISSUE: The lecturer does not quote or discuss this line.
+- The transferred-sensation reading based on "The pedal pained me at the ankle" — ISSUE: The line is not in the transcript.
+- The ambiguity claim about "Any more light would have been dangerous" — ISSUE: This line does not appear in the transcript.
+
+MISATTRIBUTED/OUT-OF-CONTEXT:
+- The notes import several lines the lecturer never reads (ankle/light/house safe again) and then build analysis on them.
+- The lecturer's emphasis is on symbols/tools of law, fear, guilt, and tension; the notes' explicit relief ending goes beyond the evidence in the transcript.

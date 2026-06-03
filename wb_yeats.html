@@ -1,307 +1,1772 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WB Yeats — Interactive Study Notes</title>
   <style>
-    :root { --bg:#FAF9F5; --fg:#1F1E1D; --accent:#1C6BBB; --emphasis:#C96442; --pink:#D73A83; --purple:#8A46CE; --blue:#1F6FE4; --cyan:#2D8F8F; --orange:#B56613; --green:#26831A; --gray:#6F6F78; --border:#E8E6E1; --card-bg:#FFFFFF; --quote-bg:#FDF3EF; --shadow:0 2px 8px rgba(0,0,0,0.06); --radius:18px; --quote:var(--emphasis); --heading:var(--purple); --tag-bg:rgba(138,70,206,.08); --transition:.25s ease; --ui-font:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; --body-font:Georgia,'Times New Roman',serif; }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; background:radial-gradient(circle at top, rgba(138,70,206,.07), transparent 28%),linear-gradient(180deg, rgba(28,107,187,.04), transparent 24%),var(--bg); color:var(--fg); font:16px/1.7 var(--body-font); min-height:100vh; }
-    a { color:var(--accent); }
-    .page { max-width:1180px; margin:0 auto; padding:24px 18px 56px; }
-    .top-link { display:inline-flex; align-items:center; gap:.4rem; font-family:var(--ui-font); font-size:.95rem; text-decoration:none; padding:.65rem 1rem; border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,.84); box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; backdrop-filter:blur(10px); }
-    .top-link:hover { transform:translateY(-1px); border-color:var(--accent); box-shadow:0 8px 20px rgba(28,107,187,.12); }
-    .hero { margin-top:18px; background:linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,255,255,.9)); border:1px solid var(--border); border-radius:28px; box-shadow:0 22px 40px rgba(31,30,29,.06); padding:32px; position:relative; overflow:hidden; }
-    .hero::after { content:''; position:absolute; inset:auto -80px -80px auto; width:220px; height:220px; background:radial-gradient(circle, rgba(28,107,187,.12), transparent 62%); pointer-events:none; }
-    .hero-grid { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr); gap:24px; align-items:start; position:relative; z-index:1; }
-    .eyebrow { display:inline-flex; font-family:var(--ui-font); text-transform:uppercase; letter-spacing:.14em; font-size:.76rem; color:var(--gray); margin-bottom:.7rem; }
-    h1,h2,h3,h4 { line-height:1.2; margin:0; color:var(--purple); }
-    h1 { font-size:clamp(2.2rem,4vw,3.6rem); margin-bottom:.5rem; }
-    h2 { font-size:clamp(1.45rem,2vw,1.9rem); margin-bottom:1rem; }
-    h3 { font-size:1.2rem; margin-bottom:.85rem; }
-    h4 { font-size:1rem; margin-bottom:.7rem; }
-    .hero p { margin:0; }
-    .hero .lead { font-size:1.08rem; max-width:65ch; }
-    .hero .support { color:var(--gray); margin-top:1rem; max-width:60ch; }
-    .hero-side { background:rgba(250,249,245,.92); border:1px solid var(--border); border-radius:22px; padding:22px; box-shadow:var(--shadow); }
-    .date-chip,.progress-chip { display:inline-flex; align-items:center; gap:.45rem; font-family:var(--ui-font); font-weight:600; background:var(--card-bg); border:1px solid var(--border); border-radius:999px; padding:.55rem .9rem; margin-bottom:.85rem; }
-    .date-chip { color:var(--cyan); }
-    .progress-chip { color:var(--blue); }
-    .tabbar { margin-top:22px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; background:rgba(255,255,255,.7); padding:10px; border-radius:22px; border:1px solid var(--border); box-shadow:var(--shadow); position:sticky; top:12px; z-index:5; backdrop-filter:blur(10px); }
-    .tab-button { border:0; border-radius:16px; background:transparent; color:var(--gray); font:600 .95rem var(--ui-font); padding:.95rem 1rem; cursor:pointer; transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease; }
-    .tab-button:hover { transform:translateY(-1px); color:var(--accent); }
-    .tab-button.active { background:var(--card-bg); color:var(--accent); box-shadow:var(--shadow); }
-    .tab-panel { display:none; animation:fadeIn .35s ease; margin-top:22px; }
-    .tab-panel.active { display:block; }
-    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-    .content-grid,.exam-layout { display:grid; gap:22px; }
-    .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease; }
-    .card:hover { transform:translateY(-2px); box-shadow:0 16px 30px rgba(31,30,29,.08); border-color:rgba(28,107,187,.2); }
-    .card p+p { margin-top:1rem; }
-    .two-col { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:22px; align-items:start; }
-    .tags { display:flex; flex-wrap:wrap; gap:.55rem; }
-    .tag { display:inline-flex; align-items:center; font-family:var(--ui-font); font-size:.82rem; font-weight:700; border-radius:999px; padding:.5rem .85rem; border:1px solid transparent; transition:transform .25s ease,box-shadow .25s ease; box-shadow:inset 0 0 0 1px rgba(255,255,255,.35); }
-    .tag:hover { transform:translateY(-1px); box-shadow:0 8px 18px rgba(31,30,29,.08); }
-    .color-accent { background:rgba(28,107,187,.11); color:var(--accent); border-color:rgba(28,107,187,.14); }
-    .color-emphasis { background:rgba(201,100,66,.12); color:var(--emphasis); border-color:rgba(201,100,66,.18); }
-    .color-pink { background:rgba(215,58,131,.11); color:var(--pink); border-color:rgba(215,58,131,.14); }
-    .color-purple { background:rgba(138,70,206,.12); color:var(--purple); border-color:rgba(138,70,206,.16); }
-    .color-blue { background:rgba(31,111,228,.11); color:var(--blue); border-color:rgba(31,111,228,.16); }
-    .color-cyan { background:rgba(45,143,143,.12); color:var(--cyan); border-color:rgba(45,143,143,.16); }
-    .color-orange { background:rgba(181,102,19,.12); color:var(--orange); border-color:rgba(181,102,19,.15); }
-    .color-green { background:rgba(38,131,26,.12); color:var(--green); border-color:rgba(38,131,26,.15); }
-    .theme-grid,.theme-detail-grid,.quick-quote-grid { display:grid; gap:16px; }
-    .theme-grid { grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); }
-    .theme-detail-grid { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-    .quick-quote-grid { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-    .theme-card,.theme-detail-card,.quick-quote-card { background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(250,249,245,.9)); border:1px solid var(--border); border-radius:18px; padding:18px; box-shadow:var(--shadow); }
-    .theme-card p,.theme-detail-card p,.quick-quote-card li { margin:0; }
-    .theme-card-head,.theme-detail-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:.8rem; }
-    .cross-label { font-family:var(--ui-font); font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--gray); display:block; margin-bottom:.7rem; }
-    .cross-poem { margin-top:1rem; }
-    .detail-list,.technique-list,.essay-list,.comparative-list,.quick-quote-card ul { margin:0; padding-left:1.25rem; }
-    .detail-list li,.technique-list li,.essay-list li,.comparative-list li,.quick-quote-card li { margin-bottom:.65rem; }
-    .detail-list li::marker { color:var(--accent); }
-    .technique-list li::marker { color:var(--cyan); }
-    .essay-list li::marker { color:var(--orange); }
-    .comparative-list li::marker { color:var(--pink); }
-    .accordion-stack { display:grid; gap:16px; }
-    .accordion-item { background:var(--card-bg); border:1px solid var(--border); border-radius:22px; box-shadow:var(--shadow); overflow:hidden; transition:box-shadow .25s ease,transform .25s ease; }
-    .accordion-item:hover { transform:translateY(-2px); box-shadow:0 18px 34px rgba(31,30,29,.08); }
-    .accordion-trigger { width:100%; border:0; background:linear-gradient(135deg, rgba(255,255,255,.98), rgba(250,249,245,.96)); color:var(--fg); text-align:left; padding:20px 22px; cursor:pointer; display:flex; justify-content:space-between; gap:20px; align-items:center; font-family:var(--ui-font); transition:background .25s ease,color .25s ease; }
-    .accordion-trigger[aria-expanded='true'] { background:linear-gradient(135deg, rgba(28,107,187,.08), rgba(138,70,206,.08)); color:var(--accent); }
-    .accordion-title { display:block; font-size:1.15rem; font-weight:700; margin-top:.25rem; color:var(--purple); }
-    .accordion-meta { font-size:.82rem; color:var(--gray); }
-    .accordion-panel { height:0; overflow:hidden; transition:height .36s ease; }
-    .accordion-panel.open { height:auto; }
-    .accordion-inner { padding:0 22px 22px; border-top:1px solid var(--border); }
-    .study-toggle { display:flex; justify-content:flex-end; padding-top:18px; }
-    .study-toggle label,.checklist label { display:inline-flex; align-items:center; gap:.65rem; font-family:var(--ui-font); }
-    .study-toggle label { background:rgba(31,111,228,.08); color:var(--blue); border:1px solid rgba(31,111,228,.14); padding:.55rem .85rem; border-radius:999px; font-weight:600; }
-    input[type='checkbox'] { accent-color:var(--blue); width:1rem; height:1rem; }
-    .poem-section { padding-top:18px; }
-    .quote-stack { display:grid; gap:16px; }
-    .quote-analysis p { margin:.9rem 0 0; }
+    :root {
+      --bg: #FAF9F5;
+      --text: #1F1E1D;
+      --accent: #1C6BBB;
+      --quote: #C96442;
+      --keyword: #D73A83;
+      --heading: #8A46CE;
+      --interactive: #1F6FE4;
+      --constant: #2D8F8F;
+      --parameter: #B56613;
+      --string: #26831A;
+      --gray: #6F6F78;
+      --border: #E8E6E1;
+      --card: #FFFFFF;
+      --shadow: 0 10px 28px rgba(31, 30, 29, 0.06);
+      --quote-bg: #FFF6F1;
+      --tag-bg: #F3F0FB;
+      --ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --body-font: Georgia, 'Times New Roman', serif;
+      --radius: 20px;
+      --radius-sm: 14px;
+      --transition: 220ms ease;
+    }
 
-    .theme-detail-card { scroll-margin-top:96px; }
-    .quote-themes { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 4px; }
-    .qtag { display:inline-block; padding:2px 10px; border-radius:12px; font:600 .72rem var(--ui-font); text-transform:uppercase; letter-spacing:.04em; background:var(--tag-bg); color:var(--heading); border:1px solid var(--border); cursor:pointer; transition:background var(--transition), transform var(--transition), box-shadow var(--transition); }
-    .qtag:hover { background:rgba(138,70,206,.12); transform:translateY(-1px); box-shadow:0 6px 14px rgba(138,70,206,.12); }
-    .qtag[data-theme="contrast"] { background:rgba(28,107,187,.11); color:var(--accent); border-color:rgba(28,107,187,.14); }
-    .qtag[data-theme="ageing"] { background:rgba(201,100,66,.12); color:var(--emphasis); border-color:rgba(201,100,66,.18); }
-    .qtag[data-theme="nature"] { background:rgba(215,58,131,.11); color:var(--pink); border-color:rgba(215,58,131,.14); }
-    .qtag[data-theme="idealism"] { background:rgba(138,70,206,.12); color:var(--purple); border-color:rgba(138,70,206,.16); }
-    .qtag[data-theme="politics"] { background:rgba(31,111,228,.11); color:var(--blue); border-color:rgba(31,111,228,.16); }
-    .qtag[data-theme="love"] { background:rgba(45,143,143,.12); color:var(--cyan); border-color:rgba(45,143,143,.16); }
-    .qtag[data-theme="companionship"] { background:rgba(45,143,143,.12); color:var(--cyan); border-color:rgba(45,143,143,.16); }
-    .qtag[data-theme="art"] { background:rgba(181,102,19,.12); color:var(--orange); border-color:rgba(181,102,19,.15); }
-    .qtag[data-theme="permanence"] { background:rgba(181,102,19,.12); color:var(--orange); border-color:rgba(181,102,19,.15); }
-    .qtag[data-theme="public-private"] { background:rgba(38,131,26,.12); color:var(--green); border-color:rgba(38,131,26,.15); }
-    .qtag[data-theme="escapism"] { background:rgba(138,70,206,.12); color:var(--purple); border-color:rgba(138,70,206,.16); }
-    .theme-quotes { margin-top:12px; }
-    .theme-quotes-toggle { background:none; border:1px solid var(--border); border-radius:10px; padding:6px 14px; font:600 .82rem var(--ui-font); color:var(--accent); cursor:pointer; transition:background var(--transition), border-color var(--transition), transform var(--transition); }
-    .theme-quotes-toggle:hover { background:rgba(28,107,187,.06); border-color:rgba(28,107,187,.18); transform:translateY(-1px); }
-    .theme-quotes-list { margin-top:10px; display:grid; gap:8px; }
-    .mini-quote { padding:10px 14px; background:var(--quote-bg); border-left:3px solid var(--quote); border-radius:8px; }
-    .mini-quote .quote-source { display:block; font:700 .75rem var(--ui-font); color:var(--gray); text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
-    .mini-quote blockquote { margin:0; padding:0; font-style:italic; color:var(--quote); font-size:.92rem; background:none; border-left:0; box-shadow:none; border-radius:0; }
-    blockquote { margin:0; padding:1rem 1.15rem; border-left:4px solid var(--emphasis); background:var(--quote-bg); color:var(--emphasis); border-radius:0 14px 14px 0; box-shadow:inset 0 0 0 1px rgba(201,100,66,.08); font-size:1.04rem; }
-    .checklist.static { list-style:none; padding-left:0; display:grid; gap:.8rem; }
-    .checklist.static input { pointer-events:none; }
-    .note-banner { border-left:4px solid var(--pink); background:rgba(215,58,131,.06); border-radius:0 16px 16px 0; padding:1rem 1.15rem; }
-    @media (max-width:900px) { .hero-grid,.two-col { grid-template-columns:1fr; } .tabbar { position:static; grid-template-columns:repeat(2,minmax(0,1fr)); } }
-    @media (max-width:640px) { .page { padding:18px 12px 40px; } .hero { padding:24px 18px; border-radius:22px; } .tabbar { grid-template-columns:1fr 1fr; gap:8px; padding:8px; } .tab-button { padding:.8rem .7rem; font-size:.9rem; } .accordion-trigger { padding:16px 18px; flex-direction:column; align-items:flex-start; } .accordion-inner { padding:0 18px 18px; } h1 { font-size:2rem; } body { font-size:15.5px; } }
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #fcfbf8 0%, var(--bg) 100%);
+      color: var(--text);
+      font: 16px/1.7 var(--body-font);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { opacity: 0.84; }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .top-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      font: 700 0.95rem var(--ui-font);
+    }
+
+    .hero {
+      background: radial-gradient(circle at top right, rgba(138, 70, 206, 0.09), transparent 38%), var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 32px;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -44px -44px auto;
+      width: 210px;
+      height: 210px;
+      background: radial-gradient(circle, rgba(28, 107, 187, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--heading);
+      margin-top: 0;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.45rem);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 3vw, 1.95rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+    }
+
+    h4 {
+      font-size: 0.98rem;
+      margin-bottom: 10px;
+      color: var(--interactive);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: var(--ui-font);
+    }
+
+    .hero p {
+      margin: 0 0 14px;
+      max-width: 72ch;
+    }
+
+    .hero-note {
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+
+    .progress-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 111, 228, 0.16);
+      background: rgba(31, 111, 228, 0.08);
+      color: var(--interactive);
+      font: 700 0.88rem var(--ui-font);
+      white-space: nowrap;
+      box-shadow: 0 8px 18px rgba(31, 111, 228, 0.08);
+    }
+
+    .tag-row,
+    .topic-tags,
+    .quote-themes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag,
+    .topic-tag,
+    .qtag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--tag-bg);
+      color: var(--heading);
+      font: 700 0.82rem/1 var(--ui-font);
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .tag,
+    .topic-tag {
+      cursor: default;
+    }
+
+    .qtag {
+      appearance: none;
+      cursor: pointer;
+      padding: 7px 11px;
+      background: var(--card);
+    }
+
+    .tag:hover,
+    .topic-tag:hover,
+    .qtag:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(31, 30, 29, 0.08);
+    }
+
+    .tag[data-theme="contrast"],
+    .topic-tag[data-theme="contrast"],
+    .qtag[data-theme="contrast"] {
+      background: rgba(28, 107, 187, 0.11);
+      color: var(--accent);
+      border-color: rgba(28, 107, 187, 0.18);
+    }
+
+    .tag[data-theme="nature"],
+    .topic-tag[data-theme="nature"],
+    .qtag[data-theme="nature"] {
+      background: rgba(45, 143, 143, 0.12);
+      color: var(--constant);
+      border-color: rgba(45, 143, 143, 0.18);
+    }
+
+    .tag[data-theme="escape"],
+    .topic-tag[data-theme="escape"],
+    .qtag[data-theme="escape"] {
+      background: rgba(38, 131, 26, 0.11);
+      color: var(--string);
+      border-color: rgba(38, 131, 26, 0.18);
+    }
+
+    .tag[data-theme="ageing"],
+    .topic-tag[data-theme="ageing"],
+    .qtag[data-theme="ageing"] {
+      background: rgba(201, 100, 66, 0.12);
+      color: var(--quote);
+      border-color: rgba(201, 100, 66, 0.18);
+    }
+
+    .tag[data-theme="companionship"],
+    .topic-tag[data-theme="companionship"],
+    .qtag[data-theme="companionship"] {
+      background: rgba(215, 58, 131, 0.11);
+      color: var(--keyword);
+      border-color: rgba(215, 58, 131, 0.18);
+    }
+
+    .tag[data-theme="politics"],
+    .topic-tag[data-theme="politics"],
+    .qtag[data-theme="politics"] {
+      background: rgba(181, 102, 19, 0.12);
+      color: var(--parameter);
+      border-color: rgba(181, 102, 19, 0.18);
+    }
+
+    .tag[data-theme="art"],
+    .topic-tag[data-theme="art"],
+    .qtag[data-theme="art"] {
+      background: rgba(31, 111, 228, 0.11);
+      color: var(--interactive);
+      border-color: rgba(31, 111, 228, 0.18);
+    }
+
+    .tag[data-theme="idealisation"],
+    .topic-tag[data-theme="idealisation"],
+    .qtag[data-theme="idealisation"] {
+      background: rgba(138, 70, 206, 0.12);
+      color: var(--heading);
+      border-color: rgba(138, 70, 206, 0.18);
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+      padding: 10px;
+      border: 1px solid rgba(232, 230, 225, 0.88);
+      background: rgba(250, 249, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(31, 30, 29, 0.05);
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--gray);
+      font: 700 0.95rem var(--ui-font);
+      padding: 12px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .tab-btn:hover,
+    .tab-btn:focus-visible {
+      color: var(--interactive);
+      background: rgba(31, 111, 228, 0.08);
+      outline: none;
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--interactive), var(--accent));
+      box-shadow: 0 8px 22px rgba(28, 107, 187, 0.2);
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 260ms ease;
+    }
+
+    .tab-panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .card p:last-child,
+    .card ul:last-child,
+    .card ol:last-child {
+      margin-bottom: 0;
+    }
+
+    .overview-grid,
+    .theme-grid,
+    .exam-grid,
+    .angle-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .overview-grid,
+    .theme-grid,
+    .angle-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .theme-card,
+    .angle-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,249,245,0.94));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .theme-card:hover,
+    .angle-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(31, 30, 29, 0.08);
+    }
+
+    .theme-card.highlight {
+      border-color: rgba(138, 70, 206, 0.34);
+      box-shadow: 0 0 0 3px rgba(138, 70, 206, 0.14), 0 14px 28px rgba(31, 30, 29, 0.08);
+    }
+
+    .theme-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .theme-card p,
+    .angle-card p {
+      margin: 0;
+    }
+
+    .theme-card h3,
+    .angle-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.04rem;
+    }
+
+    .theme-card {
+      scroll-margin-top: 104px;
+    }
+
+    .theme-quotes-toggle {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--accent);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font: 700 0.8rem var(--ui-font);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    .theme-quotes-toggle:hover {
+      background: rgba(28, 107, 187, 0.06);
+      border-color: rgba(28, 107, 187, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .theme-quotes-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .theme-quotes-list[hidden] {
+      display: none;
+    }
+
+    .mini-quote {
+      padding: 12px 14px;
+      background: var(--quote-bg);
+      border-left: 4px solid var(--quote);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .quote-source {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--gray);
+      font: 700 0.74rem var(--ui-font);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .mini-quote blockquote,
+    .quote-card blockquote {
+      margin: 0;
+      color: var(--quote);
+      font-style: italic;
+    }
+
+    .mini-quote blockquote {
+      font-size: 0.94rem;
+    }
+
+    .accordion-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .accordion-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .accordion-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(31, 30, 29, 0.08);
+    }
+
+    .accordion-item.open {
+      border-color: rgba(28, 107, 187, 0.28);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      padding: 22px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      transition: background var(--transition);
+    }
+
+    .accordion-trigger:hover {
+      background: rgba(28, 107, 187, 0.035);
+    }
+
+    .accordion-head {
+      display: grid;
+      gap: 6px;
+    }
+
+    .accordion-count {
+      font: 700 0.76rem var(--ui-font);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .accordion-title {
+      font-size: 1.16rem;
+      color: var(--heading);
+    }
+
+    .accordion-tools {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .progress-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(31, 111, 228, 0.08);
+      border: 1px solid rgba(31, 111, 228, 0.16);
+      color: var(--interactive);
+      font: 700 0.82rem var(--ui-font);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .progress-label input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--interactive);
+      cursor: pointer;
+    }
+
+    .chevron {
+      width: 14px;
+      height: 14px;
+      border-right: 2px solid var(--interactive);
+      border-bottom: 2px solid var(--interactive);
+      transform: rotate(45deg);
+      transition: transform var(--transition);
+      margin-top: 2px;
+    }
+
+    .accordion-item.open .chevron {
+      transform: rotate(-135deg);
+      margin-top: 8px;
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 340ms ease;
+    }
+
+    .accordion-inner {
+      padding: 0 24px 24px;
+      border-top: 1px solid rgba(232, 230, 225, 0.78);
+    }
+
+    .poem-section {
+      padding-top: 20px;
+    }
+
+    .poem-section + .poem-section {
+      border-top: 1px dashed var(--border);
+      margin-top: 20px;
+    }
+
+    .topic-tags {
+      gap: 8px;
+    }
+
+    .topic-tag {
+      font-weight: 600;
+      background: rgba(111, 111, 120, 0.07);
+      color: var(--gray);
+      border-color: rgba(111, 111, 120, 0.14);
+    }
+
+    .quote-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .quote-card {
+      border: 1px solid rgba(201, 100, 66, 0.2);
+      background: var(--quote-bg);
+      border-left: 5px solid var(--quote);
+      border-radius: 0 14px 14px 0;
+      padding: 16px 18px;
+    }
+
+    .quote-card blockquote + blockquote {
+      margin-top: 10px;
+    }
+
+    .quote-themes {
+      margin: 12px 0 10px;
+      gap: 8px;
+    }
+
+    .quote-card p {
+      margin: 0;
+    }
+
+    .clean-list,
+    .exam-list {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .clean-list li + li,
+    .exam-list li + li {
+      margin-top: 10px;
+    }
+
+    .clean-list li::marker {
+      color: var(--interactive);
+    }
+
+    .exam-list li::marker {
+      color: var(--parameter);
+    }
+
+    .exam-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .angle-grid {
+      margin-top: 12px;
+    }
+
+    .muted {
+      color: var(--gray);
+      font-family: var(--ui-font);
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero-top,
+      .accordion-trigger,
+      .theme-card-head {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .accordion-tools {
+        justify-content: space-between;
+      }
+
+      .exam-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 20px;
+      }
+
+      .hero,
+      .card,
+      .accordion-trigger,
+      .accordion-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .hero {
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+
+      .tabs {
+        top: 8px;
+        padding: 8px;
+        gap: 8px;
+      }
+
+      .tab-btn {
+        flex: 1 1 calc(50% - 8px);
+        text-align: center;
+      }
+
+      .progress-chip,
+      .progress-label {
+        white-space: normal;
+      }
+
+      body {
+        font-size: 15.5px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page">
-    <a class="top-link" href="index.html">← Back to Index</a>
-    <header class="hero"><div class="hero-grid"><div><span class="eyebrow">Leaving Cert Poetry</span><h1>WB Yeats</h1><p class="lead">William Butler Yeats is one of Ireland’s greatest poets and a central figure on the Leaving Cert course. Born in 1865, he lived through major cultural and political change in Ireland, including the rise of nationalism, the struggle for independence, and the modern age.</p><p class="support">His poetry often reflects his own life: his love of Ireland, his fascination with beauty and art, his disappointment with society, and his growing awareness of ageing and mortality.</p></div><aside class="hero-side"><div class="date-chip">📜 1865–1939</div><div class="progress-chip">✅ <span id="progress-text">0 of 5 poems studied</span></div><p>Beautiful language, big human concerns, and a voice shaped by contrast: ideal versus reality, youth versus age, nature versus art, and public duty versus private longing.</p></aside></div></header>
-    <nav class="tabbar" aria-label="Study sections"><button class="tab-button active" type="button" data-tab="overview">Overview</button><button class="tab-button" type="button" data-tab="poems">Poems</button><button class="tab-button" type="button" data-tab="themes">Themes</button><button class="tab-button" type="button" data-tab="exam">Exam Tips</button></nav>
+    <a class="top-link" href="index.html">← All Poets</a>
+
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1>WB Yeats</h1>
+          <p>In these poems, Yeats returns again and again to identity, nature, politics, ageing, companionship, and art.</p>
+          <p>A key habit in his poetry is setting up grand contrasts: an ideal or heroic past against a disappointing present; nature against the city; youth against age; sensual life against enduring intellect or art.</p>
+          <p class="hero-note">He often idealises places or states of being. In the lecture, this idealisation is often used not just to praise something, but to criticise what falls short of it. His voice can shift from dreamy and lyrical to scathing, political, or quietly wistful.</p>
+        </div>
+        <div class="progress-chip">✅ <span id="progress-text">0 of 5 poems studied</span></div>
+      </div>
+      <div class="tag-row">
+        <span class="tag" data-theme="contrast">Contrast</span>
+        <span class="tag" data-theme="nature">Nature</span>
+        <span class="tag" data-theme="escape">Escape</span>
+        <span class="tag" data-theme="ageing">Ageing</span>
+        <span class="tag" data-theme="companionship">Companionship</span>
+        <span class="tag" data-theme="politics">Politics</span>
+        <span class="tag" data-theme="art">Art &amp; intellect</span>
+        <span class="tag" data-theme="idealisation">Idealisation</span>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Study sections">
+      <button class="tab-btn active" type="button" data-tab="overview" aria-selected="true">Overview</button>
+      <button class="tab-btn" type="button" data-tab="poems" aria-selected="false">Poems</button>
+      <button class="tab-btn" type="button" data-tab="themes" aria-selected="false">Themes</button>
+      <button class="tab-btn" type="button" data-tab="exam-tips" aria-selected="false">Exam Tips</button>
+    </nav>
+
     <main>
-      <section class="tab-panel active" id="tab-overview"><div class="content-grid"><div class="two-col"><article class="card"><h2>Poet Overview</h2><p>William Butler Yeats is one of Ireland’s greatest poets and a central figure on the Leaving Cert course. Born in 1865, he lived through major cultural and political change in Ireland, including the rise of nationalism, the struggle for independence, and the modern age.</p><p>His poetry often reflects his own life: his love of Ireland, his fascination with beauty and art, his disappointment with society, and his growing awareness of ageing and mortality.</p><p>Across these poems, Yeats is defined by contrast. He constantly sets one thing against another: ideal versus reality, youth versus age, nature versus art, public duty versus private longing, and past heroism versus present mediocrity.</p><p>His style is highly musical and formal. He frequently uses repetition, refrains, symbolism, carefully controlled rhyme, and memorable images. Even when his ideas are complex, his language often sounds graceful, lyrical, and deeply considered.</p><p>A key feature of Yeats’s work is idealisation. He tends to romanticise places, people, the past, art, and old forms of heroism. However, his later poetry becomes more conflicted and self-aware, showing that ideals are often challenged by time, loss, and human desire.</p></article><article class="card"><h2>Key Themes at a Glance</h2><div class="theme-grid"><div class="theme-card"><div class="theme-card-head"><span class="tag color-accent">Contrast</span></div><p><strong>Contrast:</strong> Yeats constantly compares opposites such as ideal/real, youth/age, body/soul, nature/art, and past/present.</p></div><div class="theme-card"><div class="theme-card-head"><span class="tag color-emphasis">Ageing and mortality</span></div><p><strong>Ageing and mortality:</strong> He is deeply conscious of getting older, losing physical vitality, and facing death.</p></div><div class="theme-card"><div class="theme-card-head"><span class="tag color-pink">Nature</span></div><p><strong>Nature:</strong> In early poems, nature offers peace, beauty, and escape. In later poems, it can remind him of what he has lost.</p></div><div class="theme-card"><div class="theme-card-head"><span class="tag color-purple">Idealism and escapism</span></div><p><strong>Idealism and escapism:</strong> Yeats often imagines perfect places or perfect states of being, whether Innisfree or Byzantium.</p></div><div class="theme-card"><div class="theme-card-head"><span class="tag color-blue">Politics and social criticism</span></div><p><strong>Politics and social criticism:</strong> He attacks greed, materialism, and the betrayal of noble ideals in Irish society.</p></div><div class="theme-card"><div class="theme-card-head"><span class="tag color-cyan">Love and companionship</span></div><p><strong>Love and companionship:</strong> Yeats frequently longs for emotional connection, intimacy, and shared feeling, but this is often absent or unattainable.</p></div><div class="theme-card"><div class="theme-card-head"><span class="tag color-orange">Art and permanence</span></div><p><strong>Art and permanence:</strong> He sees art as a possible way to overcome time, decay, and death.</p></div><div class="theme-card"><div class="theme-card-head"><span class="tag color-green">The tension between public and private life</span></div><p><strong>The tension between public and private life:</strong> Even when politics seems important, personal desire can prove stronger.</p></div></div></article></div><article class="card note-banner"><strong>Why Yeats matters:</strong><p>Yeats is essential for any essay on contrast, ageing, nature, idealism, or the relationship between art and life. His poems span his full career and show a voice that evolves from romantic idealist to conflicted, self-aware modernist.</p></article></div></section>
-      <section class="tab-panel" id="tab-poems"><div class="content-grid"><article class="card"><h2>Poems</h2><p>Open each poem for full notes, quotation analysis, techniques, and exam-ready points. Mark each section as studied to save your progress on this device.</p></article><div class="accordion-stack">
-        <article class="accordion-item" data-accordion>
-            <button class="accordion-trigger" type="button" aria-expanded="true" aria-controls="panel-the-lake-isle-of-innisfree" id="trigger-the-lake-isle-of-innisfree">
-                <span><span class="eyebrow">Poem 1</span><span class="accordion-title">The Lake Isle of Innisfree</span></span>
-                <span class="accordion-meta">Tap to collapse</span>
+      <section class="tab-panel active" id="overview">
+        <div class="grid">
+          <article class="card">
+            <h2>Overview</h2>
+            <ul class="clean-list">
+              <li>In these poems, Yeats returns again and again to identity, nature, politics, ageing, companionship, and art.</li>
+              <li>A key habit in his poetry is setting up grand contrasts: an ideal or heroic past against a disappointing present; nature against the city; youth against age; sensual life against enduring intellect or art.</li>
+              <li>He often idealises places or states of being. In the lecture, this idealisation is often used not just to praise something, but to criticise what falls short of it.</li>
+              <li>His voice can shift from dreamy and lyrical to scathing, political, or quietly wistful.</li>
+            </ul>
+          </article>
+          <div class="overview-grid">
+            <article class="theme-card">
+              <div class="theme-card-head"><span class="tag" data-theme="contrast">Contrast</span></div>
+              <p>Yeats likes to set up grand contrasts: an ideal or heroic past against a disappointing present; nature against the city; youth against age; sensual life against enduring intellect or art.</p>
+            </article>
+            <article class="theme-card">
+              <div class="theme-card-head"><span class="tag" data-theme="nature">Nature</span></div>
+              <p>Nature is intensely positive and idealised in <em>The Lake Isle of Innisfree</em>, but in <em>The Wild Swans at Coole</em> it is no longer a simple refuge, and in <em>Sailing to Byzantium</em> it is the realm of what is born and dies.</p>
+            </article>
+            <article class="theme-card">
+              <div class="theme-card-head"><span class="tag" data-theme="escape">Escape</span></div>
+              <p><em>The Lake Isle of Innisfree</em> is a daydream or wish, not a literal action. Yeats wants the island, but he also clearly wants escape from the city.</p>
+            </article>
+            <article class="theme-card">
+              <div class="theme-card-head"><span class="tag" data-theme="ageing">Ageing</span></div>
+              <p>Time and ageing are central to <em>The Wild Swans at Coole</em>. <em>Sailing to Byzantium</em> is centrally about insecurity about ageing, and <em>Politics</em> ends with a gentle wistfulness about lost youth.</p>
+            </article>
+            <article class="theme-card">
+              <div class="theme-card-head"><span class="tag" data-theme="companionship">Companionship</span></div>
+              <p>Yeats repeatedly returns to companionship and romantic longing, from the swans who are “lover by lover,” to the young “in one another's arms,” to the wish to be young again and hold the girl in his arms.</p>
+            </article>
+            <article class="theme-card">
+              <div class="theme-card-head"><span class="tag" data-theme="politics">Politics</span></div>
+              <p><em>September 1913</em> is one of the clearest examples of Yeats's political and social criticism, while <em>Politics</em> admits that public affairs may be true or important without giving them emotional priority.</p>
+            </article>
+            <article class="theme-card">
+              <div class="theme-card-head"><span class="tag" data-theme="art">Art &amp; intellect</span></div>
+              <p>Yeats imagines art and intellect as what may outlast bodily decay. Byzantium should be treated as a symbolic ideal rather than just a geographical place.</p>
+            </article>
+            <article class="theme-card">
+              <div class="theme-card-head"><span class="tag" data-theme="idealisation">Idealisation</span></div>
+              <p>He often idealises places or states of being. In the lecture, this idealisation is often used not just to praise something, but to criticise what falls short of it.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="poems">
+        <div class="accordion-list">
+          <article class="accordion-item open">
+            <button class="accordion-trigger" type="button" aria-expanded="true" aria-controls="panel-innisfree" id="trigger-innisfree">
+              <div class="accordion-head">
+                <span class="accordion-count">Poem 1</span>
+                <span class="accordion-title">The Lake Isle of Innisfree</span>
+              </div>
+              <div class="accordion-tools">
+                <label class="progress-label" data-stop-toggle>
+                  <input class="study-checkbox" type="checkbox" data-poem="the-lake-isle-of-innisfree" />
+                  <span>Studied ✓</span>
+                </label>
+                <span class="chevron" aria-hidden="true"></span>
+              </div>
             </button>
-            <div class="accordion-panel open" id="panel-the-lake-isle-of-innisfree" role="region" aria-labelledby="trigger-the-lake-isle-of-innisfree">
-                <div class="accordion-inner">
-                    <div class="study-toggle"><label><input type="checkbox" class="study-checkbox" data-storage-key="yeats-the-lake-isle-of-innisfree"><span>Studied ✓</span></label></div>
-                    <section class="poem-section"><h3>Summary</h3><p>Yeats imagines leaving urban life behind and going to Innisfree, a peaceful island in Sligo. There he would live simply and self-sufficiently, surrounded by beautiful natural sounds and sights. The poem presents Innisfree not just as a real place, but as an ideal inner refuge that lives in his imagination.</p></section>
-                    <section class="poem-section"><h3>Key Themes</h3><div class="tags"><span class="tag color-accent">Nature</span><span class="tag color-emphasis">escapism</span><span class="tag color-pink">idealism</span><span class="tag color-purple">Irish identity</span><span class="tag color-blue">peace</span><span class="tag color-cyan">contrast between urban life and retreat</span></div></section>
-                    <section class="poem-section"><h3>Structure &amp; Form</h3><ul class="detail-list"><li>Three regular quatrains with a musical, lyrical flow</li><li>Strong rhythm and repetition create a chant-like quality</li><li>The poem moves from a declaration of intent, to a vivid vision of island life, to the revelation that this longing exists within the speaker’s “heart’s core”</li><li>Rich sound effects reinforce the soothing, dreamlike atmosphere</li></ul></section>
-                    <section class="poem-section"><h3>Key Quotes &amp; Analysis</h3><div class="quote-stack"><div class="quote-analysis"><blockquote>“I will arise and go now”</blockquote><div class="quote-themes"><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="nature">Nature</span></div><p>The opening is decisive and purposeful. It echoes biblical language, especially the prodigal son, giving the journey a spiritual seriousness. Yeats presents the retreat to Innisfree as something deeply necessary.</p></div><div class="quote-analysis"><blockquote>“And a small cabin build there, of clay and wattles made”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>The imagined life is simple and humble. Yeats idealises a stripped-back existence close to nature, away from the complexity of modern life.</p></div><div class="quote-analysis"><blockquote>“Nine bean-rows will I have there, a hive for the honey-bee”</blockquote><div class="quote-themes"><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="nature">Nature</span></div><p>The detail suggests order, planning, and self-sufficiency. This is not a vague fantasy but a carefully imagined alternative life.</p></div><div class="quote-analysis"><blockquote>“And live alone in the bee-loud glade”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>The phrase captures both solitude and vitality. He wants to be alone, but not lonely: nature itself becomes his companion.</p></div><div class="quote-analysis"><blockquote>“And I shall have some peace there, for peace comes dropping slow”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>Peace is presented as natural, gradual, and almost physical. The line is beautifully tautological: peace “dropping slow” from the “veils of the morning” restates the same idea in musical form, showing Yeats’s delight in lyrical beauty.</p></div><div class="quote-analysis"><blockquote>“Dropping from the veils of the morning to where the cricket sings”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>Morning is softened into a dreamy, almost mystical image. The world of Innisfree is gentle, harmonious, and idealised.</p></div><div class="quote-analysis"><blockquote>“There midnight’s all a glimmer, and noon a purple glow / And evening full of the linnet’s wings”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>Yeats presents all times of day as beautiful. Nature is consistently positive here; there is no threat, decay, or conflict.</p></div><div class="quote-analysis"><blockquote>“I hear lake water lapping with low sounds by the shore”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>The soft alliteration and liquid sounds mimic the motion of water. The line is musical and immersive, helping the reader experience the calm he longs for.</p></div><div class="quote-analysis"><blockquote>“While I stand on the roadway, or on the pavements grey”</blockquote><div class="quote-themes"><span class="qtag" data-theme="contrast">Contrast</span><span class="qtag" data-theme="nature">Nature</span></div><p>The dull urban setting sharply contrasts with the living beauty of Innisfree. The city is colourless and spiritually empty.</p></div><div class="quote-analysis"><blockquote>“I hear it in the deep heart’s core”</blockquote><div class="quote-themes"><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="nature">Nature</span></div><p>Innisfree is revealed as an inner reality as much as a physical place. The final line suggests that the desire for peace, home, and harmony lives permanently within him.</p></div></div></section>
-                    <section class="poem-section"><h3>Poetic Techniques</h3><ul class="technique-list"><li><strong>Repetition:</strong> “I will arise and go now” gives the poem a prayer-like insistence.</li><li><strong>Assonance and alliteration:</strong> “lake water lapping with low sounds” recreates the soft movement of water.</li><li><strong>Imagery:</strong> Visual and auditory images make Innisfree feel vivid and dreamlike.</li><li><strong>Symbolism:</strong> Innisfree symbolises inner peace, spiritual refuge, and idealised Ireland.</li><li><strong>Contrast:</strong> The living island is set against the “pavements grey” of city life.</li><li><strong>Tautology:</strong> “peace comes dropping slow / Dropping from the veils of the morning” shows Yeats’s musical style and love of beautiful restatement.</li></ul></section>
-                    <section class="poem-section"><h3>Exam-Ready Points</h3><ul class="checklist static"><li><label><input type="checkbox" disabled><span>Yeats presents nature as an ideal place of healing, peace, and spiritual renewal.</span></label></li><li><label><input type="checkbox" disabled><span>The poem shows his tendency to romanticise Ireland and create perfect imagined spaces.</span></label></li><li><label><input type="checkbox" disabled><span>Innisfree functions both as a real place in Sligo and as a symbol of inner longing.</span></label></li><li><label><input type="checkbox" disabled><span>The contrast between the grey city and the glowing island highlights modern alienation.</span></label></li><li><label><input type="checkbox" disabled><span>The musical language reflects the calm and harmony the speaker desires.</span></label></li><li><label><input type="checkbox" disabled><span>This is an early Yeats poem, so nature is uncomplicatedly positive; later poems make this relationship more complex.</span></label></li></ul></section>
-                </div>
+            <div class="accordion-panel" id="panel-innisfree" role="region" aria-labelledby="trigger-innisfree" style="max-height: none;">
+              <div class="accordion-inner">
+                <section class="poem-section">
+                  <h4>Summary</h4>
+                  <p>The speaker imagines going to Innisfree and living simply in a small cabin, growing food and listening to natural sounds. The lecture stresses that this is not something actually happening: it is a daydream or wish. The poem presents an idealised natural refuge in sharp contrast with the dull city.</p>
+                </section>
+                <section class="poem-section">
+                  <h4>Themes</h4>
+                  <div class="topic-tags">
+                    <span class="topic-tag" data-theme="nature">Nature</span>
+                    <span class="topic-tag" data-theme="escape">escape</span>
+                    <span class="topic-tag">peace</span>
+                    <span class="topic-tag" data-theme="idealisation">idealisation</span>
+                    <span class="topic-tag">self-sufficiency</span>
+                    <span class="topic-tag">contrast between the natural world and the city</span>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Quotes &amp; Analysis</h4>
+                  <div class="quote-stack">
+                    <article class="quote-card">
+                      <blockquote>"I will arise and go now"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>The opening is energetic and full of movement. The repetition of "go" shows how strongly he wants this. Because it is in the future tense, the lecture treats it as hypothetical: a wish rather than a real journey.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"And a small cabin build there, of clay and wattles made"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                      </div>
+                      <p>He does not want a grand house; he wants a simple hut-like dwelling. The lecturer sees this as a desire for primitivism or very simple living.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Nine bean-rows will I have there, a hive for the honey-bee"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                      </div>
+                      <p>These details suggest self-sufficiency: he will farm the land and provide for himself.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"And live alone in the bee-loud glade"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                      </div>
+                      <p>He wants to be away from the city, but not because he wants absolute silence. Natural sound is welcome; it is man-made urban sound that seems undesirable.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"And I shall have some peace there, for peace comes dropping slow"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                      </div>
+                      <p>The repetition of "peace" makes its importance clear. The lecturer also points to the assonance in "comes dropping slow," which creates a calming, slowing effect.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Dropping from the veils of the morning to where the cricket sings"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>The assonance continues. The lecturer suggests that "veils of the morning" may be like morning mist, and notes that the cricket does not literally "sing": the line idealises and elevates nature.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"There midnight's all a glimmer, and noon a purple glow / And evening full of the linnet's wings"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>The whole day is beautified. The lecturer notes the balancing effect of "glimmer" and "glow," helping to create a smooth, beautiful image.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"I will arise and go now, for always night and day"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>The lecturer points to "always night and day" as a deliberate merism (using opposing terms to convey totality), used to stress how constant and inescapable this inner call to Innisfree is.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"I hear lake water lapping with low sounds by the shore"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                      </div>
+                      <p>The line is full of soft sound patterning. The lecturer highlights its assonance as calming and almost continuous, like the water itself.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"While I stand on the roadway, or on the pavements grey"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                      </div>
+                      <p>This is the clearest reference to the city. The lecturer notes how deliberately dull it is: the pavements are simply "grey."</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"I hear it in the deep heart's core"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>Innisfree is not only a place but an inward desire. The poem is very personal and inward-looking.</p>
+                    </article>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Techniques</h4>
+                  <ul class="clean-list">
+                    <li>Repetition, especially of "go" and "peace"</li>
+                    <li>Assonance in lines such as "peace comes dropping slow" and "lake water lapping with low sounds"</li>
+                    <li>Alliteration, for example in "hive" and "honey"</li>
+                    <li>Strong contrast between the idealised island and the dull city</li>
+                    <li>Idealised and sometimes unrealistic natural imagery</li>
+                  </ul>
+                </section>
+                <section class="poem-section">
+                  <h4>Exam Points</h4>
+                  <ul class="exam-list">
+                    <li>The poem is a daydream or wish, not a literal action.</li>
+                    <li>Yeats wants the island, but he also clearly wants escape from the city.</li>
+                    <li>Nature here is intensely positive and idealised.</li>
+                    <li>The poem values simplicity, self-sufficiency, and peace.</li>
+                    <li>The city is kept deliberately colourless so the contrast with Innisfree is stronger.</li>
+                  </ul>
+                </section>
+              </div>
             </div>
-        </article>
-        
-        <article class="accordion-item" data-accordion>
-            <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-the-wild-swans-at-coole" id="trigger-the-wild-swans-at-coole">
-                <span><span class="eyebrow">Poem 2</span><span class="accordion-title">The Wild Swans at Coole</span></span>
-                <span class="accordion-meta">Tap to expand</span>
+          </article>
+
+          <article class="accordion-item">
+            <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-swans" id="trigger-swans">
+              <div class="accordion-head">
+                <span class="accordion-count">Poem 2</span>
+                <span class="accordion-title">The Wild Swans at Coole</span>
+              </div>
+              <div class="accordion-tools">
+                <label class="progress-label" data-stop-toggle>
+                  <input class="study-checkbox" type="checkbox" data-poem="the-wild-swans-at-coole" />
+                  <span>Studied ✓</span>
+                </label>
+                <span class="chevron" aria-hidden="true"></span>
+              </div>
             </button>
-            <div class="accordion-panel" id="panel-the-wild-swans-at-coole" role="region" aria-labelledby="trigger-the-wild-swans-at-coole">
-                <div class="accordion-inner">
-                    <div class="study-toggle"><label><input type="checkbox" class="study-checkbox" data-storage-key="yeats-the-wild-swans-at-coole"><span>Studied ✓</span></label></div>
-                    <section class="poem-section"><h3>Summary</h3><p>Yeats reflects on seeing swans at Coole Park, a place he has returned to for nineteen years. While the swans remain energetic, beautiful, and companionable, he has changed. The poem becomes a meditation on ageing, lost vitality, loneliness, and the fear of future loss.</p></section>
-                    <section class="poem-section"><h3>Key Themes</h3><div class="tags"><span class="tag color-emphasis">Ageing</span><span class="tag color-pink">change</span><span class="tag color-purple">nature</span><span class="tag color-blue">loss</span><span class="tag color-cyan">companionship</span><span class="tag color-orange">contrast</span><span class="tag color-green">mortality</span></div></section>
-                    <section class="poem-section"><h3>Structure &amp; Form</h3><ul class="detail-list"><li>Five sestets with a controlled, reflective pattern</li><li>The poem begins with stillness and observation, then shifts into personal reflection and emotional pain</li><li>Yeats balances description of the swans with meditations on his own ageing</li><li>The structure supports contrast between permanence in nature and change in the self</li></ul></section>
-                    <section class="poem-section"><h3>Key Quotes &amp; Analysis</h3><div class="quote-stack"><div class="quote-analysis"><blockquote>“The trees are in their autumn beauty, / The woodland paths are dry”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="nature">Nature</span></div><p>Autumn is beautiful, but it also suggests decline and ageing. From the beginning, the season hints at mortality.</p></div><div class="quote-analysis"><blockquote>“Upon the brimming water among the stones / Are nine-and-fifty swans”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span></div><p>The precise number shows familiarity and repeated observation. Yeats knows this place intimately, suggesting a long relationship with it.</p></div><div class="quote-analysis"><blockquote>“The nineteenth autumn has come upon me / Since I first made my count”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>Time is central. Nineteen years have passed, and the phrase “come upon me” suggests age as something almost oppressive.</p></div><div class="quote-analysis"><blockquote>“All suddenly mount / And scatter wheeling in great broken rings / Upon their clamorous wings”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The swans burst into movement and energy. Their freedom and vitality sharply contrast with Yeats’s reflective stillness.</p></div><div class="quote-analysis"><blockquote>“I have looked upon those brilliant creatures, / And now my heart is sore”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="love">Love/Companionship</span></div><p>Nature no longer simply consoles him. The swans make him sad because they reveal what he lacks.</p></div><div class="quote-analysis"><blockquote>“All’s changed since I, hearing at twilight, / The first time on this shore”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>This line marks the emotional centre of the poem. The real change is not in the swans but in Yeats himself.</p></div><div class="quote-analysis"><blockquote>“The bell-beat of their wings above my head / Trod with a lighter tread”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The swans’ wings once matched his own lighter, younger self. The contrast with his current heaviness is implied rather than directly stated, making it more poignant.</p></div><div class="quote-analysis"><blockquote>“Unwearied still, lover by lover, / They paddle in the cold / Companionable streams”</blockquote><div class="quote-themes"><span class="qtag" data-theme="love">Love/Companionship</span><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="ageing">Ageing</span></div><p>The swans are tireless and paired off. Yeats envies both their endurance and their companionship.</p></div><div class="quote-analysis"><blockquote>“Their hearts have not grown old”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>This stark line captures the contrast perfectly. The swans seem untouched by time, whereas Yeats feels his own ageing acutely.</p></div><div class="quote-analysis"><blockquote>“Delight men’s eyes, when I awake some day / To find they have flown away?”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The ending introduces fear and uncertainty. Even these apparently permanent creatures may vanish, reminding Yeats that nothing can ultimately be held forever.</p></div></div></section>
-                    <section class="poem-section"><h3>Poetic Techniques</h3><ul class="technique-list"><li><strong>Symbolism:</strong> The swans symbolise beauty, vitality, permanence, and companionship.</li><li><strong>Contrast:</strong> Yeats’s ageing is set against the swans’ apparent timelessness.</li><li><strong>Seasonal imagery:</strong> Autumn suggests maturity, decline, and the passing of life.</li><li><strong>Sound imagery:</strong> “clamorous wings” and “bell-beat” bring the swans vividly to life.</li><li><strong>Repetition of return and counting:</strong> Emphasises habit, memory, and the passage of time.</li><li><strong>Emotive diction:</strong> “heart is sore” conveys direct personal pain.</li></ul></section>
-                    <section class="poem-section"><h3>Exam-Ready Points</h3><ul class="checklist static"><li><label><input type="checkbox" disabled><span>The poem shows a major change in Yeats’s treatment of nature: it now provokes jealousy and melancholy rather than peace.</span></label></li><li><label><input type="checkbox" disabled><span>Time is measured precisely, making the speaker’s awareness of ageing feel inescapable.</span></label></li><li><label><input type="checkbox" disabled><span>The swans symbolise everything the speaker feels he is losing: youth, energy, beauty, and companionship.</span></label></li><li><label><input type="checkbox" disabled><span>The poem is deeply personal, but its reflections on change and mortality are universal.</span></label></li><li><label><input type="checkbox" disabled><span>Yeats’s gift for contrast is central: the unwearied swans throw his own decline into sharp focus.</span></label></li><li><label><input type="checkbox" disabled><span>The ending shows that even what seems permanent may disappear, intensifying the poem’s sadness.</span></label></li></ul></section>
-                </div>
+            <div class="accordion-panel" id="panel-swans" role="region" aria-labelledby="trigger-swans">
+              <div class="accordion-inner">
+                <section class="poem-section">
+                  <h4>Summary</h4>
+                  <p>Yeats looks at the swans at Coole after many years of returning there. The lecture presents the poem as showing a changed understanding of what nature now represents to him. The swans are still beautiful and energetic, but the sight now brings pain rather than reassurance.</p>
+                </section>
+                <section class="poem-section">
+                  <h4>Themes</h4>
+                  <div class="topic-tags">
+                    <span class="topic-tag">Change</span>
+                    <span class="topic-tag" data-theme="ageing">ageing</span>
+                    <span class="topic-tag" data-theme="companionship">companionship</span>
+                    <span class="topic-tag">beauty</span>
+                    <span class="topic-tag">loss</span>
+                    <span class="topic-tag">the changing meaning of nature</span>
+                    <span class="topic-tag" data-theme="contrast">contrast</span>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Quotes &amp; Analysis</h4>
+                  <div class="quote-stack">
+                    <article class="quote-card">
+                      <blockquote>"The trees are in their autumn beauty, / The woodland paths are dry"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                      </div>
+                      <p>The poem opens with calm, lyrical scene-setting. The lecturer stresses the beauty of the description.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Under the October twilight the water / Mirrors a still sky"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                      </div>
+                      <p>The water is compared to a mirror, making the opening scene seem very calm and flat.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Upon the brimming water among the stones / Are nine-and-fifty swans"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                      </div>
+                      <p>The swans are part of this carefully observed setting.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"The nineteenth autumn has come upon me / Since I first made my count"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                      </div>
+                      <p>Time is central: nineteen years have passed since he first counted them.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"All suddenly mount / And scatter wheeling in great broken rings / Upon their clamorous wings"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The movement is sudden, energetic, and noisy. The lecturer highlights words like "scatter," "wheeling," and "clamorous."</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"I have looked upon those brilliant creatures, / And now my heart is sore"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                      </div>
+                      <p>He still sees the swans as beautiful, but he no longer takes comfort from that beauty.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"All's changed since I, hearing at twilight, / The first time on this shore"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                      </div>
+                      <p>The real change is in him, not in the swans.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"The bell-beat of their wings above my head / Trod with a lighter tread"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                      </div>
+                      <p>The lecture suggests that he himself was lighter once, and no longer is.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Unwearied still, lover by lover, / They paddle in the cold / Companionable streams"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="companionship">Companionship</button>
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                      </div>
+                      <p>The swans remain tireless and paired, which throws Yeats's weariness and lack of companionship into sharper focus.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Their hearts have not grown old. / Passion or conquest, wander where they will, / Attend upon them still"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                        <button class="qtag" type="button" data-theme="companionship">Companionship</button>
+                      </div>
+                      <p>The swans still seem full of energy, desire, and movement.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Delight men's eyes, when I awake some day / To find they have flown away?"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                      </div>
+                      <p>The ending is anxious and almost elegiac. Even these beautiful creatures may one day be gone.</p>
+                    </article>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Techniques</h4>
+                  <ul class="clean-list">
+                    <li>Strong contrast between the speaker and the swans</li>
+                    <li>Energetic diction and sound imagery in the flight scene</li>
+                    <li>Lyrical visual description in the opening</li>
+                    <li>Direct emotional statement in "my heart is sore"</li>
+                    <li>An almost elegiac tone toward the end</li>
+                  </ul>
+                </section>
+                <section class="poem-section">
+                  <h4>Exam Points</h4>
+                  <ul class="exam-list">
+                    <li>This poem is useful to compare with <em>Innisfree</em>: nature is no longer a simple refuge.</li>
+                    <li>Time and ageing are central to the poem.</li>
+                    <li>The swans suggest beauty, vitality, and companionship, but the ending reminds us that they may fly away.</li>
+                    <li>Yeats feels weary where the swans remain "unwearied still."</li>
+                    <li>The poem shows how a sight that once gave joy can later bring sadness.</li>
+                  </ul>
+                </section>
+              </div>
             </div>
-        </article>
-        
-        <article class="accordion-item" data-accordion>
-            <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-september-1913" id="trigger-september-1913">
-                <span><span class="eyebrow">Poem 3</span><span class="accordion-title">September 1913</span></span>
-                <span class="accordion-meta">Tap to expand</span>
+          </article>
+
+          <article class="accordion-item">
+            <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-september" id="trigger-september">
+              <div class="accordion-head">
+                <span class="accordion-count">Poem 3</span>
+                <span class="accordion-title">September 1913</span>
+              </div>
+              <div class="accordion-tools">
+                <label class="progress-label" data-stop-toggle>
+                  <input class="study-checkbox" type="checkbox" data-poem="september-1913" />
+                  <span>Studied ✓</span>
+                </label>
+                <span class="chevron" aria-hidden="true"></span>
+              </div>
             </button>
-            <div class="accordion-panel" id="panel-september-1913" role="region" aria-labelledby="trigger-september-1913">
-                <div class="accordion-inner">
-                    <div class="study-toggle"><label><input type="checkbox" class="study-checkbox" data-storage-key="yeats-september-1913"><span>Studied ✓</span></label></div>
-                    <section class="poem-section"><h3>Summary</h3><p>In this bitter political poem, Yeats attacks the Irish middle class for greed, narrow-mindedness, and spiritual poverty. He contrasts their petty materialism with the heroic sacrifices of earlier patriots, arguing that the noble spirit of “Romantic Ireland” has died.</p></section>
-                    <section class="poem-section"><h3>Key Themes</h3><div class="tags"><span class="tag color-pink">Politics</span><span class="tag color-purple">social criticism</span><span class="tag color-blue">idealism</span><span class="tag color-cyan">betrayal</span><span class="tag color-orange">nationalism</span><span class="tag color-green">contrast between past and present</span></div></section>
-                    <section class="poem-section"><h3>Structure &amp; Form</h3><ul class="detail-list"><li>Four tight quatrains with a strong, regular rhyme scheme</li><li>Refrain gives the poem force, bitterness, and memorability</li><li>The rhythm can feel mechanical, fitting the poem’s attack on money-counting and routine piety</li><li>Each stanza deepens the contrast between heroic past and degraded present</li></ul></section>
-                    <section class="poem-section"><h3>Key Quotes &amp; Analysis</h3><div class="quote-stack"><div class="quote-analysis"><blockquote>“What need you, being come to sense, / But fumble in a greasy till”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>Yeats opens with contempt. “Greasy till” reduces modern Ireland to grubby commerce. “Come to sense” is sarcastic: what society calls practicality is, to Yeats, spiritual decline.</p></div><div class="quote-analysis"><blockquote>“And add the halfpence to the pence / And prayer to shivering prayer”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>Yeats links money and religion, suggesting both have become empty rituals. The repetition mimics petty accumulation and mechanical devotion.</p></div><div class="quote-analysis"><blockquote>“Romantic Ireland’s dead and gone, / It’s with O’Leary in the grave”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>This refrain is the poem’s emotional core. John O’Leary represents an older, nobler nationalist spirit. The line is both elegiac and accusatory.</p></div><div class="quote-analysis"><blockquote>“Was it for this the wild geese spread / The grey wing upon every tide”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The “Wild Geese” evoke Irish soldiers who left Ireland after defeat. Yeats invokes historical sacrifice to shame the present generation.</p></div><div class="quote-analysis"><blockquote>“For this that all that blood was shed”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="contrast">Contrast</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>The bluntness of the question makes the accusation more powerful. Heroic sacrifice has, in Yeats’s view, led only to greed and mediocrity.</p></div><div class="quote-analysis"><blockquote>“For men were born to pray and save”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>This is savage irony. Yeats mocks a society that has reduced life to piety and thrift.</p></div><div class="quote-analysis"><blockquote>“Yet they were of a different kind, / The names that stilled your childish play”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>He elevates the revolutionary heroes into figures of myth and inspiration.</p></div><div class="quote-analysis"><blockquote>“They weighed so lightly what they gave”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The old heroes gave generously, even their lives, while modern Ireland clings to money.</p></div><div class="quote-analysis"><blockquote>“But let them be, they’re dead and gone, / They’re with O’Leary in the grave”</blockquote><div class="quote-themes"><span class="qtag" data-theme="politics">Politics</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The variation on the refrain sounds resigned and bitterly final. Yeats suggests that heroic values now belong only to the dead.</p></div><div class="quote-analysis"><blockquote>“Some woman’s yellow hair / Has maddened every mother’s son”</blockquote><div class="quote-themes"><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="politics">Politics</span></div><p>Yeats imagines how modern cynics would dismiss revolutionary passion as mere romantic foolishness. This shows his anger at a society incapable of recognising idealism.</p></div></div></section>
-                    <section class="poem-section"><h3>Poetic Techniques</h3><ul class="technique-list"><li><strong>Refrain:</strong> “Romantic Ireland’s dead and gone” drives home Yeats’s grief and frustration.</li><li><strong>Sarcasm and irony:</strong> He mocks the values of thrift, respectability, and hollow religiosity.</li><li><strong>Historical allusion:</strong> O’Leary, the Wild Geese, and patriotic sacrifice deepen the political resonance.</li><li><strong>Contrast:</strong> The generous heroes of the past are set against the mercenary present.</li><li><strong>Regular form:</strong> Tight quatrains and rhythmic control give the poem a forceful, almost marching energy.</li><li><strong>Diction of contempt:</strong> Words like “fumble” and “greasy” show disgust.</li></ul></section>
-                    <section class="poem-section"><h3>Exam-Ready Points</h3><ul class="checklist static"><li><label><input type="checkbox" disabled><span>Yeats presents himself as defender of an older, heroic Ireland against a materialistic modern society.</span></label></li><li><label><input type="checkbox" disabled><span>The poem is political, but it is also deeply emotional, driven by disappointment and anger.</span></label></li><li><label><input type="checkbox" disabled><span>The refrain creates a mournful sense that noble values have been buried.</span></label></li><li><label><input type="checkbox" disabled><span>Yeats idealises the past, especially revolutionary sacrifice, in order to criticise the present.</span></label></li><li><label><input type="checkbox" disabled><span>His attack on the middle class shows his hostility to greed, small-mindedness, and spiritual emptiness.</span></label></li><li><label><input type="checkbox" disabled><span>The regular form mirrors the repetitive, mechanical life he despises.</span></label></li></ul></section>
-                </div>
+            <div class="accordion-panel" id="panel-september" role="region" aria-labelledby="trigger-september">
+              <div class="accordion-inner">
+                <section class="poem-section">
+                  <h4>Summary</h4>
+                  <p>The lecture places this poem against the background of the Hugh Lane gallery controversy. Yeats attacks a miserly, commercialised, anti-cultural public mood and contrasts it with a more heroic and idealised Irish past. The poem is openly political and very scathing.</p>
+                </section>
+                <section class="poem-section">
+                  <h4>Themes</h4>
+                  <div class="topic-tags">
+                    <span class="topic-tag" data-theme="politics">Politics</span>
+                    <span class="topic-tag">social criticism</span>
+                    <span class="topic-tag">miserliness</span>
+                    <span class="topic-tag">anti-cultural values</span>
+                    <span class="topic-tag">contrast between past and present</span>
+                    <span class="topic-tag">heroism and sacrifice</span>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Quotes &amp; Analysis</h4>
+                  <div class="quote-stack">
+                    <article class="quote-card">
+                      <blockquote>"What need you, being come to sense, / But fumble in a greasy till"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The opening is contemptuous. Yeats presents the present as grubby money-counting.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"And add the halfpence to the pence / And prayer to shivering prayer"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                      </div>
+                      <p>The poem piles up images of petty thrift and pious smallness.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Till you have dried the marrow from the bone"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                      </div>
+                      <p>The lecturer explains this as giving only scraps: the very last little bit.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"For men were born to pray and save"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                      </div>
+                      <p>This line helps sum up the narrow culture Yeats is attacking.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Romantic Ireland's dead and gone, / It's with O'Leary in the grave"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The refrain contrasts the present with a more romantic and heroic Ireland of the past.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Yet they were of a different kind, / The names that stilled your childish play"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>Yeats elevates earlier figures as passionate and heroic examples.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Was it for this the wild geese spread / The grey wing upon every tide / For this that all that blood was shed"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The repeated question is a sharp accusation against the disappointing present.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Some woman's yellow hair / Has maddened every mother's son"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>The lecturer tentatively reads this as Ireland imagined as a woman, tied to patriotism and nationalism.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"They weighed so lightly what they gave"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The older heroes treated sacrifice, even life itself, as a light price for a cause.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"But let them be, they're dead and gone, / They're with O'Leary in the grave"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The return to the refrain keeps loss and accusation in view.</p>
+                    </article>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Techniques</h4>
+                  <ul class="clean-list">
+                    <li>Refrain that works almost like a chorus</li>
+                    <li>Strong contrast between a heroic past and a mean present</li>
+                    <li>Contemptuous diction such as "fumble" and "greasy"</li>
+                    <li>Striking imagery of scraps in "dried the marrow from the bone"</li>
+                    <li>Historical and political references such as O'Leary, Emmet, Tone, and Fitzgerald</li>
+                    <li>Scathing, explicit social commentary</li>
+                  </ul>
+                </section>
+                <section class="poem-section">
+                  <h4>Exam Points</h4>
+                  <ul class="exam-list">
+                    <li>The Hugh Lane context is useful for understanding the poem's anger.</li>
+                    <li>Yeats attacks a miserly, anti-cultural society.</li>
+                    <li>He idealises an older heroic Ireland in order to criticise the present.</li>
+                    <li>The poem is one of the clearest examples of Yeats's political and social criticism.</li>
+                    <li>Handle <strong>"some woman's yellow hair"</strong> cautiously: the lecture's reading is tentative and symbolic, not dismissive.</li>
+                    <li>The refrain is central to the poem's force.</li>
+                  </ul>
+                </section>
+              </div>
             </div>
-        </article>
-        
-        <article class="accordion-item" data-accordion>
-            <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-sailing-to-byzantium" id="trigger-sailing-to-byzantium">
-                <span><span class="eyebrow">Poem 4</span><span class="accordion-title">Sailing to Byzantium</span></span>
-                <span class="accordion-meta">Tap to expand</span>
+          </article>
+
+          <article class="accordion-item">
+            <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-byzantium" id="trigger-byzantium">
+              <div class="accordion-head">
+                <span class="accordion-count">Poem 4</span>
+                <span class="accordion-title">Sailing to Byzantium</span>
+              </div>
+              <div class="accordion-tools">
+                <label class="progress-label" data-stop-toggle>
+                  <input class="study-checkbox" type="checkbox" data-poem="sailing-to-byzantium" />
+                  <span>Studied ✓</span>
+                </label>
+                <span class="chevron" aria-hidden="true"></span>
+              </div>
             </button>
-            <div class="accordion-panel" id="panel-sailing-to-byzantium" role="region" aria-labelledby="trigger-sailing-to-byzantium">
-                <div class="accordion-inner">
-                    <div class="study-toggle"><label><input type="checkbox" class="study-checkbox" data-storage-key="yeats-sailing-to-byzantium"><span>Studied ✓</span></label></div>
-                    <section class="poem-section"><h3>Summary</h3><p>Yeats rejects the sensual world of youth and nature and imagines travelling to Byzantium, a symbolic city of art and spiritual permanence. Feeling trapped in an ageing body, he longs to transcend mortality and become part of an eternal artistic order.</p></section>
-                    <section class="poem-section"><h3>Key Themes</h3><div class="tags"><span class="tag color-purple">Ageing</span><span class="tag color-blue">mortality</span><span class="tag color-cyan">art</span><span class="tag color-orange">transcendence</span><span class="tag color-green">body versus soul</span><span class="tag color-accent">nature versus permanence</span><span class="tag color-emphasis">contrast</span></div></section>
-                    <section class="poem-section"><h3>Structure &amp; Form</h3><ul class="detail-list"><li>Four ottava rima stanzas give the poem dignity and formal control</li><li>The poem moves from rejection of the physical world, to self-description, to invocation of sages, to a vision of transformed existence</li><li>This progression reflects a spiritual journey from decay toward imagined permanence</li><li>Elevated diction and symbolic imagery create a grand, philosophical tone</li></ul></section>
-                    <section class="poem-section"><h3>Key Quotes &amp; Analysis</h3><div class="quote-stack"><div class="quote-analysis"><blockquote>“That is no country for old men”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The opening is blunt and memorable. The world of youth, sensuality, and physical life excludes the old.</p></div><div class="quote-analysis"><blockquote>“The young / In one another’s arms, birds in the trees”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span><span class="qtag" data-theme="nature">Nature</span></div><p>Yeats fills the opening with images of fertility, passion, and life. Yet these are not comforting; they underline his exclusion.</p></div><div class="quote-analysis"><blockquote>“Those dying generations”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>Even youth is temporary. The phrase shows Yeats’s ability to darken beauty with mortality.</p></div><div class="quote-analysis"><blockquote>“Caught in that sensual music all neglect / Monuments of unageing intellect”</blockquote><div class="quote-themes"><span class="qtag" data-theme="art-permanence">Art/Permanence</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The physical world is seductive but shallow. Yeats contrasts fleeting sensation with lasting artistic and intellectual achievement.</p></div><div class="quote-analysis"><blockquote>“An aged man is but a paltry thing, / A tattered coat upon a stick”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>This harsh image reduces the body to a scarecrow-like husk. Yeats confronts ageing without sentimentality.</p></div><div class="quote-analysis"><blockquote>“Unless / Soul clap its hands and sing”</blockquote><div class="quote-themes"><span class="qtag" data-theme="art-permanence">Art/Permanence</span><span class="qtag" data-theme="ageing">Ageing</span></div><p>The only answer to bodily decay is spiritual and artistic energy. The soul must become active and expressive.</p></div><div class="quote-analysis"><blockquote>“And therefore I have sailed the seas and come / To the holy city of Byzantium”</blockquote><div class="quote-themes"><span class="qtag" data-theme="idealism">Idealism</span><span class="qtag" data-theme="art-permanence">Art/Permanence</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>Byzantium is not just a place but an ideal realm of order, art, and transcendence.</p></div><div class="quote-analysis"><blockquote>“O sages standing in God’s holy fire / As in the gold mosaic of a wall”</blockquote><div class="quote-themes"><span class="qtag" data-theme="art-permanence">Art/Permanence</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>The sages are imagined as both spiritual beings and works of art. Yeats merges religion, art, and permanence.</p></div><div class="quote-analysis"><blockquote>“Come from the holy fire, perne in a gyre, / And be the singing-masters of my soul”</blockquote><div class="quote-themes"><span class="qtag" data-theme="art-permanence">Art/Permanence</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>He asks for guidance in transforming himself. The language is mystical and ceremonial.</p></div><div class="quote-analysis"><blockquote>“Consume my heart away; sick with desire / And fastened to a dying animal”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="contrast">Contrast</span><span class="qtag" data-theme="art-permanence">Art/Permanence</span></div><p>The heart remains trapped in desire and in the body, which Yeats calls a “dying animal.” This is one of his starkest expressions of bodily revulsion.</p></div><div class="quote-analysis"><blockquote>“Once out of nature I shall never take / My bodily form from any natural thing”</blockquote><div class="quote-themes"><span class="qtag" data-theme="nature">Nature</span><span class="qtag" data-theme="art-permanence">Art/Permanence</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>This is the decisive rejection of nature. Unlike the Yeats of <em>Innisfree</em>, he now sees nature as bound to death and decay.</p></div><div class="quote-analysis"><blockquote>“But such a form as Grecian goldsmiths make / Of hammered gold and gold enamelling”</blockquote><div class="quote-themes"><span class="qtag" data-theme="art-permanence">Art/Permanence</span><span class="qtag" data-theme="idealism">Idealism</span></div><p>He wants to become an artificial artwork, crafted and permanent.</p></div><div class="quote-analysis"><blockquote>“To keep a drowsy Emperor awake”</blockquote><div class="quote-themes"><span class="qtag" data-theme="art-permanence">Art/Permanence</span></div><p>Art has power, elegance, and purpose. The image also suggests refinement and elite culture.</p></div><div class="quote-analysis"><blockquote>“Of what is past, or passing, or to come”</blockquote><div class="quote-themes"><span class="qtag" data-theme="art-permanence">Art/Permanence</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>Art transcends time. The triad, almost tautological in its fullness, suggests total temporal reach.</p></div></div></section>
-                    <section class="poem-section"><h3>Poetic Techniques</h3><ul class="technique-list"><li><strong>Symbolism:</strong> Byzantium symbolises eternal art, spiritual order, and permanence.</li><li><strong>Contrast:</strong> Young/old, body/soul, nature/art, sensual/intellectual.</li><li><strong>Metaphor:</strong> “A tattered coat upon a stick” vividly expresses physical decline.</li><li><strong>Religious and artistic imagery:</strong> “holy fire,” “gold mosaic,” and “gold enamelling” elevate the poem’s vision.</li><li><strong>Formal verse:</strong> The ornate structure reflects the poem’s admiration for crafted perfection.</li><li><strong>Tautological phrasing:</strong> “past, or passing, or to come” broadens art’s scope across all time.</li></ul></section>
-                    <section class="poem-section"><h3>Exam-Ready Points</h3><ul class="checklist static"><li><label><input type="checkbox" disabled><span>The poem is Yeats’s strongest rejection of the natural world as a place of decay.</span></label></li><li><label><input type="checkbox" disabled><span>Ageing is presented not just as physical decline, but as a crisis of identity and value.</span></label></li><li><label><input type="checkbox" disabled><span>Byzantium represents a dreamed-of escape into artistic and spiritual permanence.</span></label></li><li><label><input type="checkbox" disabled><span>Yeats contrasts transient sensual life with the enduring achievements of art and intellect.</span></label></li><li><label><input type="checkbox" disabled><span>The poem shows his idealising imagination at its most ambitious and philosophical.</span></label></li><li><label><input type="checkbox" disabled><span>It powerfully develops a pattern seen across his work: when reality disappoints him, he turns toward an ideal world.</span></label></li></ul></section>
-                </div>
+            <div class="accordion-panel" id="panel-byzantium" role="region" aria-labelledby="trigger-byzantium">
+              <div class="accordion-inner">
+                <section class="poem-section">
+                  <h4>Summary</h4>
+                  <p>The lecture presents this as a poem about Yeats's insecurity about ageing. Byzantium is a real place, but in the poem it becomes more of a metaphor or symbol for artistic purity and almost ageless intellect. The poem sets the sensual, mortal world against art and intellect, which may last beyond the body.</p>
+                </section>
+                <section class="poem-section">
+                  <h4>Themes</h4>
+                  <div class="topic-tags">
+                    <span class="topic-tag" data-theme="ageing">Ageing</span>
+                    <span class="topic-tag">mortality</span>
+                    <span class="topic-tag" data-theme="art">art</span>
+                    <span class="topic-tag">intellect</span>
+                    <span class="topic-tag">body versus soul</span>
+                    <span class="topic-tag">sensual life versus permanence</span>
+                    <span class="topic-tag" data-theme="contrast">contrast</span>
+                    <span class="topic-tag">identity</span>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Quotes &amp; Analysis</h4>
+                  <div class="quote-stack">
+                    <article class="quote-card">
+                      <blockquote>"That is no country for old men"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The opening immediately sets up the speaker's exclusion from the world of youth.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"The young / In one another's arms, birds in the trees"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="companionship">Companionship</button>
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                      </div>
+                      <p>The lecturer notes how this combines human and natural companionship.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Those dying generations"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>Even youth belongs to a world where everything born will die.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Caught in that sensual music all neglect / Monuments of unageing intellect"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The poem contrasts the vibrancy of sensual life with intellect and art, which Yeats presents as what may endure.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"An aged man is but a paltry thing, / A tattered coat upon a stick"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                      </div>
+                      <p>This is the poem's harshest image of bodily decay and decline.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Unless / Soul clap its hands and sing"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                      </div>
+                      <p>The lecture reads the soul, singing, art, and intellect as what can continue beyond bodily decline.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"And therefore I have sailed the seas and come / To the holy city of Byzantium"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                        <button class="qtag" type="button" data-theme="escape">Escape</button>
+                      </div>
+                      <p>Byzantium is less a realistic destination than an imagined ideal.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"O sages standing in God's holy fire / As in the gold mosaic of a wall"</blockquote>
+                      <blockquote>"Be the singing-masters of my soul"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>The language is elevated here, and the lecture says the passage is almost like offering up a prayer. It also links art, religion, soul, and transcendence.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Consume my heart away; sick with desire / And fastened to a dying animal"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                      </div>
+                      <p>The lecturer is clear that the "dying animal" is the mortal body, Yeats himself.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Gather me into the artifice of eternity"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>This phrase helps sum up the poem: created artifice is imagined as something that can last.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Once out of nature I shall never take / My bodily form from any natural thing"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="nature">Nature</button>
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The poem rejects natural bodily existence as something tied to decay.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"But such a form as Grecian goldsmiths make / Of hammered gold and gold enamelling"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                        <button class="qtag" type="button" data-theme="idealisation">Idealisation</button>
+                      </div>
+                      <p>Yeats imagines survival through crafted art rather than through the body.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"Of what is past, or passing, or to come"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="art">Art</button>
+                      </div>
+                      <p>The lecture's wider point is that art can continue to speak across time.</p>
+                    </article>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Techniques</h4>
+                  <ul class="clean-list">
+                    <li>Grand contrasts: youth and age, body and soul, nature and art, sensual life and intellect</li>
+                    <li>Symbolism in the figure of Byzantium</li>
+                    <li>Harsh metaphor in "a tattered coat upon a stick"</li>
+                    <li>Elevated, contrived diction in the address to the sages</li>
+                    <li>Religious and artistic imagery such as "holy fire" and "gold mosaic"</li>
+                    <li>Heavy sibilance in the middle of the poem; the lecturer notices it but leaves its exact purpose open</li>
+                  </ul>
+                </section>
+                <section class="poem-section">
+                  <h4>Exam Points</h4>
+                  <ul class="exam-list">
+                    <li>The poem is centrally about insecurity about ageing.</li>
+                    <li>Byzantium should be treated as a symbolic ideal rather than just a geographical place.</li>
+                    <li>Yeats imagines art and intellect as what may outlast bodily decay.</li>
+                    <li>Nature here is no longer a refuge; it is the realm of what is born and dies.</li>
+                    <li>This is a strong example of Yeats setting up a grand contrast between reality and an ideal.</li>
+                    <li>Keep readings measured: the lecture treats some parts of the poem as open to interpretation.</li>
+                  </ul>
+                </section>
+              </div>
             </div>
-        </article>
-        
-        <article class="accordion-item" data-accordion>
+          </article>
+
+          <article class="accordion-item">
             <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-politics" id="trigger-politics">
-                <span><span class="eyebrow">Poem 5</span><span class="accordion-title">Politics</span></span>
-                <span class="accordion-meta">Tap to expand</span>
+              <div class="accordion-head">
+                <span class="accordion-count">Poem 5</span>
+                <span class="accordion-title">Politics</span>
+              </div>
+              <div class="accordion-tools">
+                <label class="progress-label" data-stop-toggle>
+                  <input class="study-checkbox" type="checkbox" data-poem="politics" />
+                  <span>Studied ✓</span>
+                </label>
+                <span class="chevron" aria-hidden="true"></span>
+              </div>
             </button>
             <div class="accordion-panel" id="panel-politics" role="region" aria-labelledby="trigger-politics">
-                <div class="accordion-inner">
-                    <div class="study-toggle"><label><input type="checkbox" class="study-checkbox" data-storage-key="yeats-politics"><span>Studied ✓</span></label></div>
-                    <section class="poem-section"><h3>Summary</h3><p>In this short late poem, Yeats acknowledges the importance of international politics but admits that personal desire matters more to him. Seeing a young girl, he finds his thoughts drawn away from war and public affairs toward longing for youth and physical love.</p></section>
-                    <section class="poem-section"><h3>Key Themes</h3><div class="tags"><span class="tag color-blue">Ageing</span><span class="tag color-cyan">desire</span><span class="tag color-orange">politics versus personal life</span><span class="tag color-green">love</span><span class="tag color-accent">contrast</span><span class="tag color-emphasis">human longing</span></div></section>
-                    <section class="poem-section"><h3>Structure &amp; Form</h3><ul class="detail-list"><li>Short, direct lyric with simple language and a conversational tone</li><li>The brevity gives it the feeling of a final, honest admission</li><li>Its apparent simplicity masks a deep reversal of ideas from earlier poems like <em>Sailing to Byzantium</em></li><li>The poem’s compact form suits its immediacy and emotional directness</li></ul></section>
-                    <section class="poem-section"><h3>Key Quotes &amp; Analysis</h3><div class="quote-stack"><div class="quote-analysis"><blockquote>“How can I, that girl standing there, / My attention fix / On Roman or on Russian / Or on Spanish politics?”</blockquote><div class="quote-themes"><span class="qtag" data-theme="public-vs-private">Public-vs-Private</span><span class="qtag" data-theme="love">Love/Companionship</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>The poem opens with a rhetorical question. Grand public issues are immediately displaced by the sight of a girl. Yeats places the personal above the political.</p></div><div class="quote-analysis"><blockquote>“That girl standing there”</blockquote><div class="quote-themes"><span class="qtag" data-theme="love">Love/Companionship</span><span class="qtag" data-theme="public-vs-private">Public-vs-Private</span></div><p>The phrase is concrete, immediate, and physical. It undercuts abstract discussion and returns the poem to the living moment.</p></div><div class="quote-analysis"><blockquote>“And maybe what they say is true / Of war and war’s alarms”</blockquote><div class="quote-themes"><span class="qtag" data-theme="public-vs-private">Public-vs-Private</span><span class="qtag" data-theme="contrast">Contrast</span></div><p>Yeats does not deny that politics matters. He simply admits that intellectual agreement is weaker than emotional and physical desire.</p></div><div class="quote-analysis"><blockquote>“But O that I were young again”</blockquote><div class="quote-themes"><span class="qtag" data-theme="ageing">Ageing</span><span class="qtag" data-theme="love">Love/Companionship</span></div><p>This sudden exclamation brings ageing back to the centre of the poem. Beneath the light tone lies intense regret.</p></div><div class="quote-analysis"><blockquote>“And held her in my arms”</blockquote><div class="quote-themes"><span class="qtag" data-theme="love">Love/Companionship</span><span class="qtag" data-theme="public-vs-private">Public-vs-Private</span><span class="qtag" data-theme="ageing">Ageing</span></div><p>The ending is simple, intimate, and deeply human. The poem closes not on theory or ideology, but on bodily longing.</p></div></div></section>
-                    <section class="poem-section"><h3>Poetic Techniques</h3><ul class="technique-list"><li><strong>Contrast:</strong> Public politics is set against private desire.</li><li><strong>Direct address and rhetorical question:</strong> These make the poem immediate and personal.</li><li><strong>Plain style:</strong> The simplicity gives the poem honesty and emotional force.</li><li><strong>Irony:</strong> Yeats had earlier sought to escape the body in <em>Sailing to Byzantium</em>, but here he longs to recover youthful physical experience.</li><li><strong>Understatement:</strong> The poem seems casual, but it expresses deep truths about ageing and desire.</li></ul></section>
-                    <section class="poem-section"><h3>Exam-Ready Points</h3><ul class="checklist static"><li><label><input type="checkbox" disabled><span>The poem shows Yeats’s honesty: despite all grand ideas, he remains subject to ordinary human longing.</span></label></li><li><label><input type="checkbox" disabled><span>It revisits his favourite theme of ageing, but in a lighter, more personal tone.</span></label></li><li><label><input type="checkbox" disabled><span>The contrast between politics and desire reflects his lifelong habit of setting opposites against each other.</span></label></li><li><label><input type="checkbox" disabled><span>The poem can be read as a late reversal of <em>Sailing to Byzantium</em>: instead of rejecting the body, he misses it.</span></label></li><li><label><input type="checkbox" disabled><span>Its plain language makes its emotional impact more striking.</span></label></li><li><label><input type="checkbox" disabled><span>Yeats suggests that private feeling may be more powerful than public ideology.</span></label></li></ul></section>
-                </div>
+              <div class="accordion-inner">
+                <section class="poem-section">
+                  <h4>Summary</h4>
+                  <p>Despite its title, this poem is less interested in politics than in immediate human desire. The lecturer praises it as economical, direct, and built around one clear point: how can the speaker focus on far-off public affairs when a girl is standing nearby? The ending carries only a slight, wistful regret about lost youth.</p>
+                </section>
+                <section class="poem-section">
+                  <h4>Themes</h4>
+                  <div class="topic-tags">
+                    <span class="topic-tag">Politics versus personal desire</span>
+                    <span class="topic-tag" data-theme="ageing">ageing</span>
+                    <span class="topic-tag">love and companionship</span>
+                    <span class="topic-tag">wistfulness</span>
+                    <span class="topic-tag">what matters most</span>
+                    <span class="topic-tag" data-theme="contrast">contrast</span>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Quotes &amp; Analysis</h4>
+                  <div class="quote-stack">
+                    <article class="quote-card">
+                      <blockquote>"How can I, that girl standing there, / My attention fix / On Roman or on Russian / Or on Spanish politics?"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                        <button class="qtag" type="button" data-theme="companionship">Companionship</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>Far-off continental politics is pushed aside by the immediate presence of the girl.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"That girl standing there"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="companionship">Companionship</button>
+                      </div>
+                      <p>The phrase creates simplicity, closeness, and immediacy.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"And maybe what they say is true / Of war and war's alarms"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="politics">Politics</button>
+                        <button class="qtag" type="button" data-theme="contrast">Contrast</button>
+                      </div>
+                      <p>The speaker does not deny that politics may matter or may be true.</p>
+                    </article>
+                    <article class="quote-card">
+                      <blockquote>"But oh that I were young again / And held her in my arms"</blockquote>
+                      <div class="quote-themes">
+                        <button class="qtag" type="button" data-theme="ageing">Ageing</button>
+                        <button class="qtag" type="button" data-theme="companionship">Companionship</button>
+                      </div>
+                      <p>The poem ends with longing for youth and intimacy. The lecturer stresses that this is only a tinge or hint of wistful regret, not something overbearing.</p>
+                    </article>
+                  </div>
+                </section>
+                <section class="poem-section">
+                  <h4>Techniques</h4>
+                  <ul class="clean-list">
+                    <li>Very economical, direct, to-the-point style</li>
+                    <li>Clear contrast between public politics and private desire</li>
+                    <li>Simplicity and immediacy in the image of the girl standing there</li>
+                    <li>A light touch of social commentary, including a playful jab at public expertise and grand political talk</li>
+                    <li>Wistful rather than heavy tone</li>
+                  </ul>
+                </section>
+                <section class="poem-section">
+                  <h4>Exam Points</h4>
+                  <ul class="exam-list">
+                    <li>The title is slightly ironic: the poem finally cares more about desire than politics.</li>
+                    <li>Yeats suggests that immediate human closeness can matter more than distant public issues.</li>
+                    <li>The poem admits politics may be true or important, but it does not give it emotional priority.</li>
+                    <li>The ending should be read as gently wistful, not intensely regretful.</li>
+                    <li>Any self-admonishment here is only slight and implicit.</li>
+                    <li>The poem's simplicity is part of its power.</li>
+                  </ul>
+                </section>
+              </div>
             </div>
-        </article>
-        </div></div></section>
-      <section class="tab-panel" id="tab-themes"><div class="content-grid"><article class="card"><h2>Key Themes</h2><p>These themes organise Yeats’s poetry across the course and connect directly to the poem notes below.</p><div class="theme-detail-grid"><article class="theme-detail-card" data-theme-id="contrast"><div class="theme-detail-head"><h3>Contrast</h3><span class="tag color-accent">Contrast</span></div><p><strong>Contrast:</strong> Yeats constantly compares opposites such as ideal/real, youth/age, body/soul, nature/art, and past/present.</p><div class="cross-poem"><span class="cross-label">Cross-poem examples</span><div class="tags"><span class="tag color-accent">The Lake Isle of Innisfree</span><span class="tag color-emphasis">The Wild Swans at Coole</span><span class="tag color-pink">September 1913</span><span class="tag color-purple">Sailing to Byzantium</span><span class="tag color-blue">Politics</span></div></div><div class="theme-quotes"><button class="theme-quotes-toggle" type="button">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>“While I stand on the roadway, or on the pavements grey”</blockquote></div><div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>“Their hearts have not grown old”</blockquote></div><div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>“Romantic Ireland’s dead and gone, / It’s with O’Leary in the grave”</blockquote></div><div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>“Caught in that sensual music all neglect / Monuments of unageing intellect”</blockquote></div></div></div></article><article class="theme-detail-card" data-theme-id="ageing"><div class="theme-detail-head"><h3>Ageing and mortality</h3><span class="tag color-emphasis">Ageing and mortality</span></div><p><strong>Ageing and mortality:</strong> He is deeply conscious of getting older, losing physical vitality, and facing death.</p><div class="cross-poem"><span class="cross-label">Cross-poem examples</span><div class="tags"><span class="tag color-accent">The Wild Swans at Coole</span><span class="tag color-emphasis">Sailing to Byzantium</span><span class="tag color-pink">Politics</span></div></div><div class="theme-quotes"><button class="theme-quotes-toggle" type="button">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>“The nineteenth autumn has come upon me / Since I first made my count”</blockquote></div><div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>“Their hearts have not grown old”</blockquote></div><div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>“An aged man is but a paltry thing, / A tattered coat upon a stick”</blockquote></div><div class="mini-quote"><span class="quote-source">Politics</span><blockquote>“But O that I were young again”</blockquote></div></div></div></article><article class="theme-detail-card" data-theme-id="nature"><div class="theme-detail-head"><h3>Nature</h3><span class="tag color-pink">Nature</span></div><p><strong>Nature:</strong> In early poems, nature offers peace, beauty, and escape. In later poems, it can remind him of what he has lost.</p><div class="cross-poem"><span class="cross-label">Cross-poem examples</span><div class="tags"><span class="tag color-accent">The Lake Isle of Innisfree</span><span class="tag color-emphasis">The Wild Swans at Coole</span><span class="tag color-pink">Sailing to Byzantium</span></div></div><div class="theme-quotes"><button class="theme-quotes-toggle" type="button">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>“I hear lake water lapping with low sounds by the shore”</blockquote></div><div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>“The trees are in their autumn beauty, / The woodland paths are dry”</blockquote></div><div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>“Upon the brimming water among the stones / Are nine-and-fifty swans”</blockquote></div><div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>“Once out of nature I shall never take / My bodily form from any natural thing”</blockquote></div></div></div></article><article class="theme-detail-card" data-theme-id="idealism"><div class="theme-detail-head"><h3>Idealism and escapism</h3><span class="tag color-purple">Idealism and escapism</span></div><p><strong>Idealism and escapism:</strong> Yeats often imagines perfect places or perfect states of being, whether Innisfree or Byzantium.</p><div class="cross-poem"><span class="cross-label">Cross-poem examples</span><div class="tags"><span class="tag color-accent">The Lake Isle of Innisfree</span><span class="tag color-emphasis">September 1913</span><span class="tag color-pink">Sailing to Byzantium</span></div></div><div class="theme-quotes"><button class="theme-quotes-toggle" type="button">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>“I will arise and go now”</blockquote></div><div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>“And a small cabin build there, of clay and wattles made”</blockquote></div><div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>“Romantic Ireland’s dead and gone, / It’s with O’Leary in the grave”</blockquote></div><div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>“And therefore I have sailed the seas and come / To the holy city of Byzantium”</blockquote></div></div></div></article><article class="theme-detail-card" data-theme-id="politics"><div class="theme-detail-head"><h3>Politics and social criticism</h3><span class="tag color-blue">Politics and social criticism</span></div><p><strong>Politics and social criticism:</strong> He attacks greed, materialism, and the betrayal of noble ideals in Irish society.</p><div class="cross-poem"><span class="cross-label">Cross-poem examples</span><div class="tags"><span class="tag color-accent">September 1913</span></div></div><div class="theme-quotes"><button class="theme-quotes-toggle" type="button">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>“What need you, being come to sense, / But fumble in a greasy till”</blockquote></div><div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>“Romantic Ireland’s dead and gone, / It’s with O’Leary in the grave”</blockquote></div><div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>“Was it for this the wild geese spread / The grey wing upon every tide”</blockquote></div></div></div></article><article class="theme-detail-card" data-theme-id="love"><div class="theme-detail-head"><h3>Love and companionship</h3><span class="tag color-cyan">Love and companionship</span></div><p><strong>Love and companionship:</strong> Yeats frequently longs for emotional connection, intimacy, and shared feeling, but this is often absent or unattainable.</p><div class="cross-poem"><span class="cross-label">Cross-poem examples</span><div class="tags"><span class="tag color-accent">The Wild Swans at Coole</span><span class="tag color-emphasis">Politics</span></div></div><div class="theme-quotes"><button class="theme-quotes-toggle" type="button">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>“Unwearied still, lover by lover, / They paddle in the cold / Companionable streams”</blockquote></div><div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>“I have looked upon those brilliant creatures, / And now my heart is sore”</blockquote></div><div class="mini-quote"><span class="quote-source">Politics</span><blockquote>“That girl standing there”</blockquote></div><div class="mini-quote"><span class="quote-source">Politics</span><blockquote>“And held her in my arms”</blockquote></div></div></div></article><article class="theme-detail-card" data-theme-id="art-permanence"><div class="theme-detail-head"><h3>Art and permanence</h3><span class="tag color-orange">Art and permanence</span></div><p><strong>Art and permanence:</strong> He sees art as a possible way to overcome time, decay, and death.</p><div class="cross-poem"><span class="cross-label">Cross-poem examples</span><div class="tags"><span class="tag color-accent">Sailing to Byzantium</span></div></div><div class="theme-quotes"><button class="theme-quotes-toggle" type="button">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>“Caught in that sensual music all neglect / Monuments of unageing intellect”</blockquote></div><div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>“O sages standing in God’s holy fire / As in the gold mosaic of a wall”</blockquote></div><div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>“But such a form as Grecian goldsmiths make / Of hammered gold and gold enamelling”</blockquote></div><div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>“Of what is past, or passing, or to come”</blockquote></div></div></div></article><article class="theme-detail-card" data-theme-id="public-vs-private"><div class="theme-detail-head"><h3>The tension between public and private life</h3><span class="tag color-green">The tension between public and private life</span></div><p><strong>The tension between public and private life:</strong> Even when politics seems important, personal desire can prove stronger.</p><div class="cross-poem"><span class="cross-label">Cross-poem examples</span><div class="tags"><span class="tag color-accent">Politics</span></div></div><div class="theme-quotes"><button class="theme-quotes-toggle" type="button">View Quotes ▾</button><div class="theme-quotes-list" style="display:none;"><div class="mini-quote"><span class="quote-source">Politics</span><blockquote>“How can I, that girl standing there, / My attention fix / On Roman or on Russian / Or on Spanish politics?”</blockquote></div><div class="mini-quote"><span class="quote-source">Politics</span><blockquote>“And maybe what they say is true / Of war and war’s alarms”</blockquote></div><div class="mini-quote"><span class="quote-source">Politics</span><blockquote>“But O that I were young again”</blockquote></div><div class="mini-quote"><span class="quote-source">Politics</span><blockquote>“And held her in my arms”</blockquote></div></div></div></article></div></article><article class="card"><h2>Cross-Poem Comparative Notes</h2><ul class="comparative-list"><li><strong>Yeats and contrast:</strong> More than many poets, Yeats builds poems around oppositions — youth versus age, ideal versus reality, past versus present, and body versus soul.</li><li><strong>Nature:</strong> In <em>The Lake Isle of Innisfree</em>, nature is wholly restorative and ideal. In <em>The Wild Swans at Coole</em>, it becomes a source of envy and sadness. In <em>Sailing to Byzantium</em>, nature is finally rejected as the realm of mortality.</li><li><strong>Ageing:</strong> Few poets on the course are as persistently self-aware about ageing. In <em>Wild Swans</em>, ageing causes melancholy; in <em>Byzantium</em>, it drives a search for transcendence; in <em>Politics</em>, it produces longing for lost youth.</li><li><strong>Politics and society:</strong> In <em>September 1913</em>, Yeats is openly political and critical, attacking greed and spiritual emptiness. In <em>Politics</em>, however, he admits that the personal may ultimately matter more than public events.</li><li><strong>Idealisation:</strong> Yeats repeatedly idealises places, people, art, and the past. This makes him excellent for comparison with poets who are more realistic, grounded, or socially direct.</li><li><strong>Style:</strong> His verse is often more formal, musical, and symbol-heavy than that of many modern poets. Refrains, repetition, controlled rhyme, and rich imagery are central to his voice.</li><li><strong>Emotional range:</strong> Yeats can be dreamy (<em>Innisfree</em>), sorrowful (<em>Wild Swans</em>), bitter (<em>September 1913</em>), philosophical (<em>Sailing to Byzantium</em>), and intimate (<em>Politics</em>).</li></ul></article></div></section>
-      <section class="tab-panel" id="tab-exam"><div class="exam-layout"><article class="card"><h2>Comparative Points</h2><ul class="comparative-list"><li><strong>Yeats and contrast:</strong> More than many poets, Yeats builds poems around oppositions — youth versus age, ideal versus reality, past versus present, and body versus soul.</li><li><strong>Nature:</strong> In <em>The Lake Isle of Innisfree</em>, nature is wholly restorative and ideal. In <em>The Wild Swans at Coole</em>, it becomes a source of envy and sadness. In <em>Sailing to Byzantium</em>, nature is finally rejected as the realm of mortality.</li><li><strong>Ageing:</strong> Few poets on the course are as persistently self-aware about ageing. In <em>Wild Swans</em>, ageing causes melancholy; in <em>Byzantium</em>, it drives a search for transcendence; in <em>Politics</em>, it produces longing for lost youth.</li><li><strong>Politics and society:</strong> In <em>September 1913</em>, Yeats is openly political and critical, attacking greed and spiritual emptiness. In <em>Politics</em>, however, he admits that the personal may ultimately matter more than public events.</li><li><strong>Idealisation:</strong> Yeats repeatedly idealises places, people, art, and the past. This makes him excellent for comparison with poets who are more realistic, grounded, or socially direct.</li><li><strong>Style:</strong> His verse is often more formal, musical, and symbol-heavy than that of many modern poets. Refrains, repetition, controlled rhyme, and rich imagery are central to his voice.</li><li><strong>Emotional range:</strong> Yeats can be dreamy (<em>Innisfree</em>), sorrowful (<em>Wild Swans</em>), bitter (<em>September 1913</em>), philosophical (<em>Sailing to Byzantium</em>), and intimate (<em>Politics</em>).</li></ul></article><article class="card"><h2>Sample Essay Angles</h2><ul class="essay-list"><li>Yeats as a poet of contrast and opposition</li><li>The importance of ageing and mortality in Yeats’s poetry</li><li>Yeats’s changing attitude to nature across his career</li><li>Idealism and escapism in Yeats’s work</li><li>The relationship between personal feeling and public life in Yeats</li><li>Yeats as a political and social critic</li><li>The role of art and imagination in overcoming reality</li><li>Yeats’s musical style and memorable use of repetition and refrain</li><li>How Yeats romanticises the past, Ireland, and heroic values</li><li>The tension in Yeats between high philosophy and ordinary human desire</li></ul></article><article class="card"><h2>Quick-Reference Quotes</h2><div class="quick-quote-grid"><div class="quick-quote-card"><h4>The Lake Isle of Innisfree</h4><ul><li>“I will arise and go now”</li><li>“And a small cabin build there, of clay and wattles made”</li><li>“Nine bean-rows will I have there, a hive for the honey-bee”</li><li>“And live alone in the bee-loud glade”</li><li>“And I shall have some peace there, for peace comes dropping slow”</li><li>“Dropping from the veils of the morning to where the cricket sings”</li><li>“There midnight’s all a glimmer, and noon a purple glow / And evening full of the linnet’s wings”</li><li>“I hear lake water lapping with low sounds by the shore”</li><li>“While I stand on the roadway, or on the pavements grey”</li><li>“I hear it in the deep heart’s core”</li></ul></div><div class="quick-quote-card"><h4>The Wild Swans at Coole</h4><ul><li>“The trees are in their autumn beauty, / The woodland paths are dry”</li><li>“Upon the brimming water among the stones / Are nine-and-fifty swans”</li><li>“The nineteenth autumn has come upon me / Since I first made my count”</li><li>“All suddenly mount / And scatter wheeling in great broken rings / Upon their clamorous wings”</li><li>“I have looked upon those brilliant creatures, / And now my heart is sore”</li><li>“All’s changed since I, hearing at twilight, / The first time on this shore”</li><li>“The bell-beat of their wings above my head / Trod with a lighter tread”</li><li>“Unwearied still, lover by lover, / They paddle in the cold / Companionable streams”</li><li>“Their hearts have not grown old”</li><li>“Delight men’s eyes, when I awake some day / To find they have flown away?”</li></ul></div><div class="quick-quote-card"><h4>September 1913</h4><ul><li>“What need you, being come to sense, / But fumble in a greasy till”</li><li>“And add the halfpence to the pence / And prayer to shivering prayer”</li><li>“Romantic Ireland’s dead and gone, / It’s with O’Leary in the grave”</li><li>“Was it for this the wild geese spread / The grey wing upon every tide”</li><li>“For this that all that blood was shed”</li><li>“For men were born to pray and save”</li><li>“Yet they were of a different kind, / The names that stilled your childish play”</li><li>“They weighed so lightly what they gave”</li><li>“But let them be, they’re dead and gone, / They’re with O’Leary in the grave”</li><li>“Some woman’s yellow hair / Has maddened every mother’s son”</li></ul></div><div class="quick-quote-card"><h4>Sailing to Byzantium</h4><ul><li>“That is no country for old men”</li><li>“The young / In one another’s arms, birds in the trees”</li><li>“Those dying generations”</li><li>“Caught in that sensual music all neglect / Monuments of unageing intellect”</li><li>“An aged man is but a paltry thing, / A tattered coat upon a stick”</li><li>“Unless / Soul clap its hands and sing”</li><li>“And therefore I have sailed the seas and come / To the holy city of Byzantium”</li><li>“O sages standing in God’s holy fire / As in the gold mosaic of a wall”</li><li>“Come from the holy fire, perne in a gyre, / And be the singing-masters of my soul”</li><li>“Consume my heart away; sick with desire / And fastened to a dying animal”</li><li>“Once out of nature I shall never take / My bodily form from any natural thing”</li><li>“But such a form as Grecian goldsmiths make / Of hammered gold and gold enamelling”</li><li>“To keep a drowsy Emperor awake”</li><li>“Of what is past, or passing, or to come”</li></ul></div><div class="quick-quote-card"><h4>Politics</h4><ul><li>“How can I, that girl standing there, / My attention fix / On Roman or on Russian / Or on Spanish politics?”</li><li>“That girl standing there”</li><li>“And maybe what they say is true / Of war and war’s alarms”</li><li>“But O that I were young again”</li><li>“And held her in my arms”</li></ul></div></div></article><article class="card note-banner"><strong>Final takeaway:</strong><p>### The Wild Swans at Coole</p></article></div></section>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="themes">
+        <div class="grid">
+          <article class="card">
+            <h2>Themes</h2>
+            <p>These key themes run across the five poems and can help you move from individual quotations to cross-poem discussion.</p>
+          </article>
+          <div class="theme-grid">
+            <article class="theme-card" data-theme-id="contrast">
+              <div class="theme-card-head">
+                <span class="tag" data-theme="contrast">Contrast</span>
+                <button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button>
+              </div>
+              <p>Yeats likes to set up grand contrasts: an ideal or heroic past against a disappointing present; nature against the city; youth against age; sensual life against enduring intellect or art.</p>
+              <div class="theme-quotes-list" hidden>
+                <div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>"While I stand on the roadway, or on the pavements grey"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>"All's changed since I, hearing at twilight, / The first time on this shore"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>"Romantic Ireland's dead and gone, / It's with O'Leary in the grave"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"Caught in that sensual music all neglect / Monuments of unageing intellect"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Politics</span><blockquote>"How can I, that girl standing there, / My attention fix / On Roman or on Russian / Or on Spanish politics?"</blockquote></div>
+              </div>
+            </article>
+
+            <article class="theme-card" data-theme-id="nature">
+              <div class="theme-card-head">
+                <span class="tag" data-theme="nature">Nature</span>
+                <button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button>
+              </div>
+              <p>Nature is intensely positive and idealised in <em>The Lake Isle of Innisfree</em>, but in <em>The Wild Swans at Coole</em> it is no longer a simple refuge, and in <em>Sailing to Byzantium</em> it is the realm of what is born and dies.</p>
+              <div class="theme-quotes-list" hidden>
+                <div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>"And live alone in the bee-loud glade"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>"There midnight's all a glimmer, and noon a purple glow / And evening full of the linnet's wings"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>"The trees are in their autumn beauty, / The woodland paths are dry"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>"Upon the brimming water among the stones / Are nine-and-fifty swans"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"Once out of nature I shall never take / My bodily form from any natural thing"</blockquote></div>
+              </div>
+            </article>
+
+            <article class="theme-card" data-theme-id="escape">
+              <div class="theme-card-head">
+                <span class="tag" data-theme="escape">Escape</span>
+                <button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button>
+              </div>
+              <p><em>The Lake Isle of Innisfree</em> is a daydream or wish, not a literal action. Yeats wants the island, but he also clearly wants escape from the city.</p>
+              <div class="theme-quotes-list" hidden>
+                <div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>"I will arise and go now"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>"And a small cabin build there, of clay and wattles made"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>"I hear it in the deep heart's core"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"And therefore I have sailed the seas and come / To the holy city of Byzantium"</blockquote></div>
+              </div>
+            </article>
+
+            <article class="theme-card" data-theme-id="ageing">
+              <div class="theme-card-head">
+                <span class="tag" data-theme="ageing">Ageing</span>
+                <button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button>
+              </div>
+              <p>Time and ageing are central to <em>The Wild Swans at Coole</em>. <em>Sailing to Byzantium</em> is centrally about insecurity about ageing, and <em>Politics</em> ends with a gentle wistfulness about lost youth.</p>
+              <div class="theme-quotes-list" hidden>
+                <div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>"The nineteenth autumn has come upon me / Since I first made my count"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>"Their hearts have not grown old. / Passion or conquest, wander where they will, / Attend upon them still"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"That is no country for old men"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"An aged man is but a paltry thing, / A tattered coat upon a stick"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Politics</span><blockquote>"But oh that I were young again / And held her in my arms"</blockquote></div>
+              </div>
+            </article>
+
+            <article class="theme-card" data-theme-id="companionship">
+              <div class="theme-card-head">
+                <span class="tag" data-theme="companionship">Companionship</span>
+                <button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button>
+              </div>
+              <p>Yeats repeatedly returns to companionship and romantic longing, from the swans who are “lover by lover,” to the young “in one another's arms,” to the wish to be young again and hold the girl in his arms.</p>
+              <div class="theme-quotes-list" hidden>
+                <div class="mini-quote"><span class="quote-source">The Wild Swans at Coole</span><blockquote>"Unwearied still, lover by lover, / They paddle in the cold / Companionable streams"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"The young / In one another's arms, birds in the trees"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Politics</span><blockquote>"That girl standing there"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Politics</span><blockquote>"But oh that I were young again / And held her in my arms"</blockquote></div>
+              </div>
+            </article>
+
+            <article class="theme-card" data-theme-id="politics">
+              <div class="theme-card-head">
+                <span class="tag" data-theme="politics">Politics</span>
+                <button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button>
+              </div>
+              <p><em>September 1913</em> is one of the clearest examples of Yeats's political and social criticism, while <em>Politics</em> admits that public affairs may be true or important without giving them emotional priority.</p>
+              <div class="theme-quotes-list" hidden>
+                <div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>"What need you, being come to sense, / But fumble in a greasy till"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>"And add the halfpence to the pence / And prayer to shivering prayer"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>"Romantic Ireland's dead and gone, / It's with O'Leary in the grave"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Politics</span><blockquote>"How can I, that girl standing there, / My attention fix / On Roman or on Russian / Or on Spanish politics?"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Politics</span><blockquote>"And maybe what they say is true / Of war and war's alarms"</blockquote></div>
+              </div>
+            </article>
+
+            <article class="theme-card" data-theme-id="art">
+              <div class="theme-card-head">
+                <span class="tag" data-theme="art">Art &amp; intellect</span>
+                <button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button>
+              </div>
+              <p>Yeats imagines art and intellect as what may outlast bodily decay. Byzantium should be treated as a symbolic ideal rather than just a geographical place.</p>
+              <div class="theme-quotes-list" hidden>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"Caught in that sensual music all neglect / Monuments of unageing intellect"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"Unless / Soul clap its hands and sing"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"Gather me into the artifice of eternity"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"But such a form as Grecian goldsmiths make / Of hammered gold and gold enamelling"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"Of what is past, or passing, or to come"</blockquote></div>
+              </div>
+            </article>
+
+            <article class="theme-card" data-theme-id="idealisation">
+              <div class="theme-card-head">
+                <span class="tag" data-theme="idealisation">Idealisation</span>
+                <button class="theme-quotes-toggle" type="button" aria-expanded="false">View Quotes ▾</button>
+              </div>
+              <p>He often idealises places or states of being. In the lecture, this idealisation is often used not just to praise something, but to criticise what falls short of it.</p>
+              <div class="theme-quotes-list" hidden>
+                <div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>"Dropping from the veils of the morning to where the cricket sings"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">The Lake Isle of Innisfree</span><blockquote>"There midnight's all a glimmer, and noon a purple glow / And evening full of the linnet's wings"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">September 1913</span><blockquote>"Yet they were of a different kind, / The names that stilled your childish play"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"And therefore I have sailed the seas and come / To the holy city of Byzantium"</blockquote></div>
+                <div class="mini-quote"><span class="quote-source">Sailing to Byzantium</span><blockquote>"O sages standing in God's holy fire / As in the gold mosaic of a wall"</blockquote></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="exam-tips">
+        <div class="exam-grid">
+          <article class="card">
+            <h2>General Exam Advice</h2>
+            <ul class="exam-list">
+              <li>Track contrast carefully: Yeats likes to set up grand contrasts between ideal and reality, nature and the city, youth and age, and sensual life and enduring intellect or art.</li>
+              <li>Notice how nature changes across the poems: in <em>The Lake Isle of Innisfree</em> it is intensely positive and idealised; in <em>The Wild Swans at Coole</em> it is no longer a simple refuge; in <em>Sailing to Byzantium</em> it is the realm of what is born and dies.</li>
+              <li>Keep idealisation in view: Yeats often idealises places or states of being, and he idealises an older heroic Ireland in order to criticise the present.</li>
+              <li>Pay attention to tone: his voice can shift from dreamy and lyrical to scathing, political, or quietly wistful.</li>
+              <li>Use measured readings: <em>Sailing to Byzantium</em> should be treated as open to interpretation in places, and <strong>"some woman's yellow hair"</strong> should be handled cautiously.</li>
+              <li><em>Politics</em> should be read as gently wistful, not intensely regretful.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h2>Essay Angles</h2>
+            <div class="angle-grid">
+              <article class="angle-card">
+                <h3>Contrast</h3>
+                <p>Use <em>The Lake Isle of Innisfree</em>, <em>The Wild Swans at Coole</em>, <em>September 1913</em>, <em>Sailing to Byzantium</em>, and <em>Politics</em> to show how often Yeats sets one world against another.</p>
+              </article>
+              <article class="angle-card">
+                <h3>Nature and changing attitudes to nature</h3>
+                <p><em>The Lake Isle of Innisfree</em>, <em>The Wild Swans at Coole</em>, and <em>Sailing to Byzantium</em> together show that nature moves from refuge, to pain, to the realm of mortality.</p>
+              </article>
+              <article class="angle-card">
+                <h3>Ageing and insecurity about ageing</h3>
+                <p><em>The Wild Swans at Coole</em> and <em>Sailing to Byzantium</em> are central here, while <em>Politics</em> ends with a slight, wistful regret about lost youth.</p>
+              </article>
+              <article class="angle-card">
+                <h3>Politics and social commentary</h3>
+                <p><em>September 1913</em> is one of the clearest examples of Yeats's political and social criticism, while <em>Politics</em> shows a more personal hierarchy of what matters.</p>
+              </article>
+              <article class="angle-card">
+                <h3>Escape and idealisation</h3>
+                <p><em>The Lake Isle of Innisfree</em> and <em>Sailing to Byzantium</em> both imagine ideal destinations or states of being, and <em>September 1913</em> idealises an older heroic Ireland.</p>
+              </article>
+              <article class="angle-card">
+                <h3>Art, intellect, and what may last beyond the body</h3>
+                <p><em>Sailing to Byzantium</em> is the key poem for showing Yeats's belief that art and intellect may outlast bodily decay.</p>
+              </article>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
   </div>
+
   <script>
-    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanels = document.querySelectorAll('.tab-panel');
-    tabButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const target = button.dataset.tab;
-        tabButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
-        tabPanels.forEach((panel) => panel.classList.toggle('active', panel.id === `tab-${target}`));
+
+    function activateTab(tabId) {
+      tabButtons.forEach(button => {
+        const isActive = button.dataset.tab === tabId;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', String(isActive));
       });
+      tabPanels.forEach(panel => panel.classList.toggle('active', panel.id === tabId));
+    }
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => activateTab(button.dataset.tab));
     });
 
-    document.querySelectorAll('.accordion-panel').forEach((panel) => {
-      if (panel.classList.contains('open')) panel.style.height = panel.scrollHeight + 'px';
-    });
+    const accordionItems = document.querySelectorAll('.accordion-item');
 
-    document.querySelectorAll('[data-accordion]').forEach((item) => {
+    function setAccordionState(item, open) {
+      const panel = item.querySelector('.accordion-panel');
+      const trigger = item.querySelector('.accordion-trigger');
+      item.classList.toggle('open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+      panel.style.maxHeight = open ? panel.scrollHeight + 'px' : '0px';
+    }
+
+    accordionItems.forEach(item => {
       const trigger = item.querySelector('.accordion-trigger');
       const panel = item.querySelector('.accordion-panel');
-      const meta = item.querySelector('.accordion-meta');
-      const setState = (open) => {
-        trigger.setAttribute('aria-expanded', String(open));
-        panel.classList.toggle('open', open);
-        meta.textContent = open ? 'Tap to collapse' : 'Tap to expand';
-        if (open) {
-          panel.style.height = panel.scrollHeight + 'px';
-        } else {
-          panel.style.height = panel.scrollHeight + 'px';
-          requestAnimationFrame(() => { panel.style.height = '0px'; });
-        }
-      };
-      trigger.addEventListener('click', () => setState(trigger.getAttribute('aria-expanded') !== 'true'));
+      const isOpen = item.classList.contains('open');
+      if (!panel.style.maxHeight) {
+        panel.style.maxHeight = isOpen ? panel.scrollHeight + 'px' : '0px';
+      }
+      trigger.addEventListener('click', event => {
+        if (event.target.closest('[data-stop-toggle]')) return;
+        setAccordionState(item, !item.classList.contains('open'));
+      });
     });
 
     window.addEventListener('resize', () => {
-      document.querySelectorAll('.accordion-panel.open').forEach((panel) => {
-        panel.style.height = panel.scrollHeight + 'px';
+      accordionItems.forEach(item => {
+        if (item.classList.contains('open')) {
+          const panel = item.querySelector('.accordion-panel');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
       });
     });
 
-    const storagePrefix = 'wb-yeats-study:';
+    document.querySelectorAll('[data-stop-toggle]').forEach(label => {
+      label.addEventListener('click', event => event.stopPropagation());
+    });
+
+    const progressKey = 'yeats-progress';
+    let progressState = {};
+
+    try {
+      progressState = JSON.parse(localStorage.getItem(progressKey) || '{}') || {};
+    } catch (error) {
+      progressState = {};
+    }
+
     const checkboxes = Array.from(document.querySelectorAll('.study-checkbox'));
     const progressText = document.getElementById('progress-text');
-    const updateProgress = () => {
-      progressText.textContent = `${checkboxes.filter((box) => box.checked).length} of ${checkboxes.length} poems studied`;
-    };
 
-    checkboxes.forEach((checkbox) => {
-      const key = storagePrefix + checkbox.dataset.storageKey;
-      checkbox.checked = localStorage.getItem(key) === 'true';
-      checkbox.addEventListener('change', () => {
-        localStorage.setItem(key, String(checkbox.checked));
+    function updateProgress() {
+      const studied = checkboxes.filter(box => box.checked).length;
+      progressText.textContent = `${studied} of ${checkboxes.length} poems studied`;
+    }
+
+    checkboxes.forEach(box => {
+      const poemId = box.dataset.poem;
+      box.checked = Boolean(progressState[poemId]);
+      box.addEventListener('click', event => event.stopPropagation());
+      box.addEventListener('change', () => {
+        progressState[poemId] = box.checked;
+        localStorage.setItem(progressKey, JSON.stringify(progressState));
         updateProgress();
       });
     });
 
+    updateProgress();
 
-    document.querySelectorAll('.theme-quotes-toggle').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const list = btn.nextElementSibling;
-        const isHidden = list.style.display === 'none';
-        list.style.display = isHidden ? 'grid' : 'none';
-        btn.textContent = isHidden ? 'Hide Quotes ▴' : 'View Quotes ▾';
+    function setThemeQuotesState(button, open) {
+      const list = button.closest('.theme-card').querySelector('.theme-quotes-list');
+      list.hidden = !open;
+      button.textContent = open ? 'Hide Quotes ▴' : 'View Quotes ▾';
+      button.setAttribute('aria-expanded', String(open));
+    }
+
+    document.querySelectorAll('.theme-quotes-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const open = button.getAttribute('aria-expanded') !== 'true';
+        setThemeQuotesState(button, open);
       });
     });
 
-    const activateTab = (target) => {
-      tabButtons.forEach((btn) => btn.classList.toggle('active', btn.dataset.tab === target));
-      tabPanels.forEach((panel) => panel.classList.toggle('active', panel.id === `tab-${target}`));
-    };
-
-    document.querySelectorAll('.qtag').forEach((tag) => {
-      tag.addEventListener('click', (e) => {
-        e.stopPropagation();
+    document.querySelectorAll('.qtag').forEach(tag => {
+      tag.addEventListener('click', event => {
+        event.stopPropagation();
         const theme = tag.dataset.theme;
         activateTab('themes');
-        const themeCard = document.querySelector(`[data-theme-id="${theme}"]`);
-        if (themeCard) {
-          themeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          themeCard.style.boxShadow = '0 0 0 3px rgba(138, 70, 206, 0.3)';
-          setTimeout(() => { themeCard.style.boxShadow = ''; }, 2000);
+        const card = document.querySelector(`[data-theme-id="${theme}"]`);
+        if (!card) return;
+        const toggle = card.querySelector('.theme-quotes-toggle');
+        if (toggle && toggle.getAttribute('aria-expanded') !== 'true') {
+          setThemeQuotesState(toggle, true);
         }
+        card.classList.add('highlight');
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.setTimeout(() => card.classList.remove('highlight'), 1800);
       });
     });
-
-    updateProgress();
   </script>
-<script src="auth.js"></script></body>
+  <script src="auth.js"></script>
+</body>
 </html>
